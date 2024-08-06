@@ -1,15 +1,12 @@
-import React from "react";
-import './home.css'
-import Nav from './nav/nav'
+import React from 'react';
+import './home.css';
+import Nav from './nav/nav';
 
 function home() {
-
-    return (
-        <div className=" homepage h-dvh container ">
-            <Nav />
-
-
-        </div>
-    )
+  return (
+    <div className=" homepage h-dvh container ">
+      <Nav />
+    </div>
+  );
 }
-export default home 
+export default home;
