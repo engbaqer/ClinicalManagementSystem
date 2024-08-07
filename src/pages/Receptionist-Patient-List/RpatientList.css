@@ -11,8 +11,8 @@
 }
 
 .Arrow{
-    width: 75px;
-    height: 65px;
+    width: 65px;
+    height: 55px;
 }
 
 .RPL-title {
@@ -20,7 +20,7 @@
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    width: 90%;
+    width: 80%;
     text-align: center;
     font-size: 72px;
 }
@@ -30,7 +30,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 90%;
+    width: 80%;
     height: 100px;
     position: relative;
 }
@@ -58,8 +58,8 @@
 
 
 .table-container {
-    width: 90%;
-    height: 700px;
+    width: 80%;
+    height: 75%;
     background-color: white;
     border-radius: 25px;
     overflow: hidden;

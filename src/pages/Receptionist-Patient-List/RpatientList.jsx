@@ -5,6 +5,7 @@ import trash from '../../images/trash.png';
 import options from '../../images/options.png';
 import RPLoptions from '../../components/RPL-Options/RPLoptions';
 import arrow from '../../images/arrow-right 1.png';
+import { Link } from 'react-router-dom';
 
 function RpatientList() {
   const [search, setSearch] = useState('');
@@ -69,7 +70,7 @@ function RpatientList() {
       <div className='RPL-Edit'>
         <div>
           <img src={trash} alt="Trash" />
-          <img src={AddPatient} alt="Add Patient" />
+          <Link to='/AddPatient' ><img src={AddPatient} alt="Add Patient" /></Link>
         </div>
         <div>
           <input 
