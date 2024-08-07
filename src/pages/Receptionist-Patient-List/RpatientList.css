@@ -11,15 +11,20 @@
 }
 
 .Arrow{
-    position: absolute;
-    top: 10px;
-    left: 10%;
+    width: 75px;
+    height: 65px;
 }
 
 .RPL-title {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 90%;
     text-align: center;
     font-size: 72px;
 }
+.RPL-title h1{ width: 60%;}
 
 .RPL-Edit {
     display: flex;
@@ -107,4 +112,10 @@ th {
 .table-wrapper tbody tr:hover {
     background-color: rgb(227, 227, 235);
     cursor: default;
+}
+
+@media screen and (max-width: 1400px) {
+    .RPL-title{font-size: 50px;}
+    .table-container{height: 420px;}
+    .Arrow{left: 4%;}
 }
