@@ -11,15 +11,19 @@
 }
 
 .Arrow{
+    position: absolute;
     width: 65px;
     height: 55px;
+    left: 0;
+    cursor: pointer;
 }
 
 .RPL-title {
+    position: relative;
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
     width: 80%;
     text-align: center;
     font-size: 72px;

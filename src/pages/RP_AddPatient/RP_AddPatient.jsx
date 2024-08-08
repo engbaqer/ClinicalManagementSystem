@@ -36,11 +36,10 @@ function RP_AddPatient(){
     return(
         <div className="RP-container">
             <div className="RP-header">
-                <img src={Arrow} alt="" className="Arrow"/>
+                <img src={Arrow} alt="" className="Arrow" onClick={() => window.history.back()}/>
                 <h1>اضافة مريض</h1>
             </div>
             <form onSubmit={handleSubmit} className="patient-form">
-                <i className="circle1"></i><i className="circle2"></i><i className="circle3"></i><i className="circle4"></i>
       <div className="form-row">
         <div className="form-group large-input">
           <label>الاسم الكامل</label>

@@ -64,7 +64,7 @@ function RpatientList() {
   return (
     <div className="RPL-container">
       <div className="RPL-title">
-        <img src={arrow} alt="" className='Arrow' style={{cursor: 'pointer'}}/>
+        <img src={arrow} alt="" className='Arrow' onClick={() => window.history.back()} style={{cursor: 'pointer'}}/>
       <h1 className='RPL-title'>قائمة المرضى</h1>
       </div>
       <div className='RPL-Edit'>
