@@ -10,7 +10,7 @@ function body(params) {
 
     return (
         <div className=" body container ">
-            <h1>!أهلاً مريم، مرحباً بعودتك</h1>
+            <h1>! أهلاً مريم، مرحباً بعودتك</h1>
             <div className="Departments flex flex-wrap">
                 <Cart ImgLink={Reseption}  Text={"موظف استقبال"}/>
                 <Cart ImgLink={Dector} Text={"طبيب"}/>

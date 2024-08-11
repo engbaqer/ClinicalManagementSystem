@@ -6,7 +6,7 @@ import Footer from "./footer/footer";
 function home() {
 
     return (
-        <div className=" homepage h-full mx-auto">
+        <div className="homepage h-full mx-auto ">
             <Nav />
             <Body />
             <Footer />

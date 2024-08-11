@@ -27,6 +27,7 @@
     height: 200px;
     background-color:rgba(225, 244, 244, 1) ;
     cursor: pointer;
+    border-radius: 10px;
 }
 .Departments .cart img{
     width: 70px;
