@@ -119,6 +119,8 @@ th {
 }
 
 @media screen and (max-width: 1400px) {
+    th{height: 60px; font-size: 30px;}
+    td{font-size: 30px;}
     .RPL-title{font-size: 50px;}
     .table-container{height: 420px;}
     .Arrow{left: 4%;}

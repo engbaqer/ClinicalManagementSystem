@@ -1,11 +1,9 @@
 import React,{useState} from "react";
-import DatePicker from 'react-datepicker'; 
 import 'react-datepicker/dist/react-datepicker.css';
 import './RP_AddPatient.css';
 import Arrow from '../../images/arrow-right 1.png';
 
 function RP_AddPatient(){
-    const [startDate, setStartDate] = useState(null);
     const [formData, setFormData] = useState({
         fullName: '',
         gender: '',
@@ -86,7 +84,7 @@ function RP_AddPatient(){
             required
           />
         </div>
-        <div className="form-group small-input">
+        <div className="form-group small-input"> 
           <label>تاريخ التسجيل</label>
           <input
             type="date"
