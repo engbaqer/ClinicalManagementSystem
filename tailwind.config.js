@@ -7,8 +7,11 @@ module.exports = {
         amiri: ['Amiri', 'serif'],
       },
       colors: {
-        primary: '#B7EBF7'
-      }
+        primary: '#B7EBF7',
+      },
+      direction: {
+        rtl: 'rtl',
+      },
     },
   },
   plugins: [],
