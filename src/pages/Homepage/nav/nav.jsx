@@ -14,10 +14,10 @@ import Invoice from '../../../images/invoice.png'
 import list from '../../../images/list.png'
 import Health from '../../../images/Health.png'
 function nav(params) {
-const [Showlis,SetshowList]=useState("haid");
+const [Showlis,SetshowList]=useState("hide");
 function changing(x) {
     if (x==="show"){
-SetshowList("haid")
+SetshowList("hide")
     }
     else{
         SetshowList("show")

@@ -1,10 +1,8 @@
 
-.invoice{ 
-    
-    background-color: #B7EBF7;
-  
-}
 
+body{
+    background: #B7EBF7;
+  }
 .header {
     font-size: 50px;
     display: flex;
@@ -24,11 +22,12 @@
 
 .invoice .info{
 width: 75%;
-height: 500px;
+/* height: 500px; */
 background-color:#FFFFFF ;
 margin-top: 50px;
 border-radius: 30px;
 border: solid 5px #D3D3D3 ;
+padding-bottom: 50px;
 }
 .invoice .info form .name{
     display: flex;
@@ -54,13 +53,15 @@ font-weight:600;
 }
 .add_patient{
     display: flex;
-    width: 100px;
-    height: 30px;
+    width: 120px;
+    height: 40px;
     justify-content: center;
     background-color: #14B6DA;
     align-items: center;
     border-radius: 10px;
     cursor: pointer;
+    gap: 6px;
+    font-weight: bold;
 }
 
 .invoice .info form .histore_notes{
@@ -96,6 +97,7 @@ width: 100px;
     flex-direction: row-reverse;
   
 }
+
 .invoice .info form .lastSection .part{
     display: flex;
     flex-direction: column-reverse;
@@ -103,7 +105,7 @@ width: 100px;
 }
 .invoice .info form .lastSection input{
     border: solid 1px black;
-    width: 300px;
+    width: 250px;
     height: 35px;
     text-align: end;
     padding-right: 10px;
@@ -131,6 +133,7 @@ font-weight:600;
     right:5px;
     top: 67px;
     border: #D3D3D3 solid 1px;
+    z-index: 2;
 }
 .invoice .info form .lastSection .item ul li{
    text-align: center;
@@ -142,7 +145,17 @@ font-weight:600;
     transition: 90ms;
     cursor: pointer;
 }
-
+.add_other_line{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 35px;
+    height: 33px;
+    margin-top: 40px;
+    border: solid black 1px;
+    border-radius: 5px;
+    cursor: pointer;
+}
 .invoice .info form .lastSection .price{
     display: flex;
     flex-direction: column-reverse;
@@ -165,20 +178,27 @@ font-weight:600;
 }
 
 .invoice .buttons input{
-    width: 150px;
-    height: 35px;
+    width: 180px;
+    height: 40px;
     background-color: #14B6DA;
     border-radius: 10px;
     cursor: pointer;
     color: #FFFFFF;
+    margin-bottom: 30px;
+    font-size: large;
+    font-weight: bold;
 }
-@media screen and (min-height: 680px) {
+/* @media screen and (min-height: 680px) {
     .invoice {
      height: 100vh;
     }
-  }
-  @media screen and (max-height: 680px) {
+  } */
+  /* @media screen and (max-height: 680px) {
     .invoice {
     padding-bottom: 40px;
     }
+  } */
+  .invoice .buttons input:hover{
+    background-color: white;
+    color: #14B6DA;
   }

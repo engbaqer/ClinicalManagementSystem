@@ -1,4 +1,4 @@
-.haid{
+.hide{
     display: none;
 }
 .nav{
@@ -81,11 +81,14 @@ display: flex;
     display: flex;
     gap: 30px;
 }
-
+.nav .list ul .header{
+    padding-top: 0; 
+}
 .nav .list ul  h1{
     font-weight: bold;
  margin-top: 20px;
  font-size: 25px;
+ 
 }
 .nav .list ul li img{
     width: 30px;
