@@ -118,10 +118,10 @@ th {
     cursor: default;
 }
 
-@media screen and (max-width: 1400px) {
-    th{height: 60px; font-size: 30px;}
+@media screen and (max-width: 1600px) {
+    th{height: 50px; font-size: 30px;}
     td{font-size: 30px;}
     .RPL-title{font-size: 50px;}
-    .table-container{height: 420px;}
+    .table-container{height: 65%;}
     .Arrow{left: 4%;}
 }

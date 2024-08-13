@@ -24,7 +24,7 @@
   padding: 50px;
   background-color: white;
   max-width: 1120px;
-  max-height: 800px;
+  height: 85%;
   width:100%;
   margin-top: 20px;
   border: #d3d3d3 solid 1px;
@@ -152,12 +152,13 @@ textarea.notes-input{
   border-radius: 50%;
 }
 
-@media only screen and (max-width: 1400px) {
+@media only screen and (max-width: 1600px) {
   
   .RP-header{font-size: 48px;}
   .RP-container form{
     max-width: 920px;
-    width:100%; padding:40px 50px;}
+    width:100%; padding:20px 50px;
+  }
   .large-input input,
   .small-input input,
   .small-input select,

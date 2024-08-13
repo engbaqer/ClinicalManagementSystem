@@ -52,6 +52,6 @@
     direction: rtl;
 }
 
-@media screen and (max-width: 1400px) {
+@media screen and (max-width: 1600px) {
     .InvoicePage-container .table-container{height: 400px;}
 }
