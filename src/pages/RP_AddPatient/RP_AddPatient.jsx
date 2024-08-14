@@ -45,7 +45,7 @@ function RP_AddPatient(){
       <div className="form-row">
         <div className="form-group large-input">
           <label>الاسم الكامل</label>
-          <input
+          <input 
             type="text"
             name="fullName"
             value={formData.fullName}
