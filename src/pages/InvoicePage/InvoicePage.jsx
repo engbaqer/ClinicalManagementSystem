@@ -13,6 +13,12 @@ const patients = [
 const invoicesData = [
   { id: 1, date: '2022-12-12', status: 'غير مسدد', name: ' محمد علي جاسم', invoiceNumber: 1 },
   { id: 2, date: '2022-02-23', status: 'مسدد', name: 'علي', invoiceNumber: 2 },
+  { id: 3, date: '2022-05-15', status: 'غير مسدد', name: 'محمد علي ', invoiceNumber: 3 },
+  { id: 4, date: '2022-08-18', status: 'غير مسدد', name: 'محمد علي ', invoiceNumber: 4 },
+  { id: 5, date: '2022-10-01', status: 'غير مسدد', name: 'محمد علي ', invoiceNumber: 5 },
+  { id: 6, date: '2022-12-12', status: 'غير مسدد', name: 'محمد علي ', invoiceNumber: 6 },
+  { id: 7, date: '2022-02-23', status: 'مسدد', name: 'علي', invoiceNumber: 7 },
+  { id: 8, date: '2022-05-15', status: 'غير مسدد', name: 'محمد علي ', invoiceNumber: 8 }
 ];
 
 function InvoicePage() {
