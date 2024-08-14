@@ -4,9 +4,15 @@ import arrow2 from '../../images/Group 17.png'
 
 function DynamicForm({info}) {
   const [add, setAdd] = useState(1); // Initial number of sections
-  const [values, setValues] = useState([{ value: '', number1: 0, number2: 0, sum: 0, show: 'hide' }]);
+  const [values, setValues] = useState([{ value: '', number1: 0, number2: 0, sum: 0 }]);
   const result ={...info,...values}
+  const [showStates, setShowStates] = useState(['hide']);
 //   const [show, setShow] = useState('haid');
+const toggleShow = (index) => {
+  const newShowStates = [...showStates];
+  newShowStates[index] = newShowStates[index] === 'show' ? 'hide' : 'show';
+  setShowStates(newShowStates);
+};
 
   const handleValueChange = (index, newValue) => {
     const newValues = [...values];
@@ -14,11 +20,7 @@ function DynamicForm({info}) {
     setValues(newValues);
   };
   
-  const change = (index) => {
-    const newValues = [...values];
-    newValues[index].show = newValues[index].show === 'show' ? 'hide' : 'show';
-    setValues(newValues);
-  };
+ 
 
   const handleNumber1Change = (index, newValue) => {
     const newValues = [...values];
@@ -59,8 +61,8 @@ function DynamicForm({info}) {
               onChange={(e) => handleValueChange(index, e.target.value)}
             />
             <label htmlFor={`name-${index}`}>البند</label>
-            <img onClick={() => change(index)} src={arrow2} alt="" />
-            <ul className={`${item.show}`}>
+            <img onClick={() => toggleShow(index)} src={arrow2} alt="" />
+            <ul  className={showStates[index] || 'hide'}>
               <li onClick={() => handleValueChange(index, 'فحوصات الاسنان')}>فحوصات الاسنان</li>
               <hr />
               <li onClick={() => handleValueChange(index, 'فحوصات المختبرت')}>فحوصات المختبرات</li>
