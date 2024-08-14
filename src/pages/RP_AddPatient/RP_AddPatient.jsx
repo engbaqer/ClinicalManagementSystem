@@ -2,6 +2,8 @@ import React,{useState} from "react";
 import 'react-datepicker/dist/react-datepicker.css';
 import './RP_AddPatient.css';
 import Arrow from '../../images/arrow-right 1.png';
+import bluewave from '../../Assets/Waveimgs/Mask group.png';
+import bluewave2 from '../../Assets/Waveimgs/Mask group-1.png';
 
 function RP_AddPatient(){
     const [formData, setFormData] = useState({
@@ -32,12 +34,14 @@ function RP_AddPatient(){
         console.log(formData);
       };
     return(
-        <div className="RP-container">
+        <div className="RP-container"> 
             <div className="RP-header">
                 <img src={Arrow} alt="" className="Arrow" onClick={() => window.history.back()}/>
                 <h1>اضافة مريض</h1>
             </div>
             <form onSubmit={handleSubmit} className="patient-form">
+              <img src={bluewave} alt="" className="wave1"/>
+              <img src={bluewave2} alt="" className="wave2"/>
       <div className="form-row">
         <div className="form-group large-input">
           <label>الاسم الكامل</label>
@@ -168,7 +172,7 @@ function RP_AddPatient(){
           className="notes-input"
         ></textarea>
       </div>
-        <div className="form-group btn-add" >
+      <div className="form-group btn-add" >
         <button type="submit" className="submit-button">إضافة</button>
       </div>
     </form>

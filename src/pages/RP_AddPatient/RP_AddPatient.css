@@ -28,12 +28,22 @@
   width:100%;
   margin-top: 20px;
   border: #d3d3d3 solid 1px;
-  
-
+  overflow: hidden;
+}
+.RP-container form img{
+  position: absolute;
+}
+.wave1{
+  top: -8%;
+  left: -4%;
+}
+.wave2{
+  top: -10%;
+  left: -6%;
 }
 .RP-container input {
   background-color: #E1F4F4;
-  border: #d3d3d3 solid 1px;
+  border: #d3d3d3 solid 1px; 
 }
 .patient-form {
   display: grid;

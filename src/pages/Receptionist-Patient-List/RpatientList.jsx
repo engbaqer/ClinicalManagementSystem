@@ -85,30 +85,25 @@ function RpatientList() {
         </div>
       </div>
       <div className="table-container">
-        <div className="table-wrapper">
-          <table>
-            <thead>
-              <tr>
-                <th>الحالة</th>
-                <th>رقم الهاتف</th>
-                <th>التشخيص</th>
-                <th>العمر</th>
-                <th>الاسم</th>
-              </tr>
-            </thead>
-            <tbody>
-              {filteredPatients.map((patient, index) => (
-                <tr key={index}>
-                  <td>{patient.status}</td>
-                  <td>{patient.phone}</td>
-                  <td>{patient.diagnosis}</td>
-                  <td>{patient.age}</td>
-                  <td>{patient.name}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+        <div className="table-header">
+                <p>الحالة</p>
+                <p>رقم الهاتف</p>
+                <p>التشخيص</p>
+                <p>العمر</p>
+                <p>الاسم</p>
         </div>
+            <div className='table-body'>
+              {filteredPatients.map((patient, index) => (
+                <div className='row' key={index}>
+                  <p>{patient.status}</p>
+                  <p>{patient.phone}</p>
+                  <p>{patient.diagnosis}</p>
+                  <p>{patient.age}</p>
+                  <p>{patient.name}</p>
+                </div>
+              ))}
+            </div>
+        
       </div>
     </div>
   );

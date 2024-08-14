@@ -68,31 +68,21 @@ function InvoicePage() {
             <Select options={patients} placeholder="اختر اسم المريض" isSearchable className='Patient-select' />
         </div>
         <div className="table-container">
-          <div className="table-wrapper">
-            <table>
-              <thead>
-                <tr>
-                  <th>تاريخ الفاتورة</th>
-                  <th>الحالة</th>
-                  <th>الاسم</th>
-                  <th>رقم الفاتورة</th>
-                </tr>
-              </thead>
-              <tbody>
+          <div className="table-header">
+                  <p>تاريخ الفاتورة</p>
+                  <p>الحالة</p>
+                  <p>الاسم</p>
+                  <p>رقم الفاتورة</p>
+          </div>
+          <div className='table-body'>
                 {filteredInvoices.map(invoice => (
-                  <tr
-                    key={invoice.id}
-                    onClick={() => setSelectedPatientId(invoice.id)} 
-                    className={invoice.id === selectedPatientId ? 'selected' : ''}
-                  >
-                    <td>{invoice.date}</td>
-                    <td>{invoice.status}</td>
-                    <td>{invoice.name}</td>
-                    <td>{invoice.invoiceNumber}</td>
-                  </tr>
+                  <div className='row' key={invoice.id}>
+                    <p>{invoice.date}</p>
+                    <p>{invoice.status}</p>
+                    <p>{invoice.name}</p>
+                    <p>{invoice.invoiceNumber}</p>
+                  </div>
                 ))}
-              </tbody>
-            </table>
           </div>
         </div>
     </div>
