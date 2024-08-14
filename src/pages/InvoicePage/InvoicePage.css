@@ -46,7 +46,10 @@
     text-indent: 10px;
     font-size: 20px;
 }
-
+.Patient-select{
+    width: 180px;
+    direction: rtl;
+}
 .InvoicePage-search .select {
     width: 200px;
     direction: rtl;

@@ -7,14 +7,12 @@ import Select from 'react-select';
 
 const patients = [
   { value: 'محمد', label: 'محمد' },
-  { value: 'علي', label: 'علي' },
-  // Add more patients as needed
+  { value: 'علي', label: 'علي' }, 
 ];
 
 const invoicesData = [
   { id: 1, date: '2022-12-12', status: 'غير مسدد', name: ' محمد علي جاسم', invoiceNumber: 1 },
   { id: 2, date: '2022-02-23', status: 'مسدد', name: 'علي', invoiceNumber: 2 },
-  // Add more invoices as needed
 ];
 
 function InvoicePage() {
@@ -22,7 +20,7 @@ function InvoicePage() {
   const [searchTerm, setSearchTerm] = useState('');
   const [startDate, setStartDate] = useState('');
   const [endDate, setEndDate] = useState('');
-  const [selectedPatientId, setSelectedPatientId] = useState(null); // State for selected patient ID
+  const [selectedPatientId, setSelectedPatientId] = useState(null); 
 
   const handleDelete = () => {
     if (selectedPatientId !== null) {
@@ -67,7 +65,7 @@ function InvoicePage() {
               value={endDate}
               onChange={(e) => setEndDate(e.target.value)}
             />
-            <Select options={patients} placeholder="اختر اسم المريض" isSearchable />
+            <Select options={patients} placeholder="اختر اسم المريض" isSearchable className='Patient-select' />
         </div>
         <div className="table-container">
           <div className="table-wrapper">
@@ -84,7 +82,7 @@ function InvoicePage() {
                 {filteredInvoices.map(invoice => (
                   <tr
                     key={invoice.id}
-                    onClick={() => setSelectedPatientId(invoice.id)} // Set selected patient ID on row click
+                    onClick={() => setSelectedPatientId(invoice.id)} 
                     className={invoice.id === selectedPatientId ? 'selected' : ''}
                   >
                     <td>{invoice.date}</td>

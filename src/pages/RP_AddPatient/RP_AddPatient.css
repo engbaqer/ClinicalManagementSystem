@@ -10,7 +10,7 @@
   padding: 0 0 20px 0;
 } 
 .RP-header{
-  position: relative;
+  position: relative; 
   display: flex;
   width: 80%;
   font-size: 75px;

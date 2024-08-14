@@ -67,7 +67,7 @@ function RP_AddPatient(){
           <input
             type="number"
             name="age"
-            value={formData.age}
+            value={formData.age} 
             onChange={handleChange}
             required
           />
