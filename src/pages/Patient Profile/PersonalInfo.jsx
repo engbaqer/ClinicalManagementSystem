@@ -33,7 +33,7 @@ const PersonalInfo = ({ patientPersonalInfo, notes }) => {
 
 const InfoFields = ({ fieldName, fieldInfo }) => {
   return (
-    <div className="p-4 2xl:text-2xl flex flex-row-reverse gap-2">
+    <div className="p-4 2xl:text-2xl text-xl flex flex-row-reverse gap-2">
       <p className="text-[#636363]">:{fieldName} </p>
       <p>{fieldInfo}</p>
     </div>

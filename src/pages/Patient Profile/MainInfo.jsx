@@ -15,7 +15,7 @@ const MainInfo = ({ patientData }) => {
   };
 
   return (
-    <div className=" w-full col-span-3 bg-white px-5 py-5 rounded-xl min-h-[500px] max-h-[500px] overflow-hidden">
+    <div className=" w-full col-span-3 bg-white px-5 py-5 rounded-xl min-h-[500px] max-h-[500px] overflow-hidden border border-black">
       {/* buttons */}
       <div className=" flex justify-between ">
         <InfoBtn
@@ -46,8 +46,8 @@ const MainInfo = ({ patientData }) => {
 const InfoBtn = ({ btnText, changePage, isOpen }) => {
   return (
     <button
-      className={` px-5 py-3 font-amiri 2xl:text-3xl min-w-[200px] rounded-2xl hover:bg-[#4985BC] hover:text-white transition-all ${
-        isOpen ? 'text-white bg-[#4985BC] ' : 'bg-[#CCDEEF]'
+      className={` px-5 py-3 font-amiri 2xl:text-3xl text-2xl min-w-[200px] rounded-2xl hover:bg-[#14B6DA] hover:text-white transition-all ${
+        isOpen ? 'text-white bg-[#14B6DA] ' : 'bg-[#B7EBF7]'
       }`}
       onClick={() => changePage()}
     >

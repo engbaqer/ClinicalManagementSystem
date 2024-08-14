@@ -23,6 +23,28 @@ const patientData = {
       doctorName: 'د.عبد الله عصام محمد',
       patientName: 'ماريا احمد محمد',
       prescriptionNumber: '002',
+    },{
+      prescriptionDate: '8/11/2024',
+      doctorName: 'د.احمد محمد مصطفى',
+      prescriptionNumber: '001',
+      patientName: 'ماريا احمد محمد',
+    },
+    {
+      prescriptionDate: '6/10/2024',
+      doctorName: 'د.عبد الله عصام محمد',
+      patientName: 'ماريا احمد محمد',
+      prescriptionNumber: '002',
+    },{
+      prescriptionDate: '8/11/2024',
+      doctorName: 'د.احمد محمد مصطفى',
+      prescriptionNumber: '001',
+      patientName: 'ماريا احمد محمد',
+    },
+    {
+      prescriptionDate: '6/10/2024',
+      doctorName: 'د.عبد الله عصام محمد',
+      patientName: 'ماريا احمد محمد',
+      prescriptionNumber: '002',
     },
     {
       prescriptionDate: '2/08/2024',

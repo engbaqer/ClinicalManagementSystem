@@ -3,9 +3,10 @@ import email_icon from '../../images/email.png';
 import phone_icon from '../../images/phone-icon.svg';
 import calender_icon from '../../images/calender.svg';
 
+
 const SideInfo = ({ patientMainInfo }) => {
   return (
-    <div className="bg-white min-h-[450px] min-w-[250px] col-span-1 flex flex-col justify-center items-center p-5 rounded-xl">
+    <div className="bg-white min-h-[450px] min-w-[250px] col-span-1 flex flex-col justify-center items-center p-5 rounded-xl border border-black">
       {/* img and patient name */}
       <div className="">
         <img src={user_icon} alt="user image" className="h-24 mx-auto" />
@@ -15,7 +16,7 @@ const SideInfo = ({ patientMainInfo }) => {
       </div>
 
       {/* divider */}
-      <hr className="w-1/2 mx-auto border-blue-700 mt-4" />
+      <hr className="w-[75%] mx-auto border-[#4985BC] mt-4 border-2" />
 
       {/* patient contact info */}
       <div className="mt-5">
