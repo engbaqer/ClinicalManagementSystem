@@ -5,7 +5,7 @@ import InvoicePageb from './pages/InvoicePage_b/InvoicePage'
 function App() {
   return (
     <div className="App mx-auto">
-     <InvoicePageb />  
+     <Homepage />  
     </div>  
   );  
 }
