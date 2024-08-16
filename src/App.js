@@ -1,10 +1,30 @@
 
 import './App.css';
 import Homepage from '../src/pages/Homepage/home'
+import RPL from './pages/Receptionist-Patient-List/RpatientList'
+import RP_AddPatient from './pages/RP_AddPatient/RP_AddPatient';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import InvoicePage from './pages/InvoicePage/InvoicePage';
+import InvoicePageb from './pages/InvoicePage_b/InvoicePage';
+import Reception from './pages/Reception/Reception'
 function App() {
   return (
+
     <div className="App mx-auto font-amiri">
-     <Homepage />  
+
+     <Router>
+        <Routes>
+       
+        <Route path="/" element={<Homepage />} />
+         <Route path="/Reception" element={<Reception />} />
+        
+        <Route path="/InvoicePageb" element={<InvoicePageb />} />
+          <Route path="/RPL" element={<RPL />} />
+          <Route path="/AddPatient" element={<RP_AddPatient />} />
+          <Route path="/InvoicePage" element={<InvoicePage />} />
+        </Routes>
+      </Router> 
+
     </div>  
   );  
 }
