@@ -21,7 +21,7 @@ function nav(params) {
       SetshowList("hide")
     }
     else {
-      SetshowList(() => 'show')
+      SetshowList('show')
     }
   }
   

@@ -62,6 +62,7 @@ font-weight:600;
     cursor: pointer;
     gap: 6px;
     font-weight: bold;
+    color: white;
 }
 
 .invoice .info form .histore_notes{
