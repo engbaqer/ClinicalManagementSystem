@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './InvoicePage.css';
 import Arrow from '../../images/arrow-right 1.png';
-import AddInvoiceimg from '../../images/AddInvoice.png';
+import AddInvoiceimg from '../../images/addinvoice.png';
 import trash from '../../images/trash.png';
 import Select from 'react-select';
 

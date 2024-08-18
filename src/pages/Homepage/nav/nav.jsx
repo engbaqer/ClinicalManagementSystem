@@ -15,6 +15,7 @@ import list from '../../../images/list.png';
 import Health from '../../../images/Health.png';
 
 function nav(params) {
+<<<<<<< HEAD
   const [Showlis, SetshowList] = useState('hide');
   function changing(x) {
     if (x === 'show') {
@@ -94,4 +95,82 @@ function nav(params) {
     }
   }
 }
+=======
+  const [Showlis, SetshowList] = useState("hide");
+  function changing(x) {
+    if (x === "show") {
+      SetshowList("hide")
+    }
+    else {
+      SetshowList('show')
+    }
+  }
+  
+      
+
+      return (
+        <div className="nav container ">
+          <div className="icon">
+            <img src={Health} alt="wait pleas" />
+          </div>
+          <div className=" menu ">
+            <ul>
+              <li>مخزن الادويه</li>
+              <li>لوح التحكم</li>
+              <li>التقارير </li>
+              <li>السجلات</li>
+            </ul>
+          </div>
+          <div className="right-menu">
+            <img src={list} alt="" onClick={() => changing(Showlis)} />
+          </div>
+          <div className={`list ${Showlis}`}>
+            <ul>
+              <div className="header">
+                <h1>عيادة الامراض المزمنة</h1>
+              </div>
+              <li>
+                <p>لوح التحكم </p>
+                <img src={Homefig} alt="" />
+              </li>
+              <li>
+                <p>الموظفين</p>
+                <img src={Empolyees} alt="" />
+              </li>
+              <li>
+                <p>المرضى</p>
+                <img src={patient} alt="" />
+              </li>
+              <li>
+                <p>الفواتير </p>
+                <img src={Invoice} alt="" />
+              </li>
+              <li>
+                <p>الطبيب</p>
+                <img src={Doctor} alt="" />
+              </li>
+              <li>
+                <p>صيدلاني</p>
+                <img src={Pharmacits} alt="" />
+              </li>
+              <li>
+                <p>مخزن الادوية</p>
+                <img src={drugStore} alt="" />
+              </li>
+              <li>
+                <p>تقارير</p>
+                <img src={reports} alt="" />
+              </li>
+              <li>
+                <p>السجلات</p>
+                <img src={Records} alt="" />
+              </li>
+            </ul>
+          </div>
+        </div>
+      );
+    }
+  
+
+>>>>>>> 2096f308996c16a03ef4a6f59c5337a11a019094
 export default nav;

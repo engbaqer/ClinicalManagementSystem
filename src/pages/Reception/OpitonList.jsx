@@ -1,7 +1,7 @@
 import Option from './Option.jsx';
-import addPatient from '../../images/AddPatient.png';
+import addPatient from '../../images/addpatient.png';
 import patientList from '../../images/listPatient.png'
-import addBill from '../../images/AddInvoice.png'
+import addBill from '../../images/addinvoice.png'
 import bills from '../../images/invoice.png'
 
 const OptionList = () => {

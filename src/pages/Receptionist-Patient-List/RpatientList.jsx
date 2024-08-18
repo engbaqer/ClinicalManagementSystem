@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './RpatientList.css';
-import AddPatient from '../../images/AddPatient.png';
+import AddPatient from '../../images/addpatient.png';
 import trash from '../../images/trash.png';
 import options from '../../images/options.png';
 import RPLoptions from '../../components/RPL-Options/RPLoptions';
