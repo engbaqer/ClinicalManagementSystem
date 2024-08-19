@@ -8,10 +8,10 @@ import bills from '../../images/invoice.png'
 const OptionList = () => {
   return (
     <div className=" grid grid-cols-2 p-4 place-items-center gap-4">
-      <Option imgLink={addPatient} optionText={'اضافة مريض'} />
-      <Option imgLink={patientList} optionText={"قائمة المرضى"} />
-      <Option imgLink={addBill} optionText={'اضافة فاتورة'} />
-      <Option imgLink={bills} optionText={'الفواتير'} />
+      <Option route={"/AddPatient"} imgLink={addPatient} optionText={'اضافة مريض'} />
+      <Option route={"/RPL"} imgLink={patientList} optionText={"قائمة المرضى"} />
+      <Option route={"/InvoicePageb"} imgLink={addBill} optionText={'اضافة فاتورة'} />
+      <Option route={"/InvoicePage"} imgLink={bills} optionText={'الفواتير'} />
     </div>
   );
 };
