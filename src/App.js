@@ -1,13 +1,4 @@
-<<<<<<< HEAD
-import './App.css';
-import Homepage from '../src/pages/Homepage/home';
-import InvoicePageb from './pages/InvoicePage_b/InvoicePage';
-import PatientProfile from './pages/Patient Profile/PatientProfile';
-function App() {
-  return (
-    <div className="App mx-auto">
-      <PatientProfile />
-=======
+
 import "./App.css";
 import Homepage from "../src/pages/Homepage/home";
 import RPL from "./pages/Receptionist-Patient-List/RpatientList";
@@ -36,13 +27,10 @@ function App() {
           <Route path="/patient-profile" element={<PatientProfile />} />
         </Routes>
       </Router>
->>>>>>> 2096f308996c16a03ef4a6f59c5337a11a019094
+
     </div>
   );
 }
 
-<<<<<<< HEAD
 export default App;
-=======
-export default App;
->>>>>>> 2096f308996c16a03ef4a6f59c5337a11a019094
+
