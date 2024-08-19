@@ -1,4 +1,5 @@
 
+
 import "./App.css";
 import Homepage from "../src/pages/Homepage/home";
 import RPL from "./pages/Receptionist-Patient-List/RpatientList";
@@ -10,6 +11,7 @@ import Reception from "./pages/Reception/Reception";
 import DoctorPage from './pages/Doctor/DoctorPage';
 import PatientProfile from './pages/Patient Profile/PatientProfile'
 
+import Cardpage from "./pages/Cardpage/Cardpage";
 function App() {
   return (
     <div className="App mx-auto font-amiri">
@@ -25,11 +27,14 @@ function App() {
           <Route path="/InvoicePage" element={<InvoicePage />} />
           <Route path="/doctor" element={<DoctorPage />} />
           <Route path="/patient-profile" element={<PatientProfile />} />
+          <Route path="/cardpage" element={<Cardpage />} />
+
         </Routes>
       </Router>
 
     </div>
   );
+
 }
 
 export default App;

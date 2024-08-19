@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/rules-of-hooks */
-
+import { Link } from "react-router-dom";
 import React, { useState } from 'react';
 import './nav.css';
 import Homefig from '../../../images/dashboard.png';
@@ -31,10 +31,14 @@ function nav(params) {
           </div>
           <div className=" menu ">
             <ul>
-              <li>مخزن الادويه</li>
-              <li>لوح التحكم</li>
-              <li>التقارير </li>
-              <li>السجلات</li>
+              <li><Link to="/">
+              مخزن الادويه </Link>  </li>
+              <li><Link to="/">
+              لوح التحكم</Link> </li>
+              <li><Link to="/">
+              التقارير</Link>  </li>
+              <li><Link to="/">
+              السجلات</Link> </li>
             </ul>
           </div>
           <div className="right-menu">
@@ -45,26 +49,43 @@ function nav(params) {
               <div className="header">
                 <h1>عيادة الامراض المزمنة</h1>
               </div>
+              <Link to="/">
               <li>
-                <p>لوح التحكم </p>
+                <p>
+                لوح التحكم  </p>
                 <img src={Homefig} alt="" />
               </li>
+              </Link>
+              <Link to="/">
               <li>
-                <p>الموظفين</p>
+                <p>
+                الموظفين </p>
                 <img src={Empolyees} alt="" />
               </li>
+              </Link>
+              <Link to="/RPL">
               <li>
-                <p>المرضى</p>
+                <p>
+                المرضى </p>
                 <img src={patient} alt="" />
               </li>
+              </Link>
+              <Link to="/InvoicePage">
               <li>
-                <p>الفواتير </p>
+              
+                <p>
+                الفواتير  </p>
                 <img src={Invoice} alt="" />
+               
               </li>
+              </Link>
+
+              <Link to="/doctor">
               <li>
                 <p>الطبيب</p>
                 <img src={Doctor} alt="" />
               </li>
+              </Link>
               <li>
                 <p>صيدلاني</p>
                 <img src={Pharmacits} alt="" />
