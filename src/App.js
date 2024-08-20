@@ -10,6 +10,7 @@ import InvoicePageb from "./pages/InvoicePage_b/InvoicePage";
 import Reception from "./pages/Reception/Reception";
 import DoctorPage from './pages/Doctor/DoctorPage';
 import PatientProfile from './pages/Patient Profile/PatientProfile';
+import Dashboard from "./pages/Dashboard/Dashboard";
 
 import Cardpage from "./pages/Cardpage/Cardpage";
 function App() {
@@ -19,7 +20,6 @@ function App() {
         <Routes>
           <Route path="/" element={<Homepage />} />
           <Route path="/Reception" element={<Reception />} />
-
           <Route path="/InvoicePageb" element={<InvoicePageb />} />
           <Route path="/RPL" element={<RPL />} />
           <Route path="/AddPatient" element={<RP_AddPatient />} />
@@ -27,7 +27,7 @@ function App() {
           <Route path="/doctor" element={<DoctorPage />} />
           <Route path="/patient-profile" element={<PatientProfile />} />
           <Route path="/cardpage" element={<Cardpage />} />
-
+          <Route path="/dashbaord" element={<Dashboard />} />
         </Routes>
       </Router>
     </div>
