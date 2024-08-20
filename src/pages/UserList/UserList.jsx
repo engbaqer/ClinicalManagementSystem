@@ -7,7 +7,7 @@ import { LuArrowLeftCircle } from "react-icons/lu";
 function UserList() {
     const getInitialHeight = () => {
         if (window.innerWidth < 1600) {
-            return '350px';
+            return '410px';
         }
         return '600px';
     };
