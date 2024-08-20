@@ -10,7 +10,7 @@ const PatientProfile = () => {
   return (
     <div className="bg-[#EFEEEE] min-h-screen w-full flex justify-center items-start font-amiri flex-col add-cover">
       <div className="h-12 w-12 grid place-items-center border border-black rounded-full {responsive design --> } mx-5 sm:mx-40 mt-4 sm:mt-0">
-        <button>
+        <button onClick={() => window.history.back()}>
           <img src={arrow} alt="go back" />
         </button>
       </div>

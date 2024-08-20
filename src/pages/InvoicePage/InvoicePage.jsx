@@ -49,7 +49,7 @@ function InvoicePage() {
   return (
     <div className='InvoicePage-container'>
         <div className="InvoicePage-header">
-            <img src={Arrow} alt="" className='Arrow'/>
+            <img src={Arrow} alt="" className='Arrow' onClick={() => window.history.back()}/>
             <p>قائمة الفواتير</p>
         </div>
         <div className='InvoicePage-search'>

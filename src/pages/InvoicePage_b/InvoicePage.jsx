@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import './InvoicePage.css'
 import arrow from '../../images/arrow-right 2.png'
-
+import { Link } from "react-router-dom";
 import plus from '../../images/image 46.png'
 import Lastsection from './lastsection'
 
@@ -19,7 +19,7 @@ function Invoice() {
         <div className="invoice h-lvh ">
             <div className="md:container md:mx-auto  ">
                 <div className="header">
-                    <img src={arrow} alt="" />
+                    <img src={arrow} alt="" onClick={() => window.history.back()} />
 
                     <h1 > عيادة الامراض المزمنة </h1>
                     <div></div>
@@ -27,12 +27,12 @@ function Invoice() {
                 <div className="info md:mx-auto">
                     <form action="">
                         <div  className="name" >
-
+                      <Link to="/AddPatient" >
                        <div className="add_patient">
                         <p>اضافة مريض</p>
                         <img src={plus} alt="" />
                        </div >
-
+                       </Link>
                             <input type="text" id="name" value={values.name}  onChange={(e) => handleValueChange('name', e.target.value)}  />
                             <label htmlFor="name">اسم المريض</label>
 

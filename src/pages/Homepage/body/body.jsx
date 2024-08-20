@@ -1,5 +1,6 @@
 import React from 'react';
 import './body.css';
+import { Link } from "react-router-dom";
 import Dector from '../../../images/doctor.png';
 import Reseption from '../../../images/reception.png';
 import Card from '../../../images/card.png';
@@ -10,10 +11,10 @@ function body(params) {
     <div className=" body container ">
       <h1>!أهلاً مريم، مرحباً بعودتك</h1>
       <div className="Departments flex flex-wrap">
-        <Cart ImgLink={Reseption} Text={'موظف استقبال'} />
-        <Cart ImgLink={Dector} Text={'طبيب'} />
+     <Link to="/Reception" >  <Cart ImgLink={Reseption} Text={'موظف استقبال'} /></Link>
+     <Link to="/doctor" >   <Cart ImgLink={Dector} Text={'طبيب'} /></Link>
         <Cart ImgLink={Pharmacist} Text={'صيدلاني'} />
-        <Cart ImgLink={Card} Text={'اصدار الهوية'} />
+        <Link to="/Cardpage" >  <Cart ImgLink={Card} Text={'اصدار الهوية'} /></Link>
       </div>
     </div>
   );

@@ -5,7 +5,7 @@ const DoctorHeader = ({ doctorName, proffession }) => {
     <section className="flex justify-between items-center  py-10 w-[75%] m-auto">
       <div className='w-14 h-14 grid place-items-center border border-black rounded-full group'>
         <button className='group-hover:-translate-x-1 transition'>
-          <img src={arrow} alt="go back"/>
+          <img src={arrow} alt="go back" onClick={() => window.history.back()}/>
         </button>
       </div>
       <div className='text-right'>
