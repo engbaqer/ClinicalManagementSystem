@@ -15,19 +15,6 @@ import list from '../../../images/list.png';
 import Health from '../../../images/Health.png';
 
 function nav(params) {
-<<<<<<< HEAD
-  const [Showlis, SetshowList] = useState("hide");
-  function changing(x) {
-    if (x === "show") {
-      SetshowList("hide")
-    }
-    else {
-      SetshowList('show')
-    }
-  }
-  
-      
-=======
 
   const [Showlis, SetshowList] = useState('hide');
   function changing(x) {
@@ -92,7 +79,6 @@ function nav(params) {
                
               </li>
               </Link>
->>>>>>> bdeaf1efc87576b74f89f37113629b87eee23f3d
 
               <Link to="/doctor">
               <li>
@@ -123,8 +109,4 @@ function nav(params) {
     }
   
 
-<<<<<<< HEAD
-=======
-
->>>>>>> bdeaf1efc87576b74f89f37113629b87eee23f3d
 export default nav;
