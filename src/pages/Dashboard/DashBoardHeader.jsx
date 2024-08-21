@@ -1,7 +1,9 @@
 const DashBoardHeader = () => {
   return (
-    <h1>Dash Board Header</h1>
+    <div className="bg-[#14B6DA]  w-full left-0 p-4 ">
+      Dash Board Header
+    </div>
   );
-}
- 
+};
+
 export default DashBoardHeader;
