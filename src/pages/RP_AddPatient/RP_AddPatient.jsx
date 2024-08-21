@@ -4,6 +4,12 @@ import './RP_AddPatient.css';
 import Arrow from '../../images/arrow-right 1.png';
 import bluewave from '../../Assets/Waveimgs/Mask group.png';
 import bluewave2 from '../../Assets/Waveimgs/Mask group-1.png';
+import { SlPaperPlane} from "react-icons/sl";
+import { CiBookmark } from "react-icons/ci";
+
+
+
+
 
 function RP_AddPatient(){
     const [formData, setFormData] = useState({
@@ -172,10 +178,11 @@ function RP_AddPatient(){
           className="notes-input"
         ></textarea>
       </div>
-      <div className="form-group btn-add" >
-        <button type="submit" className="submit-button">إضافة</button>
-      </div>
     </form>
+      <div className="btn-add" >
+        <button type="submit" className="submit-button"> <SlPaperPlane className="icon"/> ارسال</button>
+        <button className="save-button"> <CiBookmark className="icon"/> حفظ</button>
+      </div>
         </div>
     )
 }
