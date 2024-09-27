@@ -13,7 +13,7 @@ import './nav.css';
 // import Invoice from '../../../images/invoice.png';
 // import list from '../../../images/list.png';
 import Health from '../../../images/Health.png';
-import List from './list'
+// import List from './list'
 function nav(params) {
 
   
@@ -26,15 +26,17 @@ function nav(params) {
             <ul>
               <li><Link to="/">
               مخزن الادويه </Link>  </li>
-              <li><Link to="/">
+              <li><Link to="/dashboard">
               لوح التحكم</Link> </li>
               <li><Link to="/">
               التقارير</Link>  </li>
-              <li><Link to="/">
+              <li><Link to="/logs">
               السجلات</Link> </li>
             </ul>
           </div>
-        <List />
+        {/* <List /> */}
+        {/* hide list after edit this page and add empty div */}
+        <div></div>
         </div>
       );
     }
