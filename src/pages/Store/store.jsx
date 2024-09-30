@@ -3,6 +3,7 @@ import './store.css'
 import arrow from './../../images/arrow.png'
 import add from './../../images/add_product.png'
 import arrowForInput from './../../images/arrow-of-search.png'
+import notification from './../../images/Notification.png'
 import { type } from '@testing-library/user-event/dist/type'
 function Store(params) {
 
@@ -118,8 +119,12 @@ function Store(params) {
                     <div className="addToStore">
                         <div className="navOfHeadOfFirstContainer">
                             <div className="leftOfNavOfHeadOfFirstContainer">
+                                <div className='DivOfAdd'>
                                 <img src={add} alt="" />
                                 <p>اضافة</p>
+                                </div>
+                                <img src={notification} alt="" />
+                                <div className='notification'>1</div>
                             </div>
                             <div className='searchAndFilter'><p>البحث والتصفية</p></div>
                         </div>
