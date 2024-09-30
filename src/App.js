@@ -18,13 +18,14 @@ import Logs from './pages/LogsPage/Logs';
 import BillingReport from './pages/RecordsPage/BillingReports';
 import FollowUpBilling from './pages/RecordsPage/FollowUpBillingReport';
 import DrugStore from './pages/RecordsPage/DrugStore';
-
+import Store from './pages/Store/store'
 function App() {
   return (
     <div className="App mx-auto font-amiri">
-      <Router>
+<Store />
+      {/* <Router>
         <Routes>
-          {/* <Route path="/adduser" element={<Adduser />} /> */}
+          
 
           <Route path="/Login" element={<Login />} />
 
@@ -46,7 +47,7 @@ function App() {
             <Route path="/drugstore" element={<DrugStore />} />
           </Route>
         </Routes>
-      </Router>
+      </Router> */}
     </div>
   );
 }
