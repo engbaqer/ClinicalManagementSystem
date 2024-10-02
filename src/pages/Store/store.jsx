@@ -4,7 +4,7 @@ import arrow from './../../images/arrow.png'
 import add from './../../images/add_product.png'
 import arrowForInput from './../../images/arrow-of-search.png'
 import notification from './../../images/Notification.png'
-import { type } from '@testing-library/user-event/dist/type'
+
 function Store(params) {
 
 

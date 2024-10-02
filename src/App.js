@@ -19,10 +19,12 @@ import BillingReport from './pages/RecordsPage/BillingReports';
 import FollowUpBilling from './pages/RecordsPage/FollowUpBillingReport';
 import DrugStore from './pages/RecordsPage/DrugStore';
 import Store from './pages/Store/store'
+import AddProduct from './pages/AddProduct/AddProduct'
 function App() {
   return (
     <div className="App mx-auto font-amiri">
-<Store />
+      <AddProduct />
+{/* <Store /> */}
       {/* <Router>
         <Routes>
           
