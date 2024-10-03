@@ -67,6 +67,10 @@ top: 3.5px;
 border: 2px solid white;
 cursor: pointer;
 }
+.leftOfNavOfHeadOfFirstContainer .listOfrequest{
+    justify-content: center;
+    width: 130px;
+}
 .leftOfNavOfHeadOfFirstContainer p{
     font-size: 25px;
     color: white;

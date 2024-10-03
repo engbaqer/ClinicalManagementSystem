@@ -119,9 +119,12 @@ function Store(params) {
                     <div className="addToStore">
                         <div className="navOfHeadOfFirstContainer">
                             <div className="leftOfNavOfHeadOfFirstContainer">
-                                <div className='DivOfAdd'>
+                                <div className='DivOfAdd '>
                                 <img src={add} alt="" />
                                 <p>اضافة</p>
+                                </div>
+                                <div className='DivOfAdd listOfrequest' >
+                                <p>قائمة الطلبات </p>
                                 </div>
                                 <img src={notification} alt="" />
                                 <div className='notification'>1</div>
