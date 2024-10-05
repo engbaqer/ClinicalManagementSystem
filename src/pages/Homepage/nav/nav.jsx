@@ -23,15 +23,18 @@ function nav(params) {
             <img src={Health} alt="wait pleas" />
           </div>
           <div className=" menu ">
+        
             <ul>
-              <li><Link to="/">
-              مخزن الادويه </Link>  </li>
+            <Link to="/storepage">
+              <li>
+           المخزن  </li> </Link> 
               <li><Link to="/dashboard">
               لوح التحكم</Link> </li>
               <li><Link to="/">
-              التقارير</Link>  </li>
-              <li><Link to="/logs">
-              السجلات</Link> </li>
+              الموظفين</Link>  </li>
+              <Link to="/RPL">
+              <li>
+              المرضى  </li></Link>
             </ul>
           </div>
         {/* <List /> */}

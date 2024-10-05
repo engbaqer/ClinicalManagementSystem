@@ -4,7 +4,7 @@ import arrow from './../../images/arrow.png'
 import add from './../../images/add_product.png'
 import arrowForInput from './../../images/arrow-of-search.png'
 import notification from './../../images/Notification.png'
-
+import { Link } from "react-router-dom";
 function Store(params) {
 
 
@@ -109,7 +109,7 @@ function Store(params) {
     return (
         <div className='store' >
             <div className='header'>
-                <div className='arrow'><img src={arrow} alt="" /></div>
+                <div className='arrow'><img src={arrow} alt="" onClick={()=>window.history.back()} /></div>
                 <div className='title'><h1>المخزن</h1></div>
                 {/* empty div to make title in the center */}
                 <div></div>
@@ -118,11 +118,14 @@ function Store(params) {
                 <div className='headOfFirstContainer'>
                     <div className="addToStore">
                         <div className="navOfHeadOfFirstContainer">
-                            <div className="leftOfNavOfHeadOfFirstContainer">
+                          
+                          <div className="leftOfNavOfHeadOfFirstContainer">
+                          <Link to="/AddProduct" >
                                 <div className='DivOfAdd '>
                                 <img src={add} alt="" />
                                 <p>اضافة</p>
                                 </div>
+                                </Link>
                                 <div className='DivOfAdd listOfrequest' >
                                 <p>قائمة الطلبات </p>
                                 </div>

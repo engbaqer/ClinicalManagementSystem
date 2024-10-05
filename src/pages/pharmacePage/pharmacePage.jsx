@@ -4,6 +4,8 @@ import arrow from '../../images/arrow-right 2.png'
 import DispensingMedication from '../pharmacePage/Dispensing_medication/Dispensing medication'
 import RequestMedication from './RequestMedication/RequestMedication'
 import Listofmedication from './ListofMedications/listofmedication'
+import MedicationDispensingList from './MedicationDispensingList/MedicationDispensingList'
+import RequestResponseList from './RequestResponseList/RequestResponseList'
 function pharmacePage(params) {
     // eslint-disable-next-line react-hooks/rules-of-hooks
     const [activeSection, setActiveSection] = useState("DispensingMedication");
@@ -24,6 +26,12 @@ function pharmacePage(params) {
             case "Listofmedication":
 
                 return <Listofmedication />;
+                case "MedicationDispensingList":
+
+                return <MedicationDispensingList />;
+                case "RequestResponseList":
+
+                return <RequestResponseList />;
             default:
 
                 return <DispensingMedication />;
@@ -41,6 +49,8 @@ function pharmacePage(params) {
                 <div className="bodySection  ">
                     <div className={`leftSection h-full w-full  ${forlist}`} >
                         {renderSection()}
+                        {/* <RequestResponseList /> */}
+
                     </div>
 
 
@@ -62,8 +72,16 @@ function pharmacePage(params) {
                             setforList("")
                         }}
                             className={activeSection === "RequestMedication" ? "colorForButton" : ""} >طلب الدواء</button>
-
-
+<button onClick={() => {
+                            setActiveSection("MedicationDispensingList")
+                            setforList("forlist")
+                        }}
+                            className={activeSection === "MedicationDispensingList" ? "colorForButton" : ""} > قائمة صرف الدواء</button>
+<button onClick={() => {
+                            setActiveSection("RequestResponseList")
+                            setforList("forlist")
+                        }}
+                            className={activeSection === "RequestResponseList" ? "colorForButton" : ""} > قائمة استجابة الطلبات </button>
                     </div>
 
                 </div>

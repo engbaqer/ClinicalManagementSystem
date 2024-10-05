@@ -12,28 +12,32 @@ import DoctorPage from './pages/Doctor/DoctorPage';
 import PatientProfile from './pages/Patient Profile/PatientProfile';
 import Cardpage from './pages/Cardpage/Cardpage';
 import PharmacrPage from './pages/pharmacePage/pharmacePage';
-import Auth from './pages/auth/auth';
+// import Auth from './pages/auth/auth';
 import Dashboard from './pages/Dashboard/Dashboard';
 import Logs from './pages/LogsPage/Logs';
 import BillingReport from './pages/RecordsPage/BillingReports';
 import FollowUpBilling from './pages/RecordsPage/FollowUpBillingReport';
 import DrugStore from './pages/RecordsPage/DrugStore';
-import Store from './pages/Store/store'
-import AddProduct from './pages/AddProduct/AddProduct'
+import Store from './pages/Store/store';
+import AddProduct from './pages/AddProduct/AddProduct';
+import Addprescription from './pages/AddPrescription/AddPrescription'
 import ProductAndPriceData from './pages/ProductAndPriceData/ProductAndPriceData'
 function App() {
   return (
     <div className="App mx-auto font-amiri">
+      {/* <PharmacrPage /> */}
       {/* <AddProduct /> */}
 {/* <Store /> */}
-<ProductAndPriceData />
-      {/* <Router>
+{/* <ProductAndPriceData /> */}
+      <Router>
         <Routes>
           
 
           <Route path="/Login" element={<Login />} />
 
-          <Route element={<Auth />}>
+          {/* <Route element={<Auth />}> */}
+          <Route path="/Addprescription" element={<Addprescription />} />
+          <Route path="/AddProduct" element={<AddProduct />} />
             <Route path="/PharmacrPage" element={<PharmacrPage />} />
             <Route path="/" element={<Homepage />} />
             <Route path="/Reception" element={<Reception />} />
@@ -49,9 +53,11 @@ function App() {
             <Route path="/billing-report" element={<BillingReport />} />
             <Route path="/follow-up" element={<FollowUpBilling />} />
             <Route path="/drugstore" element={<DrugStore />} />
-          </Route>
+            
+          <Route path="/storepage" element={<Store />} />
+          {/* </Route> */}
         </Routes>
-      </Router> */}
+      </Router>
     </div>
   );
 }

@@ -1,10 +1,10 @@
 import React,{useContext} from 'react';
 import './body.css';
 import { Link } from "react-router-dom";
-import Dector from '../../../images/doctor.png';
+import Logs from '../../../images/logs.png';
 import Reseption from '../../../images/reception.png';
 import Card from '../../../images/card.png';
-import Pharmacist from '../../../images/Pharmacist.png';
+import Recordes from '../../../images/RecordsH.png';
 import Cart from '../../components/Cart';
 import  {ClinicalContext}  from './../../auth/contextFile';
 function body(params) {
@@ -15,8 +15,8 @@ function body(params) {
       <h1> مرحبا بعودتك  {username}  اهلا</h1>
       <div className="Departments flex flex-wrap">
      <Link to="/Reception" >  <Cart ImgLink={Reseption} Text={'موظف استقبال'} /></Link>
-     <Link to="/doctor" >   <Cart ImgLink={Dector} Text={'طبيب'} /></Link>
-        <Link  to="/PharmacrPage" ><Cart  ImgLink={Pharmacist} Text={'صيدلاني'} /></Link>
+     <Link to="/Logs" >   <Cart ImgLink={Logs} Text={'التقارير'} /></Link>
+        <Link  to="/DrugStore" ><Cart  ImgLink={Recordes} Text={'السجلات'} /></Link>
         <Link to="/Cardpage" >  <Cart ImgLink={Card} Text={'اصدار الهوية'} /></Link>
       </div>
     </div>

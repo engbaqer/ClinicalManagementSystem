@@ -27,7 +27,7 @@ function AddProduct(params) {
             {/* Header section with an arrow icon and a centered title */}
             <div className='header'>
                 <div className='arrow'>
-                    <img src={arrow} alt="" />
+                    <img src={arrow} alt="" onClick={()=>window.history.back()} />
                 </div>
                 <div className='title'>
                     <h1>اضافة منتج</h1>

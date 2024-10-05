@@ -181,13 +181,14 @@ display: none;
 .divFortable{
     width: 80%;
     direction: rtl;
-    max-height: 55vh;
-    overflow-y: auto;
- 
+   height: 28rem;
+   overflow-y: auto;
 }
 .store .secondContener table{
+    
     direction: ltr;
    width: 100%;
+   
 }
 .store .secondContener table thead{
     background-color: rgba(20, 182, 218, 0.42);
@@ -196,14 +197,15 @@ display: none;
     font-size: 20px;
     font-weight: bold;
 }
+
 .store .secondContener table  td {
-  
    text-align: center;
     border: none;
     border-top: 2px solid rgba(20, 182, 218, 1);
     border-bottom: 2px solid rgba(20, 182, 218, 1);
 }
 .store .secondContener table tbody td{
+    padding: 15px 0;
     background-color: rgba(255, 255, 254, 1);
     font-size: 18px;
 }
