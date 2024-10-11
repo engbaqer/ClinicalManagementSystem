@@ -22,8 +22,7 @@ function nav(params) {
           <div className="icon">
             <img src={Health} alt="wait pleas" />
           </div>
-          <div className=" menu ">
-        
+          <div className=" menu ">   
             <ul>
             <Link to="/storepage">
               <li>
@@ -33,8 +32,7 @@ function nav(params) {
               <li><Link to="/">
               الموظفين</Link>  </li>
               <Link to="/RPL">
-              <li>
-              المرضى  </li></Link>
+              <li>المرضى</li></Link>
             </ul>
           </div>
         {/* <List /> */}

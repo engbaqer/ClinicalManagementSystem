@@ -1,9 +1,11 @@
+/* eslint-disable react/jsx-no-undef */
 import React, { useEffect, useState,useContext } from 'react';
 import './InvoicePage.css';
 import Arrow from '../../images/arrow-right 1.png';
 import AddInvoiceimg from '../../images/addinvoice.png';
 import trash from '../../images/trash.png';
 import axios from 'axios';
+import { Navigate,useNavigate } from "react-router-dom";
 import  {ClinicalContext}  from './../../pages/auth/contextFile';
 function InvoicePage() {
   const {token} =useContext(ClinicalContext)
@@ -12,6 +14,22 @@ function InvoicePage() {
   const [startDate, setStartDate] = useState('');
   const [endDate, setEndDate] = useState('');
   const [slect, setSlect] = useState('');
+
+
+  ////openInvoicpage///////////////
+
+  const navigate = useNavigate();
+
+  const openInvoicePage = (id) => {
+    navigate(`/theInvoice/${id}`);
+  };
+
+
+
+
+
+  ////openInvoicpage///////////////
+
 
 
   ////////////////////////////////////{git all invoices}//////////////////////////////////////////////////
@@ -119,7 +137,7 @@ async function deleteInvoice(id) {
         <div className='table-body'>
           {filteredInvoices.length > 0 ? (
             filteredInvoices.map((invoice, index) => (
-              <div className={`row ${slect===invoice._id ? "SelectClass" : ""}`} key={invoice.id}  onClick={()=>setSlect(invoice._id)}>
+              <div className={`row ${slect===invoice._id ? "SelectClass" : ""}`} key={invoice.id}  onClick={()=>setSlect(invoice._id)}  onDoubleClick={()=>{openInvoicePage(invoice._id)}}>
                 <p>{invoice.createdAt}</p>
                 <p>مشترك</p>
                 <p>{invoice.patientName}</p>

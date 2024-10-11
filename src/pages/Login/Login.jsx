@@ -34,9 +34,12 @@ function Login() {
       );
       
       localStorage.setItem('token',response.data.token)
-      handleLogin(response.data.token)
-      console.log("Data saved successfully:", response.data);
+      localStorage.setItem('username',info.username)
+      handleLogin(response.data.token);
+      // console.log("Data saved successfully:", response.data);
+      // localStorage.setItem('username',response.data);
       navigate('/' , {replace:true})
+     
      
     } catch (error) {
       if (error.response) {

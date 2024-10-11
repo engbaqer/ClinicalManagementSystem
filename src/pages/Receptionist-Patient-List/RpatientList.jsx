@@ -5,11 +5,23 @@ import trash from '../../images/trash.png';
 import options from '../../images/options.png';
 import RPLoptions from '../../components/RPL-Options/RPLoptions';
 import arrow from '../../images/arrow-right 1.png';
-import { Link } from 'react-router-dom';
+import { Link ,useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import  {ClinicalContext}  from './../../pages/auth/contextFile';
 
 function RpatientList() {
+
+
+
+  ////////////////////////////////////////////////////////////////////
+
+  const navigate = useNavigate();
+
+  const openPatient = (id) => {
+    navigate(`/patient-profile/${id}`);
+  };
+
+////////////////////////////////////////////////////////////////////
   
   const {token} =useContext(ClinicalContext)
   const [search, setSearch] = useState('');
@@ -34,7 +46,6 @@ function RpatientList() {
     }
    try{ const r=  await axios({
         method:"get",
-        // data:"data",
         url:"http://localhost:4000/api/patient/patients",
         headers: {
           "Content-Type": "multipart/form-data",
@@ -178,7 +189,7 @@ async function deletePatient(id) {
         </div>
             <div className='table-body'>
               {filteredPatients.map((patient, index) => (
-                <div className={`row ${slect===patient._id ? "SelectClass" : ""}`}  key={index} onClick={()=>setSlect(patient._id)} >
+                <div className={`row ${slect===patient._id ? "SelectClass" : ""}`}  key={index} onClick={()=>setSlect(patient._id)} onDoubleClick={()=>{openPatient(patient._id)}} >
                   <p>مشترك</p>
                   <p>{patient.phone}</p>
                   <p>{patient.diseaseType}</p>

@@ -7,13 +7,29 @@
 gap: 10px;
 width: 500px;
 }
+.store .lineOfinput .DivForInputs ul{
+    z-index: 3;
+}
 .store .lineOfinput .DivForInputs label{
     text-align: end;
     font-weight: bold;
 }
+
+.quantityProudNum{
+display: flex !important;
+flex-direction: row !important;
+direction: rtl;
+justify-content: center;
+align-items: center;
+}
+.quantityProudNum input{
+    width: 30% !important;
+    
+}
 .store .lineOfinput .DivForInputs  input{
     width:100%;
 }
+
 .store .lineOfinput  textarea{
     width: 100%;
     direction: rtl;

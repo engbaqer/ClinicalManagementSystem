@@ -75,15 +75,12 @@ const toggleShow = (index) => {
             <label htmlFor={`name-${index}`}>البند</label>
             <img onClick={() => toggleShow(index)} src={arrow2} alt="" />
             <ul  className={showStates[index] || 'hide'}>
-              <li onClick={() => handleValueChange(index, 'فحوصات الاسنان')}>فحوصات الاسنان</li>
+              <li onClick={() => handleValueChange(index, 'فحوصات الاسنان')}>مرض عام </li>
               <hr />
-              <li onClick={() => handleValueChange(index, 'فحوصات المختبرت')}>فحوصات المختبرات</li>
+              <li onClick={() => handleValueChange(index, 'فحوصات المختبرت')}> مرض مزمن</li>
               <hr />
-              <li onClick={() => handleValueChange(index, 'فحوصات الضماد')}>فحوصات الضماد</li>
-              <hr />
-              <li onClick={() => handleValueChange(index, 'فحوصات الاشعة والسونار')}>فحوصات الاشعة والسونار</li>
-              <hr />
-              <li onClick={() => handleValueChange(index, 'الفحوصات العامة')}>الفحوصات العامة</li>
+              <li onClick={() => handleValueChange(index, 'فحوصات الضماد')}> حالة حرجه</li>
+          
               <hr />
             </ul>
           </div>

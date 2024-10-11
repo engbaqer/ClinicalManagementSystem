@@ -33,9 +33,9 @@ function DispensingMedication() {
    <div className='patientInfo'>
    <input type="text" id='input' placeholder='اختر اسم المريض' />
    <label htmlFor="input">الأسم</label>
-   <img src={arrow} alt="" onClick={() => setHideList(hidelist === '' ? 'hide' : '')}/>
+   <img src={arrow} alt="" onClick={() => setHideList(hidelist === 'show' ? 'hide' : 'show')}/>
    <div className={`listOfpationt ${hidelist}`}>
-    <ul>
+    <ul className={hidelist}>
         <li>باقر محسن خلف</li>
         <li>باقر محسن خلف</li>
         <li>باقر محسن خلف</li>

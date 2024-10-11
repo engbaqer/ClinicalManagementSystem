@@ -1,15 +1,13 @@
 import { useContext, useEffect, useState } from "react";
 import { Navigate, Outlet } from "react-router-dom";
 import axios from "axios";
-import Login from './../Login/Login'
+import { ClinicalContext } from "./contextFile"; // Import ClinicalContext
 
 export default function Auth() {
-  const token =localStorage.getItem('token')
-  
-
-  const [user, setUser] = useState(null);
-  const [loading, setLoading] = useState(true);  
-
+  // const { token, handleLogin } = useContext(ClinicalContext);
+  const [user, setUser] = useState(''); // Initialize user from localStorage
+  const [loading, setLoading] = useState(true);
+  const token=localStorage.getItem('token')
   useEffect(() => {
     async function getMe() {
       if (!token) {
@@ -23,33 +21,35 @@ export default function Auth() {
           method: "get",
           url: "http://localhost:4000/api/auth/getMe",
           headers: {
-            Authorization: `Bearer ${token}`, 
+            Authorization: `Bearer ${token}`,
           },
         });
-        localStorage.setItem("username",response.data.name)
-        setUser(response.data.name);  // Update user state with fetched data
+        const fetchedUsername = response.data.name;
+
+        setUser(fetchedUsername); // Set the user in state
+        // handleLogin(token); // Ensure token is set in context
         console.log('Fetched User Data:', response.data);
       } catch (error) {
-        if (error.response) {
-          console.error("Error response data:", error.response.data);
-        } else if (error.request) {
-          console.error("Error request:", error.request);
-        } else {
-          console.error("Error message:", error.message);
-        }
+        console.error(error);
       } finally {
-        setLoading(false);  // Stop loading after the request
+        setLoading(false); // Set loading to false after API call
       }
     }
-
     getMe();
   }, [token]);
 
-  // If still loading, show a loading message
   if (loading) {
-    return <div style={{height:'300px', display: 'flex',justifyContent:'center',alignItems:'center',fontSize:'30px'} }><h1>Loading...</h1></div>;
+    // Show a loading state while checking token and fetching user data
+    return (
+      <div style={{ height: '300px', display: 'flex', justifyContent: 'center', alignItems: 'center', fontSize: '30px' }}>
+        <h1>Loading...</h1>
+      </div>
+    );
   }
 
-  // Redirect if no token or no user is fetched
-  return user && token ? <Outlet /> :<Navigate to="/login" />;
+  // Get the username from localStorage
+  const storedUsername = localStorage.getItem('username');
+
+  return user === storedUsername && token ? <Outlet /> : <Navigate to="/login" />;
+
 }

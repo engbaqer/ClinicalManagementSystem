@@ -1,5 +1,16 @@
 
+.show {
+    max-height: 500px; /* A large enough value to fit the content */
+    overflow: visible;
+    transition: max-height 500ms ease;
+}
 
+.hide {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 500ms ease;
+    border: none !important; ;
+}
 body{
     background: #B7EBF7;
   }
@@ -137,11 +148,13 @@ font-weight:600;
 }
 .invoice .info form .lastSection .item ul {
     position: absolute;
-    background-color:#FFFFFF ;
-    right:5px;
-    top: 67px;
-    border: #D3D3D3 solid 1px;
+    background-color: #FFFFFF;
+    width: 100%;
+    top: 65px;
+    border: #000 solid 1px;
     z-index: 2;
+    border-top: none;
+    
 }
 .invoice .info form .lastSection .item ul li{
    text-align: center;

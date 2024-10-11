@@ -1,94 +1,109 @@
-import React, { useState } from 'react'
+import React, { useState,useContext, useEffect } from 'react'
 import './store.css'
 import arrow from './../../images/arrow.png'
 import add from './../../images/add_product.png'
 import arrowForInput from './../../images/arrow-of-search.png'
 import notification from './../../images/Notification.png'
-import { Link } from "react-router-dom";
+import { Link,useNavigate } from "react-router-dom";
+import  {ClinicalContext}  from './../../pages/auth/contextFile';
+import axios from 'axios';
+import io from 'socket.io-client';
+
 function Store(params) {
 
+////////////////////////////////////////////////////////////////////
+    const [responses, setResponses] = useState([]);
+    const [notificationCount, setNotificationCount] = useState(0);
+  
+    // Connect to WebSocket on component mount
+    useEffect(() => {
+      const socket = io('http://localhost:4000');
+      socket.on('connect', () => {
+        console.log('Connected to WebSocket');
+      });
+    
+      // Fetch initial responses from the server
+      const fetchResponses = async () => {
+        try {
+          const { data } = await axios.get('http://localhost:4000/api/pharmacist/responses');
+          setResponses(data);
+          setNotificationCount(data.length);
+        } catch (error) {
+          console.error('Error fetching responses:', error);
+        }
+      };
+  
+      fetchResponses();
+  // Listen for new responses via WebSocket
+      socket.on('new-response', (newResponse) => {
+        setResponses((prevResponses) => [...prevResponses, newResponse]);
+        setNotificationCount((prevCount) => prevCount + 1); // Update notification count
+        
+      });
+  
+    //   Clean up the socket connection when component unmounts
+      return () => {
+        socket.disconnect();
+      };
+    }, []);
+////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////
+
+    const navigate = useNavigate();
+
+    const openProductPage = (id) => {
+      navigate(`/ProductAndPriceData/${id}`);
+    };
+
+////////////////////////////////////////////////////////////////////
+
+    const {token} =useContext(ClinicalContext)
+    const [allproduct, setAllproduct] = useState([]);
+  const [loading, setLoading] = useState(true); 
+//////get all produects///////
+useEffect(()=>{async function getAllpatient  (){
+    if (!token) {
+      console.error("No token found, redirecting to login.");
+      setLoading(false);
+      return;
+    }
+   try{ const r=  await axios({
+        method:"get",
+        url:"http://localhost:4000/api/storage/products",
+        headers: {
+          "Content-Type": "multipart/form-data",
+          Authorization: `Bearer ${token}`,
+        },
 
 
-    const data = [
-        {
-          date: "8/23/2024",
-          quantity: 100,
-          price: "$5",
-          description: "خافض حرارة، مسكن ألم",
-          name: "Paracetamol",
-          ndc: "NDC 50090-0990"
-        },
-        {
-          date: "8/23/2024",
-          quantity: 100,
-          price: "$5",
-          description: "خافض حرارة، مسكن ألم",
-          name: "Paracetamol",
-          ndc: "NDC 50090-0990"
-        },
-        {
-          date: "8/23/2024",
-          quantity: 100,
-          price: "$5",
-          description: "خافض حرارة، مسكن ألم",
-          name: "Paracetamol",
-          ndc: "NDC 50090-0990"
-        },
-        {
-          date: "8/23/2024",
-          quantity: 100,
-          price: "$5",
-          description: "خافض حرارة، مسكن ألم",
-          name: "Paracetamol",
-          ndc: "NDC 50090-0990"
-        },
-        {
-          date: "8/23/2024",
-          quantity: 100,
-          price: "$5",
-          description: "خافض حرارة، مسكن ألم",
-          name: "Paracetamol",
-          ndc: "NDC 50090-0990"
-        },
-        {
-          date: "8/23/2024",
-          quantity: 100,
-          price: "$5",
-          description: "خافض حرارة، مسكن ألم",
-          name: "Paracetamol",
-          ndc: "NDC 50090-0990"
-        },
-        {
-          date: "8/23/2024",
-          quantity: 100,
-          price: "$5",
-          description: "خافض حرارة، مسكن ألم",
-          name: "Paracetamol",
-          ndc: "NDC 50090-0990"
-        },  {
-            date: "8/23/2024",
-            quantity: 100,
-            price: "$5",
-            description: "خافض حرارة، مسكن ألم",
-            name: "Paracetamol",
-            ndc: "NDC 50090-0990"
-          },  {
-            date: "8/23/2024",
-            quantity: 100,
-            price: "$5",
-            description: "خافض حرارة، مسكن ألم",
-            name: "Paracetamol",
-            ndc: "NDC 50090-0990"
-          },  {
-            date: "8/23/2024",
-            quantity: 100,
-            price: "$5",
-            description: "خافض حرارة، مسكن ألم",
-            name: "Paracetamol",
-            ndc: "NDC 50090-0990"
-          }
-      ];
+      });
+    setAllproduct(r.data)
+      console.log(allproduct)
+   }
+   catch (error) {
+    if (error.response) {
+      console.error("Error response data:", error.response.data);
+      console.error("Error response status:", error.response.status);
+      console.error("Error response headers:", error.response.headers);
+    } else if (error.request) {
+      console.error("Error request:", error.request);
+    } else {
+      console.error("Error message:", error.message);
+    }
 
+  }
+  finally {
+    setLoading(false);
+    if(!allproduct){
+     
+    }  // Stop loading after the request
+  }
+  }
+  getAllpatient()}
+ , []) 
+//////get all produects///////
+
+    
 
     const [toggle, setToggle] = useState({ toggle1: '', toggle2: '' })
     const [inputValues, setInputvalue] = useState({
@@ -102,9 +117,22 @@ function Store(params) {
             [key]: value, 
         }));
     }
+///////////////////////////////////////////date/////////////////////////////
+function formatPurchaseDate(purchaseDate) {
+    const date = new Date(purchaseDate);
+  
+    const formattedDate = date.toLocaleDateString('en-CA', {
+      year: 'numeric',
+      month: '2-digit', // Ensures month is always 2 digits
+      day: '2-digit' // Ensures day is always 2 digits
+    });
+  
+    return formattedDate;
+  }
+  
 
 
-
+///////////////////////////////////////////date/////////////////////////////
 
     return (
         <div className='store' >
@@ -126,11 +154,13 @@ function Store(params) {
                                 <p>اضافة</p>
                                 </div>
                                 </Link>
+                                <Link to="/drugStore/requests" >
                                 <div className='DivOfAdd listOfrequest' >
                                 <p>قائمة الطلبات </p>
                                 </div>
+                                </Link>
                                 <img src={notification} alt="" />
-                                <div className='notification'>1</div>
+                                <div className='notification'>{notificationCount}</div>
                             </div>
                             <div className='searchAndFilter'><p>البحث والتصفية</p></div>
                         </div>
@@ -192,14 +222,15 @@ function Store(params) {
                         </tr>
                     </thead>
                     <tbody>
-                    {data.map((item, index) => (
-          <tr key={index}>
-            <td className="firstTd">{item.date}</td>
+                    {allproduct.map((item, index) => (
+                        
+          <tr key={index} onClick={()=>{openProductPage(item._id)}}>
+            <td className="firstTd">{formatPurchaseDate(item.purchaseDate)}</td>
             <td>{item.quantity}</td>
-            <td>{item.price}</td>
+            <td>{item.sellingPrice}</td>
             <td>{item.description}</td>
-            <td>{item.name}</td>
-            <td className="lastTd">{item.ndc}</td>
+            <td>{item.productName}</td>
+            <td className="lastTd">{item.productNumber}</td>
           </tr>
         ))}
                     </tbody>

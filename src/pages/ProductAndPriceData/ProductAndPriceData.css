@@ -55,7 +55,8 @@ direction: rtl;
 .ProductDetails table tr td{
     border: none;
     text-align: center;
-
+    width: 17rem;
+    padding-top: 1rem;
 }
 .ProductDetails h3{
     direction: rtl;

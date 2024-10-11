@@ -1,5 +1,14 @@
+.show {
+  max-height: 500px; /* A large enough value to fit the content */
+  overflow: visible;
+  transition: max-height 500ms ease;
+}
+
 .hide {
-  display: none;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 500ms ease;
+  border: none !important; ;
 }
 .nav {
   display: flex;

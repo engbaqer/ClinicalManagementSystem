@@ -1,12 +1,10 @@
 import React, { createContext ,useState,useEffect} from "react";
-
 export const ClinicalContext = createContext(null);
 
 const ClinicalContextProvider = ({ children }) => {
   const [token, setToken] = useState(null);
   useEffect(() => {
     const savedToken = localStorage.getItem("token");
-    
 
     if (savedToken) setToken(savedToken);
     

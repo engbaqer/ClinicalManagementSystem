@@ -185,11 +185,18 @@ margin-bottom: 20px;
    margin: 10px;
    gap: 10px;
 }
-.hide{
-    display: none;
+.DispensingMedication .show {
+    max-height: 500px; /* A large enough value to fit the content */
+    overflow: visible;
+    transition: max-height 500ms ease;
 }
 
-
+.DispensingMedication .hide {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 500ms ease;
+    border: none !important; ;
+}
 .bus button img
 {
     height: 30px;

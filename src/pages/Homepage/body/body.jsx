@@ -16,7 +16,7 @@ function body(params) {
       <div className="Departments flex flex-wrap">
      <Link to="/Reception" >  <Cart ImgLink={Reseption} Text={'موظف استقبال'} /></Link>
      <Link to="/Logs" >   <Cart ImgLink={Logs} Text={'التقارير'} /></Link>
-        <Link  to="/DrugStore" ><Cart  ImgLink={Recordes} Text={'السجلات'} /></Link>
+        <Link  to="/logs" ><Cart  ImgLink={Recordes} Text={'السجلات'} /></Link>
         <Link to="/Cardpage" >  <Cart ImgLink={Card} Text={'اصدار الهوية'} /></Link>
       </div>
     </div>

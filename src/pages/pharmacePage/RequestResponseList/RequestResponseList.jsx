@@ -20,9 +20,9 @@ function RequestResponseList(params) {
                 <div className="list">
                 <input type="text" id='input' placeholder='اختر اسم المريض' />
   
-   <img src={arrow} alt="" onClick={() => setHideList(hidelist === '' ? 'hide' : '')}/>
-   <div className={`list ${hidelist}`}>
-    <ul>
+   <img src={arrow} alt="" onClick={() => setHideList(hidelist === 'show' ? 'hide' : 'show')}/>
+   <div className={`list `}>
+    <ul className={hidelist}>
         <li>باقر محسن خلف</li>
         <li>باقر محسن خلف</li>
         <li>باقر محسن خلف</li>

@@ -1,4 +1,4 @@
-import React,{useState} from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { DatePicker } from 'antd';
 import arrow from './../../../images/arrow_down.png'
 import  './MedicationDispensingList.css'
@@ -11,13 +11,13 @@ function MedicationDispensingList() {
     return (
         <div className="MedicationDispensingList">
             <div className="DateAndPatientName">
-                <RangePicker className='date' /> {/* Corrected the typo here */}
+                <RangePicker className='date' />
                 <div className="listOfpatient">
                 <input type="text" id='input' placeholder='اختر اسم المريض' />
   
-   <img src={arrow} alt="" onClick={() => setHideList(hidelist === '' ? 'hide' : '')}/>
+   <img src={arrow} alt="" onClick={() => setHideList(hidelist === 'show' ? 'hide' : 'show')}/>
    <div className={`listOfpationt ${hidelist}`}>
-    <ul>
+    <ul className={hidelist}>
         <li>باقر محسن خلف</li>
         <li>باقر محسن خلف</li>
         <li>باقر محسن خلف</li>
