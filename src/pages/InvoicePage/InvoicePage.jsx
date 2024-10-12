@@ -139,7 +139,7 @@ async function deleteInvoice(id) {
             filteredInvoices.map((invoice, index) => (
               <div className={`row ${slect===invoice._id ? "SelectClass" : ""}`} key={invoice.id}  onClick={()=>setSlect(invoice._id)}  onDoubleClick={()=>{openInvoicePage(invoice._id)}}>
                 <p>{invoice.createdAt}</p>
-                <p>مشترك</p>
+                <p className='status'>زارالطبيب-لم يزر الصيدلاني</p>
                 <p>{invoice.patientName}</p>
                 <p>{index + 1}</p>
               </div>

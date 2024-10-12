@@ -190,7 +190,7 @@ async function deletePatient(id) {
             <div className='table-body'>
               {filteredPatients.map((patient, index) => (
                 <div className={`row ${slect===patient._id ? "SelectClass" : ""}`}  key={index} onClick={()=>setSlect(patient._id)} onDoubleClick={()=>{openPatient(patient._id)}} >
-                  <p>مشترك</p>
+                  <p className='status'>زارالطبيب-لم يزر الصيدلاني</p>
                   <p>{patient.phone}</p>
                   <p>{patient.diseaseType}</p>
                   <p>{patient.age}</p>

@@ -27,10 +27,10 @@ function nav(params) {
             <Link to="/storepage">
               <li>
            المخزن  </li> </Link> 
-              <li><Link to="/dashboard">
-              لوح التحكم</Link> </li>
-              <li><Link to="/">
-              الموظفين</Link>  </li>
+           <Link to="/dashboard">     <li>
+              لوح التحكم</li></Link> 
+              <Link to="/userList"> <li>
+            الموظفين</li> </Link>
               <Link to="/RPL">
               <li>المرضى</li></Link>
             </ul>

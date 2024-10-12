@@ -19,7 +19,7 @@ import BillingReport from './pages/RecordsPage/BillingReports';
 import FollowUpBilling from './pages/RecordsPage/FollowUpBillingReport';
 import DrugStore from './pages/RecordsPage/DrugStore';
 import AddPrescription from './pages/AddPrescription/AddPrescription';
-
+import UserList from './pages/UserList/UserList'
 import RequestPage from './pages/DrugStore/RequestPage/RequestsPage';
 import Store from './pages/Store/store';
 import AddProduct from './pages/AddProduct/AddProduct';
@@ -55,7 +55,7 @@ function App() {
             <Route path="/follow-up" element={<FollowUpBilling />} />
             <Route path="/drugstore-reports" element={<DrugStore />} />
             <Route path="/add-prescription" element={<AddPrescription />} />
-            
+            <Route path="/userList" element={<UserList />} />
             <Route path='drugstore' element={<div><Outlet /></div>}>
               <Route path='requests' element={<RequestPage />} />
               <Route path=':requestId' element={<h1>Hello</h1>}/>
