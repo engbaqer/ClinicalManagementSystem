@@ -60,7 +60,7 @@ function ProductAndPriceData(params) {
                     <tbody>
                         <tr>
                         <td>{product.productName}</td>
-                            <td> {product.productName}</td>
+                            <td> {product.productNumber}</td>
                             <td>{product.purchaseDate}</td>
                             <td>{product.category}</td>
                             <td>{product.quantity}</td>
