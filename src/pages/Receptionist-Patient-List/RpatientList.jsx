@@ -1,13 +1,29 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect,useContext } from 'react';
 import './RpatientList.css';
 import AddPatient from '../../images/addpatient.png';
 import trash from '../../images/trash.png';
 import options from '../../images/options.png';
 import RPLoptions from '../../components/RPL-Options/RPLoptions';
 import arrow from '../../images/arrow-right 1.png';
-import { Link } from 'react-router-dom';
+import { Link ,useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import  {ClinicalContext}  from './../../pages/auth/contextFile';
 
 function RpatientList() {
+
+
+
+  ////////////////////////////////////////////////////////////////////
+
+  const navigate = useNavigate();
+
+  const openPatient = (id) => {
+    navigate(`/patient-profile/${id}`);
+  };
+
+////////////////////////////////////////////////////////////////////
+  
+  const {token} =useContext(ClinicalContext)
   const [search, setSearch] = useState('');
   const [filters, setFilters] = useState({
     critical: false,
@@ -17,16 +33,88 @@ function RpatientList() {
     surgeries: false,
     followUp: false
   });
+  const [allPatients, setAllPatients] = useState([]);
+  const [loading, setLoading] = useState(true); 
+  const [slect, setSlect] = useState('');
 
-  const patients = [
-    { status: 'مشترك', phone: '0123456789', diagnosis: 'سكر', age: '55', name: 'محمد' },
-    { status: 'مشترك', phone: '0123456789', diagnosis: 'سكر', age: '55', name: 'فاطمة' },
-    { status: 'مشترك', phone: '0123456789', diagnosis: 'سكر', age: '55', name: 'عبدالعزيز محمد' },
-    { status: 'مشترك', phone: '0123456789', diagnosis: 'سكر', age: '55', name: 'باسل' },
-    { status: 'مشترك', phone: '0123456789', diagnosis: 'سكر', age: '55', name: 'سلام' },
-    { status: 'بدون اشتراك', phone: '0123456789', diagnosis: 'ضغط', age: '25', name: 'محمد' },
-  ];
+  /////////////////////////git all patient////////////////////////////////
+  async function getAllpatient  (){
+    if (!token) {
+      console.error("No token found, redirecting to login.");
+      setLoading(false);
+      return;
+    }
+   try{ const r=  await axios({
+        method:"get",
+        url:"http://localhost:4000/api/patient/patients",
+        headers: {
+          "Content-Type": "multipart/form-data",
+          Authorization: `Bearer ${token}`,
+        },
 
+
+      });
+    setAllPatients(r.data)
+      console.log(allPatients)
+   }
+   catch (error) {
+    if (error.response) {
+      console.error("Error response data:", error.response.data);
+      console.error("Error response status:", error.response.status);
+      console.error("Error response headers:", error.response.headers);
+    } else if (error.request) {
+      console.error("Error request:", error.request);
+    } else {
+      console.error("Error message:", error.message);
+    }
+
+  }
+  finally {
+    setLoading(false);
+    if(!allPatients){
+     
+    }  // Stop loading after the request
+  }
+  }
+  /////////////////////////git all patient////////////////////////////////
+
+  /////////////////////////delete patient////////////////////////////////
+async function deletePatient(id) {
+  try {
+    await axios({
+      method: "delete",
+      url: `http://localhost:4000/api/patient/patients/${id}`,
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    
+    alert("تم حذف المريض بنجاح ");
+    // eslint-disable-next-line no-restricted-globals
+    location.reload()
+  } catch (error) {
+    if (error.response) {
+      console.error("Error response data:", error.response.data);
+    } else if (error.request) {
+      console.error("Error request:", error.request);
+    } else {
+      console.error("Error message:", error.message);
+    }
+  }
+}
+
+
+
+   /////////////////////////delete patient////////////////////////////////
+  useEffect(() => {
+    getAllpatient();
+  }, [token]);
+  
+ 
+  useEffect(() => {
+    console.log('Patients updated:', allPatients); // This will log when allPatients changes
+  }, [allPatients]); 
+  
   const handleSearchChange = (e) => {
     setSearch(e.target.value);
   };
@@ -38,19 +126,23 @@ function RpatientList() {
     });
   };
 
-  const filteredPatients = patients.filter(patient => {
-    const matchesSearch = Object.values(patient).some(value =>
-      value.toString().toLowerCase().includes(search.toLowerCase())
-    );
-
+  const filteredPatients = allPatients.filter(patient => {
+    // Ensure each patient property exists before calling toString()
+    const matchesSearch = Object.values(patient).some(value => {
+      if (value !== null && value !== undefined) {
+        return value.toString().toLowerCase().includes(search.toLowerCase());
+      }
+      return false;
+    });
+  
     const hasActiveFilter = Object.values(filters).some(Boolean);
-
+  
     const matchesFilter = (
       (!hasActiveFilter) ||
       (filters.subscribed && patient.status === 'مشترك') ||
       (filters.nonSubscribed && patient.status === 'بدون اشتراك')
     );
-
+  
     return matchesSearch && matchesFilter;
   });
   
@@ -60,6 +152,9 @@ function RpatientList() {
   }
 
 
+  if (loading) {
+    return <div style={{height:'300px', display: 'flex',justifyContent:'center',alignItems:'center',fontSize:'30px'} }><h1>Loading...</h1></div>;
+  }
 
   return (
     <div className="RPL-container">
@@ -69,7 +164,7 @@ function RpatientList() {
       </div>
       <div className='RPL-Edit'>
         <div>
-          <img src={trash} alt="Trash" />
+          <img src={trash} alt="Trash" style={{cursor:"pointer"}}  onClick={()=>{deletePatient(slect)}} />
           <Link to='/AddPatient' ><img src={AddPatient} alt="Add Patient" /></Link>
         </div>
         <div>
@@ -94,10 +189,10 @@ function RpatientList() {
         </div>
             <div className='table-body'>
               {filteredPatients.map((patient, index) => (
-                <div className='row' key={index}>
-                  <p>{patient.status}</p>
+                <div className={`row ${slect===patient._id ? "SelectClass" : ""}`}  key={index} onClick={()=>setSlect(patient._id)} onDoubleClick={()=>{openPatient(patient._id)}} >
+                  <p className='status'>زارالطبيب-لم يزر الصيدلاني</p>
                   <p>{patient.phone}</p>
-                  <p>{patient.diagnosis}</p>
+                  <p>{patient.diseaseType}</p>
                   <p>{patient.age}</p>
                   <p>{patient.name}</p>
                 </div>

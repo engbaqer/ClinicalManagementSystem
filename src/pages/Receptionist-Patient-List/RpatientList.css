@@ -86,6 +86,9 @@
     width: 200px;
     text-align: center;
 }
+.table-body .status{
+    font-size: 1.4rem;
+}
 .table-container .table-body{
     display: flex;
     flex-direction: column;
