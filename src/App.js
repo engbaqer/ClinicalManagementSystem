@@ -59,8 +59,8 @@ function App() {
             <Route path="/userList" element={<UserList />} />
             <Route path='drugstore' element={<div><Outlet /></div>}>
               <Route path='requests' element={<RequestPage />} />
-              <Route path='request-response' element={<ResponsePage />} />
-              <Route path=':requestId' element={<h1>why this ?</h1>} />
+              <Route path='request-response/:requestId' element={<ResponsePage />} />
+              {/* <Route path=':requestId' element={<h1>why this ?</h1>} /> */}
             </Route>
           </Route>
         </Routes>
