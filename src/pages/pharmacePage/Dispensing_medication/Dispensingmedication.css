@@ -41,7 +41,7 @@ justify-content: end;
 border: #14B6DA solid 1px;
 margin-top: -4px;
 border-top: none;    
-border-bottom: none;  
+ 
 }
 .info .patientInfo ul li:hover{
     background-color: #14B6DA;
@@ -60,7 +60,7 @@ border-bottom: none;
 .info .form div input,.DispensingMedication input{
     border: #14B6DA 1.5px solid;
     height: 32px;
-    border-radius: 7px;
+    /* border-radius: 7px; */
     
 }
 .DispensingMedication .Prescriptions  {
@@ -186,9 +186,10 @@ margin-bottom: 20px;
    gap: 10px;
 }
 .DispensingMedication .show {
-    max-height: 500px; /* A large enough value to fit the content */
+    max-height: 300px; /* A large enough value to fit the content */
     overflow: visible;
     transition: max-height 500ms ease;
+    overflow-y: auto;
 }
 
 .DispensingMedication .hide {

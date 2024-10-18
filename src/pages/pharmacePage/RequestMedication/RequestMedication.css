@@ -24,6 +24,7 @@ display: flex;
 {border: #14B6DA 1.5px solid;
 height: 32px;
 border-radius: 7px;
+text-align: start;
 box-shadow: 1px 1px 1px 1px rgba(6, 6, 6, 0.171);}
 .Name_of_the_medicine img{
     display: inline;

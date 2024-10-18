@@ -11,7 +11,7 @@ import  {ClinicalContext}  from './../../pages/auth/contextFile';
 
 function RpatientList() {
 
-
+  const {token} =useContext(ClinicalContext)
 
   ////////////////////////////////////////////////////////////////////
 
@@ -23,7 +23,7 @@ function RpatientList() {
 
 ////////////////////////////////////////////////////////////////////
   
-  const {token} =useContext(ClinicalContext)
+
   const [search, setSearch] = useState('');
   const [filters, setFilters] = useState({
     critical: false,
@@ -194,7 +194,7 @@ async function deletePatient(id) {
                   <p>{patient.phone}</p>
                   <p>{patient.diseaseType}</p>
                   <p>{patient.age}</p>
-                  <p>{patient.name}</p>
+                  <p>{patient.patientName}</p>
                 </div>
               ))}
             </div>
