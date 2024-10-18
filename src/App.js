@@ -46,7 +46,8 @@ function App() {
             <Route path="/RPL" element={<RPL />} />
             <Route path="/AddPatient" element={<RP_AddPatient />} />
             <Route path="/InvoicePage" element={<InvoicePage />} />
-            <Route path="/doctor" element={<DoctorPage />} />
+            <Route path="/doctor" element={<DoctorPage />} >
+            </Route>
             <Route path="/patient-profile/:patientId" element={<PatientProfile />} />
             <Route path="/cardpage" element={<Cardpage />} />
             <Route path="/logs" element={<Logs />} />
@@ -54,7 +55,7 @@ function App() {
             <Route path="/billing-report" element={<BillingReport />} />
             <Route path="/follow-up" element={<FollowUpBilling />} />
             <Route path="/drugstore-reports" element={<DrugStore />} />
-            <Route path="/add-prescription" element={<AddPrescription />} />
+            <Route path="/add-prescription/:patientId" element={<AddPrescription />} />
             <Route path="/userList" element={<UserList />} />
             <Route path='drugstore' element={<div><Outlet /></div>}>
               <Route path='requests' element={<RequestPage />} />
