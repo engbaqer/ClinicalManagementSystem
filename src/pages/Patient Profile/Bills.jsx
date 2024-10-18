@@ -4,6 +4,7 @@ import { Link, useNavigate } from 'react-router-dom';
 const Bills = ({ invoices }) => {
   // counter to display the number of invoices
   let counter = 0;
+  console.log(invoices);
 
   return (
     <div className="mt-4">
@@ -19,10 +20,14 @@ const Bills = ({ invoices }) => {
       <div className="mt-2 max-h-[400px] overflow-y-scroll rounded-md pb-24 scroll-bar">
         {
           invoices.map((data) => (
-            data.items.map((invoice) => {
-              counter += 1; // Increment the counter for each invoice item
-              return <Bill key={counter} patintDetails={data} patientBill={invoice} invoiceNumber={counter} />;
-            })
+            Array.isArray(data.items) && data.items.length > 0 ? (
+              data.items.map((invoice) => {
+                counter += 1; // Increment the counter for each invoice item
+                return <Bill key={counter} patintDetails={data} patientBill={invoice} invoiceNumber={counter} />;
+              })
+            ) : (
+              <div key={data._id} className="text-center">No items available for this invoice</div>
+            )
           ))
         }
       </div>

@@ -25,7 +25,7 @@ const MainInfo = ({ patientData }) => {
           })
 
           const data = response.data;
-          setPatientInvoices([data]);
+          setPatientInvoices(data);
         } catch (error) {
           console.error(error);
         }
