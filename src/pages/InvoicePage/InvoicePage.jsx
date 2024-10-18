@@ -1,14 +1,14 @@
 /* eslint-disable react/jsx-no-undef */
-import React, { useEffect, useState,useContext } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import './InvoicePage.css';
 import Arrow from '../../images/arrow-right 1.png';
 import AddInvoiceimg from '../../images/addinvoice.png';
 import trash from '../../images/trash.png';
 import axios from 'axios';
-import { Navigate,useNavigate } from "react-router-dom";
-import  {ClinicalContext}  from './../../pages/auth/contextFile';
+import { Navigate, useNavigate } from "react-router-dom";
+import { ClinicalContext } from './../../pages/auth/contextFile';
 function InvoicePage() {
-  const {token} =useContext(ClinicalContext)
+  const { token } = useContext(ClinicalContext)
   const [invoices, setInvoices] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [startDate, setStartDate] = useState('');
@@ -61,39 +61,39 @@ function InvoicePage() {
 
   ////////////////////////////////////{delete invoice}//////////////////////////////////////////////////
 
-async function deleteInvoice(id) {
-  try {
-    await axios({
-      method: "delete",
-      url: `http://localhost:4000/api/invoice/invoice/${id}`,
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
-    
-    alert("تم حذف الفاتورة بنجاح ");
-    // eslint-disable-next-line no-restricted-globals
-    location.reload()
-  } catch (error) {
-    if (error.response) {
-      console.error("Error response data:", error.response.data);
-    } else if (error.request) {
-      console.error("Error request:", error.request);
-    } else {
-      console.error("Error message:", error.message);
+  async function deleteInvoice(id) {
+    try {
+      await axios({
+        method: "delete",
+        url: `http://localhost:4000/api/invoice/invoice/${id}`,
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      alert("تم حذف الفاتورة بنجاح ");
+      // eslint-disable-next-line no-restricted-globals
+      location.reload()
+    } catch (error) {
+      if (error.response) {
+        console.error("Error response data:", error.response.data);
+      } else if (error.request) {
+        console.error("Error request:", error.request);
+      } else {
+        console.error("Error message:", error.message);
+      }
     }
   }
-}
- ////////////////////////////////////{delete invoice}//////////////////////////////////////////////////
+  ////////////////////////////////////{delete invoice}//////////////////////////////////////////////////
 
   // Filter the invoices based on search term, start date, and end date
   const filteredInvoices = invoices.filter(invoice => {
     const matchesSearchTerm = (invoice.patientName && invoice.patientName.includes(searchTerm)) ||
-                              (invoice._id && invoice._id.includes(searchTerm)); // You can search by patientName or _id
-  
+      (invoice._id && invoice._id.includes(searchTerm)); // You can search by patientName or _id
+
     const matchesDateRange = (!startDate || new Date(invoice.invoiceDate) >= new Date(startDate)) &&
-                             (!endDate || new Date(invoice.invoiceDate) <= new Date(endDate));
-  
+      (!endDate || new Date(invoice.invoiceDate) <= new Date(endDate));
+
     return matchesSearchTerm && matchesDateRange;
   });
 
@@ -108,7 +108,7 @@ async function deleteInvoice(id) {
         <p>قائمة الفواتير</p>
       </div>
       <div className='InvoicePage-search'>
-        <img src={trash} alt="Delete Invoice"  style={{cursor:"pointer"}}  onClick={()=>{deleteInvoice(slect)}}/>
+        <img src={trash} alt="Delete Invoice" style={{ cursor: "pointer" }} onClick={() => { deleteInvoice(slect) }} />
         <img src={AddInvoiceimg} alt="Add Invoice" />
         <input
           type="text"
@@ -137,7 +137,7 @@ async function deleteInvoice(id) {
         <div className='table-body'>
           {filteredInvoices.length > 0 ? (
             filteredInvoices.map((invoice, index) => (
-              <div className={`row ${slect===invoice._id ? "SelectClass" : ""}`} key={invoice.id}  onClick={()=>setSlect(invoice._id)}  onDoubleClick={()=>{openInvoicePage(invoice._id)}}>
+              <div className={`row ${slect === invoice._id ? "SelectClass" : ""}`} key={invoice.id} onClick={() => setSlect(invoice._id)} onDoubleClick={() => { openInvoicePage(invoice._id) }}>
                 <p>{invoice.createdAt}</p>
                 <p className='status'>زارالطبيب-لم يزر الصيدلاني</p>
                 <p>{invoice.patientName}</p>
