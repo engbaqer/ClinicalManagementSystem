@@ -7,7 +7,7 @@ import RPLoptions from '../../components/RPL-Options/RPLoptions';
 import arrow from '../../images/arrow-right 1.png';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { ClinicalContext } from './../../pages/auth/contextFile';
+import { ClinicalContext } from '../../pages/auth/contextFile';
 
 function RpatientList() {
 
@@ -23,7 +23,7 @@ function RpatientList() {
 
 ////////////////////////////////////////////////////////////////////
   
-  const {token} =useContext(ClinicalContext)
+ 
   const [search, setSearch] = useState('');
   const [filters, setFilters] = useState({
     critical: false,
@@ -195,7 +195,7 @@ function RpatientList() {
                   <p>{patient.phone}</p>
                   <p>{patient.diseaseType}</p>
                   <p>{patient.age}</p>
-                  <p>{patient.name}</p>
+                  <p>{patient.patientName}</p>
                 </div>
               ))}
             </div>
