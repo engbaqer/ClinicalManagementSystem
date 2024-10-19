@@ -32,48 +32,60 @@ function DispensingMedication() {
 
   ////////////////////////////////////set dispensing medication function //////////////////////////////////////
 
-  async function set_dispensing_medication() {
-    const formattedPrescriptions = rows.map(row => ({
-      drugName: row.drugName, // Assuming `name` corresponds to the drugName
-      quantity: row.dosage,    // Adjust this if you need to calculate quantity differently
-    }));
-  
-    // Use the previous state to update and call send with the updated state
-    setMedication(prevMed => {
-      const updatedMedication = {
-        ...prevMed,
-        prescriptions: formattedPrescriptions,
-      };
-      send(updatedMedication); // Call send with the updated medication
-      return updatedMedication; // Return the new state
-    });
+  // Update dispensing medication and then trigger the `send` function
+async function set_dispensing_medication() {
+  const formattedPrescriptions = rows.map(row => ({
+    drugName: row.drugName, // Assuming `drugName` corresponds to the name of the drug
+    quantity: row.dosage,   // Adjust the quantity based on dosage
+  }));
+
+  // Update the medication state and trigger the send function
+  setMedication(prevMed => {
+    const updatedMedication = {
+      ...prevMed,
+      prescriptions: formattedPrescriptions,
+    };
+
+    return updatedMedication; // Return the new updated medication state
+  });
+}
+
+// Use an effect to detect changes in the `medication` state and call `send`
+useEffect(() => {
+  if (medication.prescriptions.length > 0) { // Ensure prescriptions are set
+    send(medication);  // Call send with the updated medication
   }
-  
-  async function send(currentMedication) {
-    try {
-      console.log("Sending finalInfo:", currentMedication);
-      const response = await axios.post(
-        'http://localhost:4000/api/pharmacist/despensingMedic',
-        currentMedication,
-        {
-          headers: {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${token}`
-          }
+}, [medication]); // Trigger `send` whenever `medication` updates
+
+async function send(currentMedication) {
+  try {
+    console.log("Sending finalInfo:", currentMedication);
+    const response = await axios.post(
+      'http://localhost:4000/api/pharmacist/despensingMedic',
+      currentMedication,
+      {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`
         }
-      );
-      console.log('Data sent successfully:', response.data);
-    } catch (error) {
-      if (error.response) {
-        console.error('Server Error:', error.response.data);
-      } else if (error.request) {
-        console.error('Network Error: No response received from the server.');
-      } else {
-        console.error('Error setting up request:', error.message);
       }
+    );
+    console.log('Data sent successfully:', response.data);
+    alert("تم صرف الدواء بنجاح");
+   window.location.reload(); // Reload the page after success
+  } catch (error) {
+    if (error.response) {
+      alert(error.response.data.message);
+      console.error('Server Error:', error.response.data);
+    } else if (error.request) {
+      console.error('Network Error: No response received from the server.');
+    } else {
+      console.error('Error setting up request:', error.message);
     }
   }
-  
+}
+
+// You can call `set_dispensing_medication()` when needed (e.g., on form submit or button click)
 
   ////////////////////////////////////set dispensing medication //////////////////////////////////////
 
@@ -301,7 +313,7 @@ function DispensingMedication() {
         </div>
       </div>
       <div className='bus'>
-        <button onClick={(e)=>{set_dispensing_medication(rows)}}>
+        <button onClick={()=>{set_dispensing_medication(rows)}}>
           {/* <img src={Save} alt="" /> */}
           <p>صرف الدواء</p>
         </button>
