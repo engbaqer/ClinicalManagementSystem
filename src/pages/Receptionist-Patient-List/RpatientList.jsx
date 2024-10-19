@@ -1,13 +1,13 @@
-import React, { useState,useEffect,useContext } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import './RpatientList.css';
 import AddPatient from '../../images/addpatient.png';
 import trash from '../../images/trash.png';
 import options from '../../images/options.png';
 import RPLoptions from '../../components/RPL-Options/RPLoptions';
 import arrow from '../../images/arrow-right 1.png';
-import { Link ,useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import  {ClinicalContext}  from './../../pages/auth/contextFile';
+import { ClinicalContext } from './../../pages/auth/contextFile';
 
 function RpatientList() {
 
@@ -23,7 +23,7 @@ function RpatientList() {
 
 ////////////////////////////////////////////////////////////////////
   
-
+  const {token} =useContext(ClinicalContext)
   const [search, setSearch] = useState('');
   const [filters, setFilters] = useState({
     critical: false,
@@ -34,19 +34,20 @@ function RpatientList() {
     followUp: false
   });
   const [allPatients, setAllPatients] = useState([]);
-  const [loading, setLoading] = useState(true); 
+  const [loading, setLoading] = useState(true);
   const [slect, setSlect] = useState('');
 
   /////////////////////////git all patient////////////////////////////////
-  async function getAllpatient  (){
+  async function getAllpatient() {
     if (!token) {
       console.error("No token found, redirecting to login.");
       setLoading(false);
       return;
     }
-   try{ const r=  await axios({
-        method:"get",
-        url:"http://localhost:4000/api/patient/patients",
+    try {
+      const r = await axios({
+        method: "get",
+        url: "http://localhost:4000/api/patient/patients",
         headers: {
           "Content-Type": "multipart/form-data",
           Authorization: `Bearer ${token}`,
@@ -54,67 +55,67 @@ function RpatientList() {
 
 
       });
-    setAllPatients(r.data)
+      setAllPatients(r.data)
       console.log(allPatients)
-   }
-   catch (error) {
-    if (error.response) {
-      console.error("Error response data:", error.response.data);
-      console.error("Error response status:", error.response.status);
-      console.error("Error response headers:", error.response.headers);
-    } else if (error.request) {
-      console.error("Error request:", error.request);
-    } else {
-      console.error("Error message:", error.message);
     }
+    catch (error) {
+      if (error.response) {
+        console.error("Error response data:", error.response.data);
+        console.error("Error response status:", error.response.status);
+        console.error("Error response headers:", error.response.headers);
+      } else if (error.request) {
+        console.error("Error request:", error.request);
+      } else {
+        console.error("Error message:", error.message);
+      }
 
-  }
-  finally {
-    setLoading(false);
-    if(!allPatients){
-     
-    }  // Stop loading after the request
-  }
+    }
+    finally {
+      setLoading(false);
+      if (!allPatients) {
+
+      }  // Stop loading after the request
+    }
   }
   /////////////////////////git all patient////////////////////////////////
 
   /////////////////////////delete patient////////////////////////////////
-async function deletePatient(id) {
-  try {
-    await axios({
-      method: "delete",
-      url: `http://localhost:4000/api/patient/patients/${id}`,
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
-    
-    alert("تم حذف المريض بنجاح ");
-    // eslint-disable-next-line no-restricted-globals
-    location.reload()
-  } catch (error) {
-    if (error.response) {
-      console.error("Error response data:", error.response.data);
-    } else if (error.request) {
-      console.error("Error request:", error.request);
-    } else {
-      console.error("Error message:", error.message);
+  async function deletePatient(id) {
+    try {
+      await axios({
+        method: "delete",
+        url: `http://localhost:4000/api/patient/patients/${id}`,
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      alert("تم حذف المريض بنجاح ");
+      // eslint-disable-next-line no-restricted-globals
+      location.reload()
+    } catch (error) {
+      if (error.response) {
+        console.error("Error response data:", error.response.data);
+      } else if (error.request) {
+        console.error("Error request:", error.request);
+      } else {
+        console.error("Error message:", error.message);
+      }
     }
   }
-}
 
 
 
-   /////////////////////////delete patient////////////////////////////////
+  /////////////////////////delete patient////////////////////////////////
   useEffect(() => {
     getAllpatient();
   }, [token]);
-  
- 
+
+
   useEffect(() => {
     console.log('Patients updated:', allPatients); // This will log when allPatients changes
-  }, [allPatients]); 
-  
+  }, [allPatients]);
+
   const handleSearchChange = (e) => {
     setSearch(e.target.value);
   };
@@ -134,18 +135,18 @@ async function deletePatient(id) {
       }
       return false;
     });
-  
+
     const hasActiveFilter = Object.values(filters).some(Boolean);
-  
+
     const matchesFilter = (
       (!hasActiveFilter) ||
       (filters.subscribed && patient.status === 'مشترك') ||
       (filters.nonSubscribed && patient.status === 'بدون اشتراك')
     );
-  
+
     return matchesSearch && matchesFilter;
   });
-  
+
   const [showOptions, setShowOptions] = useState(false);
   const toggleOptions = () => {
     setShowOptions(!showOptions);
@@ -153,39 +154,39 @@ async function deletePatient(id) {
 
 
   if (loading) {
-    return <div style={{height:'300px', display: 'flex',justifyContent:'center',alignItems:'center',fontSize:'30px'} }><h1>Loading...</h1></div>;
+    return <div style={{ height: '300px', display: 'flex', justifyContent: 'center', alignItems: 'center', fontSize: '30px' }}><h1>Loading...</h1></div>;
   }
 
   return (
     <div className="RPL-container">
       <div className="RPL-title">
-        <img src={arrow} alt="" className='Arrow' onClick={() => window.history.back()} style={{cursor: 'pointer'}}/>
-      <h1 className='RPL-title'>قائمة المرضى</h1>
+        <img src={arrow} alt="" className='Arrow' onClick={() => window.history.back()} style={{ cursor: 'pointer' }} />
+        <h1 className='RPL-title'>قائمة المرضى</h1>
       </div>
       <div className='RPL-Edit'>
         <div>
-          <img src={trash} alt="Trash" style={{cursor:"pointer"}}  onClick={()=>{deletePatient(slect)}} />
+          <img src={trash} alt="Trash" style={{ cursor: "pointer" }} onClick={() => { deletePatient(slect) }} />
           <Link to='/AddPatient' ><img src={AddPatient} alt="Add Patient" /></Link>
         </div>
         <div>
-          <input 
-           type="text"
-           placeholder='بحث'
-           className='search-btn'
-           value={search}
-           onChange={handleSearchChange} />
-          <img src={options} alt="Options" onClick={toggleOptions} style={{cursor: 'pointer'}} />
+          <input
+            type="text"
+            placeholder='بحث'
+            className='search-btn'
+            value={search}
+            onChange={handleSearchChange} />
+          <img src={options} alt="Options" onClick={toggleOptions} style={{ cursor: 'pointer' }} />
           {showOptions && (<RPLoptions filters={filters} onFilterChange={handleFilterChange} />)}
-          
+
         </div>
       </div>
       <div className="table-container">
         <div className="table-header">
-                <p>الحالة</p>
-                <p>رقم الهاتف</p>
-                <p>التشخيص</p>
-                <p>العمر</p>
-                <p>الاسم</p>
+          <p>الحالة</p>
+          <p>رقم الهاتف</p>
+          <p>التشخيص</p>
+          <p>العمر</p>
+          <p>الاسم</p>
         </div>
             <div className='table-body'>
               {filteredPatients.map((patient, index) => (
@@ -194,7 +195,7 @@ async function deletePatient(id) {
                   <p>{patient.phone}</p>
                   <p>{patient.diseaseType}</p>
                   <p>{patient.age}</p>
-                  <p>{patient.patientName}</p>
+                  <p>{patient.name}</p>
                 </div>
               ))}
             </div>

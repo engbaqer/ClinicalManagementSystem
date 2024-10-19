@@ -1,6 +1,5 @@
 import './App.css';
 import Login from './pages/Login/Login';
-
 import Homepage from '../src/pages/Homepage/home';
 import RPL from './pages/Receptionist-Patient-List/RpatientList';
 import RP_AddPatient from './pages/RP_AddPatient/RP_AddPatient';
@@ -26,6 +25,7 @@ import AddProduct from './pages/AddProduct/AddProduct';
 import Addprescription from './pages/AddPrescription/AddPrescription'
 import ProductAndPriceData from './pages/ProductAndPriceData/ProductAndPriceData'
 import TheInvoice from './pages/theInvoice/theInvoice';
+import ResponsePage from './pages/DrugStore/RequestResponse/ResponsePage';
 function App() {
   return (
     <div className="App mx-auto font-amiri">
@@ -34,11 +34,11 @@ function App() {
 
           <Route path="/Login" element={<Login />} />
           <Route element={<Auth />} >
-           <Route path="/Addprescription" element={<Addprescription />} />
-          <Route path="/AddProduct" element={<AddProduct />} />
-          <Route path="/theInvoice/:ivoiceId" element={<TheInvoice />} />
-                    <Route path="/storepage" element={<Store />} />
-                    <Route path="/ProductAndPriceData/:productId" element={<ProductAndPriceData />} />
+            <Route path="/Addprescription" element={<Addprescription />} />
+            <Route path="/AddProduct" element={<AddProduct />} />
+            <Route path="/theInvoice/:ivoiceId" element={<TheInvoice />} />
+            <Route path="/storepage" element={<Store />} />
+            <Route path="/ProductAndPriceData/:productId" element={<ProductAndPriceData />} />
             <Route path="/PharmacrPage" element={<PharmacrPage />} />
             <Route path="/" element={<Homepage />} />
             <Route path="/Reception" element={<Reception />} />
@@ -46,7 +46,8 @@ function App() {
             <Route path="/RPL" element={<RPL />} />
             <Route path="/AddPatient" element={<RP_AddPatient />} />
             <Route path="/InvoicePage" element={<InvoicePage />} />
-            <Route path="/doctor" element={<DoctorPage />} />
+            <Route path="/doctor" element={<DoctorPage />} >
+            </Route>
             <Route path="/patient-profile/:patientId" element={<PatientProfile />} />
             <Route path="/cardpage" element={<Cardpage />} />
             <Route path="/logs" element={<Logs />} />
@@ -54,11 +55,12 @@ function App() {
             <Route path="/billing-report" element={<BillingReport />} />
             <Route path="/follow-up" element={<FollowUpBilling />} />
             <Route path="/drugstore-reports" element={<DrugStore />} />
-            <Route path="/add-prescription" element={<AddPrescription />} />
+            <Route path="/add-prescription/:patientId" element={<AddPrescription />} />
             <Route path="/userList" element={<UserList />} />
             <Route path='drugstore' element={<div><Outlet /></div>}>
               <Route path='requests' element={<RequestPage />} />
-              <Route path=':requestId' element={<h1>Hello</h1>}/>
+              <Route path='request-response/:requestId' element={<ResponsePage />} />
+              {/* <Route path=':requestId' element={<h1>why this ?</h1>} /> */}
             </Route>
           </Route>
         </Routes>

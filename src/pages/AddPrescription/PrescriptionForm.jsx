@@ -1,14 +1,14 @@
 import axios from "axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import './inputStyle.css';
 import cancel_icon from '../../images/trash-can.svg'; // Make sure to import the cancel icon
 
-const PrescriptionForm = () => {
+const PrescriptionForm = ({ patientData }) => {
   const token = localStorage.getItem('token');
   const [formData, setFormData] = useState({
-    patientName: '',
-    patientAge: '',
-    patientGender: '',
+    patientName: patientData.patientName,
+    patientAge: patientData.age,
+    patientGender: patientData.gender === "Male" ? 'ذكر' : 'انثى',
     medicalProcedure: '',
     reviewDate: '',
     diagnosis: '',
@@ -22,10 +22,22 @@ const PrescriptionForm = () => {
         frequency: '',
         duration: '',
         instructions: '',
+        quantity: '1',
       },
     ],
     additionalNotes: '',
   });
+
+  useEffect(() => {
+    if (patientData) {
+      setFormData({
+        ...formData,
+        patientName: patientData.patientName || '',
+        patientAge: patientData.age || '',
+        patientGender: patientData.gender === "Male" ? 'ذكر' : 'أنثى',
+      });
+    }
+  }, [patientData]);
 
   const handleInputChange = (e, index, field = null) => {
     if (field) {
@@ -42,9 +54,14 @@ const PrescriptionForm = () => {
       ...formData,
       prescriptions: [
         ...formData.prescriptions,
-        { medicineName: '', dose: '', form: '', frequency: '', duration: '', instructions: '' },
+        { medicineName: '', dose: '', form: '', frequency: '', duration: '', instructions: '', quantity: '1' },
       ],
     });
+  };
+
+  const removePrescription = (index) => {
+    const updatedPrescriptions = formData.prescriptions.filter((_, i) => i !== index);
+    setFormData({ ...formData, prescriptions: updatedPrescriptions });
   };
 
   const handleSubmit = async (e) => {
@@ -86,8 +103,9 @@ const PrescriptionForm = () => {
           },
         ],
         additionalNotes: '',
-      })
+      });
 
+      window.history.back();
 
     } catch (error) {
       if (error.response) {
@@ -118,6 +136,7 @@ const PrescriptionForm = () => {
           frequency: '',
           duration: '',
           instructions: '',
+          quantity: '',
         },
       ],
       additionalNotes: '',
@@ -216,6 +235,7 @@ const PrescriptionForm = () => {
         <table className="w-full mt-4 mb-4 border-[2px] border-[#24cccc] rounded-lg">
           <thead className="border-[1px] border-[#24cccc]">
             <tr>
+              <th className="p-2">حذف</th> {/* Add header for delete button */}
               <th className="p-2">التعليمات</th>
               <th className="p-2">المدة</th>
               <th className="p-2">التكرار</th>
@@ -228,12 +248,17 @@ const PrescriptionForm = () => {
             {formData.prescriptions.map((prescription, index) => (
               <tr key={index} className="userInfo">
                 <td className="p-2 userInfo">
+                  <button type="button" onClick={() => removePrescription(index)} className="text-red-500 pl-2">
+                    <img src={cancel_icon} alt="Remove" className="h-6" />
+                  </button>
+                </td>
+                <td className="p-2 userInfo">
                   <input
                     type="text"
                     value={prescription.instructions}
                     onChange={(e) => handleInputChange(e, index, 'instructions')}
                     required
-                    className="w-full p-2" // Removed border class
+                    className="w-full p-2"
                   />
                 </td>
                 <td className="p-2 userInfo">
@@ -242,7 +267,7 @@ const PrescriptionForm = () => {
                     value={prescription.duration}
                     onChange={(e) => handleInputChange(e, index, 'duration')}
                     required
-                    className="w-full p-2" // Removed border class
+                    className="w-full p-2"
                   />
                 </td>
                 <td className="p-2 userInfo">
@@ -251,7 +276,7 @@ const PrescriptionForm = () => {
                     value={prescription.frequency}
                     onChange={(e) => handleInputChange(e, index, 'frequency')}
                     required
-                    className="w-full p-2" // Removed border class
+                    className="w-full p-2"
                   />
                 </td>
                 <td className="p-2 userInfo">
@@ -260,7 +285,7 @@ const PrescriptionForm = () => {
                     value={prescription.form}
                     onChange={(e) => handleInputChange(e, index, 'form')}
                     required
-                    className="w-full p-2" // Removed border class
+                    className="w-full p-2"
                   />
                 </td>
                 <td className="p-2 userInfo">
@@ -269,7 +294,7 @@ const PrescriptionForm = () => {
                     value={prescription.dose}
                     onChange={(e) => handleInputChange(e, index, 'dose')}
                     required
-                    className="w-full p-2" // Removed border class
+                    className="w-full p-2"
                   />
                 </td>
                 <td className="p-2 userInfo">
@@ -278,9 +303,10 @@ const PrescriptionForm = () => {
                     value={prescription.medicineName}
                     onChange={(e) => handleInputChange(e, index, 'medicineName')}
                     required
-                    className="w-full p-2" // Removed border class
+                    className="w-full p-2"
                   />
                 </td>
+
               </tr>
             ))}
           </tbody>

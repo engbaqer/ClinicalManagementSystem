@@ -1,21 +1,29 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import axios from 'axios';
 import PatientBar from './PatientBar';
+import { ClinicalContext } from '../auth/contextFile';
 
 const PatientList = () => {
-  const [patientsData, setPatientsData] = useState([]);
+  const { token } = useContext(ClinicalContext);
+  const [waitingPatientList, setWaitingPatientList] = useState([]);
   const [openIndex, setOpenIndex] = useState(null);
+
+  // TODO:change the doctor ID
+  const doctorId = '670ab3ce59d75de768df5c39'
 
   useEffect(() => {
     const getPatients = async () => {
       try {
-        const token = localStorage.getItem("token");
-        const response = await axios.get('http://localhost:4000/api/patient/patients', {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          }
-        });
-        setPatientsData(response.data);
+        const response = await axios.get(
+          `http://localhost:4000/api/doctor/getWaitingPatients/${doctorId}`
+          , {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            }
+          });
+
+        // setting the waiting patient after fetching
+        setWaitingPatientList(response.data);
       } catch (error) {
         console.error('Error fetching patient data:', error);
       }
@@ -30,7 +38,7 @@ const PatientList = () => {
 
   return (
     <div className="w-[75%] m-auto">
-      {patientsData.map((patient, index) => (
+      {waitingPatientList.map((patient, index) => (
         <PatientBar
           key={patient._id}
           patient={patient}

@@ -8,6 +8,7 @@ import './cover.css';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 
+
 const PatientProfile = () => {
   const { patientId } = useParams();
   const [patientData, setPatientData] = useState({})

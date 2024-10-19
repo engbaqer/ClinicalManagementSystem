@@ -1,10 +1,65 @@
 import PersonalInfo from './PersonalInfo';
 import Bills from './Bills';
 import MedicalPrescriptions from './MedicalPrescriptions';
-import { useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
+import axios from 'axios';
+import { ClinicalContext } from '../auth/contextFile';
 
 const MainInfo = ({ patientData }) => {
   const [activeComponent, setActiveComponent] = useState('personalInfo');
+  const [patientInvoices, setPatientInvoices] = useState([])
+  const [prescriptions, setPrescriptions] = useState([])
+  const { token } = useContext(ClinicalContext);
+
+
+  // getting the invoices for the patient
+  useEffect(() => {
+    if (patientData.patientName) {
+      const getInvoices = async () => {
+
+        try {
+          const response = await axios.get(`http://localhost:4000/api/invoice/fetchInvoiceByName/${patientData.patientName}`, {
+            headers: {
+              Authorization: `Bearer ${token}`
+            }
+          })
+
+          const data = response.data;
+          setPatientInvoices(data);
+        } catch (error) {
+          console.error(error);
+        }
+
+      }
+
+      getInvoices();
+    }
+
+  }, [patientData])
+
+
+  // getting the prescriptions for the patient
+  useEffect(() => {
+    if (patientData) {
+      const getPatientPrescriptions = async () => {
+        try {
+          const response = await axios.get(`http://localhost:4000/api/pers/readPrescriptionByName/${patientData.patientName}`, {
+            headers: {
+              Authorization: `Bearer ${token}`
+            }
+          });
+
+          const data = response.data; // No need for `await` here
+          setPrescriptions(data);
+        } catch (error) {
+          console.error(error); // Catches any errors from the async operation
+        }
+      };
+
+      getPatientPrescriptions(); // Call the async function
+    }
+  }, [patientData]);
+
 
   const components = {
     personalInfo: (
@@ -13,9 +68,9 @@ const MainInfo = ({ patientData }) => {
         notes={patientData}
       />
     ),
-    bills: <Bills invoices={[]} />,
+    bills: <Bills invoices={patientInvoices} />,
     medicalPrescriptions: (
-      <MedicalPrescriptions medicalRecords={[]} />
+      <MedicalPrescriptions prescriptions={prescriptions} />
     ),
   };
 
