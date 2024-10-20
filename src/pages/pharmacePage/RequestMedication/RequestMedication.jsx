@@ -76,9 +76,11 @@ function DispensingMedication() {
         }
       );
       console.log('Data sent successfully:', response.data);
-     
+     alert("تم ارسال الطلب بنجاح")
+     window.location.reload();
     } catch (error) {
       if (error.response) {
+        alert( error.response.data)
         console.error('Server Error:', error.response.data);
       } else if (error.request) {
         console.error('Network Error: No response received from the server.');
