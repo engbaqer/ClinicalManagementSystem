@@ -26,12 +26,14 @@ import Addprescription from './pages/AddPrescription/AddPrescription'
 import ProductAndPriceData from './pages/ProductAndPriceData/ProductAndPriceData'
 import TheInvoice from './pages/theInvoice/theInvoice';
 import ResponsePage from './pages/DrugStore/RequestResponse/ResponsePage';
+import ShowPrescription from './pages/show prescription/ShowPrescription';
 function App() {
   return (
     <div className="App mx-auto font-amiri">
       <Router>
         <Routes>
 
+          <Route path='show-pres' element={<ShowPrescription />} />
           <Route path="/Login" element={<Login />} />
           <Route element={<Auth />} >
             <Route path="/Addprescription" element={<Addprescription />} />
@@ -48,7 +50,8 @@ function App() {
             <Route path="/InvoicePage" element={<InvoicePage />} />
             <Route path="/doctor" element={<DoctorPage />} >
             </Route>
-            <Route path="/patient-profile/:patientId" element={<PatientProfile />} />
+            <Route path="/patient-profile/:patientId" element={<PatientProfile />} >
+            </Route>
             <Route path="/cardpage" element={<Cardpage />} />
             <Route path="/logs" element={<Logs />} />
             <Route path="/dashboard" element={<Dashboard />} />
