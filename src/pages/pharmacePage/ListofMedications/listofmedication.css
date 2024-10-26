@@ -18,7 +18,7 @@
 .listofmedication .head .left,.listofmedication .head .right{
     color :#878787;
     display: flex;
-    gap: 83px;
+    gap: 50px;
     margin: 20px  20px;
 }
 .listofmedication .head .left p,.listofmedication .head .right p{
@@ -39,7 +39,7 @@
 }
 
 .R-section{
-    gap: 55px;
+    gap: 75px;
 }
 
 .L-section{
@@ -53,6 +53,6 @@
     justify-content: center;
     align-items: center;
 }
-/* .dosage{
-margin-left: 10%;
+/* .R-section .dosage{
+padding-right: 10%;
 } */

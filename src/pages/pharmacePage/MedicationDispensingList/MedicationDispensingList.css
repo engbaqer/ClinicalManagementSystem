@@ -11,6 +11,11 @@
 
 .MedicationDispensingList .listOfpatient{
     position: relative;
+   
+
+
+    border-top: none;
+    z-index: 6;
 }
 .MedicationDispensingList .listOfpatient input ,.MedicationDispensingList  .date{
     border: #14B6DA 1.5px solid;

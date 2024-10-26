@@ -9,7 +9,7 @@ import  {ClinicalContext}  from './../../pages/auth/contextFile';
 function RP_AddPatient(){
   const {token} =useContext(ClinicalContext)
     const [formData, setFormData] = useState({
-      name: '',
+      patientName: '',
         gender: 'male',
         age:'',
         phone: '',
@@ -92,8 +92,8 @@ function RP_AddPatient(){
           <input 
             type="text"
             name="fullName"
-            value={formData.name}
-            onChange={(e)=>{handleChange('name',e.target.value)}}
+            value={formData.patientName}
+            onChange={(e)=>{handleChange('patientName',e.target.value)}}
             required
           />
         </div>

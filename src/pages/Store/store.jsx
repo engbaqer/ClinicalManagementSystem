@@ -37,7 +37,7 @@ function Store(params) {
     // Fetch initial responses from the server
     const fetchResponses = async () => {
       try {
-        const response = await axios.get('http://localhost:4000/api/pharmacist/drugRequest', {
+        const response = await axios.get('http://localhost:4000/api/pharmacist/reqList', {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -46,6 +46,7 @@ function Store(params) {
         const data = response.data;
         setResponses(data);
         setNotificationCount(data.length);
+        console.log( data.Length())
         console.log(response)
       } catch (error) {
         console.error('Error fetching responses:', error);
@@ -65,7 +66,7 @@ function Store(params) {
       socket.off('new-drugRequest');
       socket.disconnect();
     };
-  }, [token]);
+  }, []);
 
   // Fetch all products from the storage
   const [allproduct, setAllproduct] = useState({});
@@ -103,7 +104,7 @@ function Store(params) {
     
 
     getAllProducts();
-  }, [token]);
+  }, []);
 
   
 

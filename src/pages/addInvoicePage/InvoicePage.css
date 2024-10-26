@@ -54,6 +54,7 @@ padding-bottom: 50px;
     margin-top: 35px;
     gap: 10px;
     align-items: center;
+    position: relative;
 }
 .invoice .info form .name #name{
     border: solid 1px black;
@@ -68,6 +69,33 @@ padding-bottom: 50px;
 font-size: 22px;
 font-weight:600;
 
+}
+.listOfpatient{
+    width: 500px;
+    position: absolute;
+    margin-right: 94px;
+    direction: rtl;
+    border: #000 solid 1px;
+    top: 1.8rem;
+    background-color: #FFFFFF;
+    border-top: none;
+    z-index: 6;
+ 
+}
+.listOfpatient li{
+    padding: 10px;
+    cursor: pointer;
+  
+}
+.listOfpatient li:hover{
+    scale: 1.02;
+}
+.arrowOfpatient{
+    position: absolute;
+    right: 550px;
+    top: 1.5px;
+    height:35px ;
+    cursor: pointer;
 }
 .add_patient{
     display: flex;
@@ -102,11 +130,46 @@ font-weight:600;
     font-size: 15px;
 }
 
+.invoice .info form .doctor{
+    display: flex ;
+    flex-direction: row;
+    gap: 40px;
+    position: relative;
+}
+.invoice .info form .doctor img{
+    position: absolute;
+    top: 0.6rem;
+    cursor: pointer;
+}
+.invoice .info form .doctor  ul{
+    position: absolute;
+    top: 1.5rem;
+    background-color: #FFFFFF;
+    width: 300px;
+    direction: rtl;
+    /* padding: 0 20px; */
+ 
+    border: #000 solid 1px;
+    border-top: none;
+    /* border-bottom: none; */
+}
+.invoice .info form .doctor  ul li{
+    padding: 0 10px;
+    margin: 10px 0;
+    /* border-bottom: #000 solid 1px; */ 
+    cursor: pointer;
+    font-size: large;
+}
+
+.invoice .info form .doctor  ul li:hover{
+    scale: 1.05;
+}
 .invoice .info form .histore_notes label{
 font-size: 22px;
 font-weight:600;
 width: 100px;
 }
+
 .invoice .info form .lastSection{
     display: flex;
     justify-content: end;
@@ -208,6 +271,7 @@ font-weight:600;
     margin-bottom: 30px;
     font-size: large;
     font-weight: bold;
+    text-align: center;
 }
 /* @media screen and (min-height: 680px) {
     .invoice {

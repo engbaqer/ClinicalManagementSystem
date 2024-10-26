@@ -7,11 +7,11 @@ import RPLoptions from '../../components/RPL-Options/RPLoptions';
 import arrow from '../../images/arrow-right 1.png';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { ClinicalContext } from './../../pages/auth/contextFile';
+import { ClinicalContext } from '../../pages/auth/contextFile';
 
 function RpatientList() {
 
-
+  const {token} =useContext(ClinicalContext)
 
   ////////////////////////////////////////////////////////////////////
 
@@ -21,9 +21,9 @@ function RpatientList() {
     navigate(`/patient-profile/${id}`);
   };
 
-  ////////////////////////////////////////////////////////////////////
-
-  const { token } = useContext(ClinicalContext)
+////////////////////////////////////////////////////////////////////
+  
+ 
   const [search, setSearch] = useState('');
   const [filters, setFilters] = useState({
     critical: false,
@@ -188,18 +188,18 @@ function RpatientList() {
           <p>العمر</p>
           <p>الاسم</p>
         </div>
-        <div className='table-body'>
-          {filteredPatients.map((patient, index) => (
-            <div className={`row ${slect === patient._id ? "SelectClass" : ""}`} key={index} onClick={() => setSlect(patient._id)} onDoubleClick={() => { openPatient(patient._id) }} >
-              <p className='status'>زارالطبيب-لم يزر الصيدلاني</p>
-              <p>{patient.phone}</p>
-              <p>{patient.diseaseType}</p>
-              <p>{patient.age}</p>
-              <p>{patient.patientName}</p>
+            <div className='table-body'>
+              {filteredPatients.map((patient, index) => (
+                <div className={`row ${slect===patient._id ? "SelectClass" : ""}`}  key={index} onClick={()=>setSlect(patient._id)} onDoubleClick={()=>{openPatient(patient._id)}} >
+                  <p className='status'>زارالطبيب-لم يزر الصيدلاني</p>
+                  <p>{patient.phone}</p>
+                  <p>{patient.diseaseType}</p>
+                  <p>{patient.age}</p>
+                  <p>{patient.patientName}</p>
+                </div>
+              ))}
             </div>
-          ))}
-        </div>
-
+        
       </div>
     </div>
   );
