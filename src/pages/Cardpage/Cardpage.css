@@ -35,14 +35,15 @@ justify-content: space-between;}
     gap: 20px;
 }
 .rightSection form input{
-    width: 600px;
+    width: 300px;
     height: 50px;
 text-align: end;
-padding-right: 10px;
-border-radius: 10px;
+padding-right: 5px;
+/* border-radius:5px; */
 border: #14B6DA solid 0.4px ;
-box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.329);
+/* box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.329); */
 }
+
 .rightSection form label{
     display: flex;
     justify-content: center;
@@ -61,6 +62,36 @@ box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.329);
 
 }
 
+.rightSection form .nameDiv{
+    position: relative;
+}
+.rightSection form .nameDiv img{
+    position: absolute;
+    top: 0.8rem;
+    width: 2rem;
+    height: 1.4rem;
+    left: 5px;
+    cursor: pointer;
+}
+.rightSection form .nameDiv ul{
+    position: absolute;
+    top: 3.1rem;
+    background-color: #FFFFFF;
+    width: 300px;
+    direction: rtl;
+    /* padding: 0 20px; */
+ left: 0px;
+    border: #000 solid 1px;
+    border-top: none;
+    /* border-bottom: none; */
+}
+.rightSection form .nameDiv ul li{
+    padding: 0 10px;
+    margin: 10px 0;
+    /* border-bottom: #000 solid 1px; */ 
+    cursor: pointer;
+    font-size: large;
+}
 /* .Determine_gender {
     gap: 0px;
     padding-right: 0;
@@ -86,7 +117,7 @@ width: 490px;
 .rightSection .buttons {
     display: flex;
     flex-direction: row;
-    /* align-items: start; */
+  margin-top: 9rem;
     justify-content:start ;
     gap: 50px;
     margin-left: 15px;

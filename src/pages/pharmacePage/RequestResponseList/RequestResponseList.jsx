@@ -73,12 +73,12 @@ function RequestResponseList() {
   // Filter function
   useEffect(() => {
     const filteredData = responses.filter((item) => {
-      const matchesName = item.storageResponse.storageManagerName
-        .toLowerCase()
+      const matchesName = item.storageResponse?.storageManagerName
+        ?.toLowerCase()
         .includes(searchTerm.toLowerCase());
 
       const matchesDate = dates.length === 2 ? (
-        moment(item.storageResponse.responseDate).isBetween(
+        moment(item.storageResponse?.responseDate).isBetween(
           moment(dates[0], 'YYYY-MM-DD'),
           moment(dates[1], 'YYYY-MM-DD'),
           undefined,
@@ -135,13 +135,19 @@ function RequestResponseList() {
         </thead>
         <tbody>
           {filteredResponses.map((item, index) => (
-            <tr key={index}>
-              <td>{item.storageResponse.storageManagerName}</td>
-              <td>{item.storageResponse.storageStatus}</td>
-              <td>{item.storageResponse.availableQuantity}</td>
-              <td>{item.storageResponse.expirationDate}</td>
-              <td>{item.storageResponse.responseDate}</td>
-            </tr>
+            item.storageResponse ? ( // Ensure storageResponse is defined
+              <tr key={index}>
+                <td>{item.storageResponse.storageManagerName}</td>
+                <td>{item.storageResponse.storageStatus}</td>
+                <td>{item.storageResponse.availableQuantity}</td>
+                <td>{item.storageResponse.expirationDate}</td>
+                <td>{item.storageResponse.responseDate}</td>
+              </tr>
+            ) : (
+              <tr key={index}>
+                <td colSpan="5">No data available</td> {/* Optional: display a message when no data */}
+              </tr>
+            )
           ))}
         </tbody>
       </table>
