@@ -285,7 +285,7 @@ console.log(`http://localhost:4000/api/storage/search?nameOrCode=${inputValues.n
                   <td>سعر المنتج</td>
                   <td>ملاحضات</td>
                   <td>اسم المنتج</td>
-                  <td className="lastTd">رقم المنتج</td>
+                  <td className="lastTd">الكود</td>
                 </tr>
               </thead>
               <tbody>

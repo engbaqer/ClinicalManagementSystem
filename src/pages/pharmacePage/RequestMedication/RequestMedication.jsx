@@ -10,7 +10,7 @@ import './RequestMedication.css';
 function DispensingMedication() {
   const { token } = useContext(ClinicalContext);
 
-  const [medicines, setMedicines] = useState([{ drugName: '', quantity: '', drugForm: '' }]);
+  const [medicines, setMedicines] = useState([{ drugName: '', quantity: '', drugForm: '',dose:'' }]);
 
   const [finalInfo, setFinalInfo] = useState({
     pharmacistName: '',
@@ -76,7 +76,7 @@ function DispensingMedication() {
         }
       );
       console.log('Data sent successfully:', response.data);
-     alert("تم ارسال الطلب بنجاح")
+     alert(`${response.data.request.serialNumber}  رقم الطلب  تم ارسال الطلب بنجاح`)
      window.location.reload();
     } catch (error) {
       if (error.response) {
@@ -108,6 +108,7 @@ function DispensingMedication() {
       </div>
 
       {medicines.map((medicine, index) => (
+        <div className='flex flex-col'>
         <div className="Name_of_the_medicine" key={index}>
           <label htmlFor="">اسم الدواء</label>
           <input
@@ -132,6 +133,14 @@ function DispensingMedication() {
             value={medicine.quantity}
             onChange={(e) => handleInputChange(e, index, 'quantity')}
           />
+       
+        </div>
+
+        <div className='Name_of_the_medicine  '>
+        <label htmlFor="">الجرعة</label>
+            <input style={{ width: '100px' }}  type="text"   value={medicine.dose}
+            onChange={(e) => handleInputChange(e, index, 'dose')} />
+          </div>
         </div>
       ))}
 

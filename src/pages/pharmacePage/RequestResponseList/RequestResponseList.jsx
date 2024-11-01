@@ -7,9 +7,13 @@ import moment from 'moment';
 import { ClinicalContext } from './../../../pages/auth/contextFile';
 import notification from './../../../images/Notification.png';
 import io from 'socket.io-client';
+import check from '../../../images/check.svg';
+import InputModal from '../../components/inputModel'; // Import InputModal
+
 const { RangePicker } = DatePicker;
 
 function RequestResponseList() {
+  const [error, setError] = useState("");
   const [hidelist, setHideList] = useState('hide');
   const [responses, setResponses] = useState([]);
   const [filteredResponses, setFilteredResponses] = useState([]);
@@ -17,6 +21,43 @@ function RequestResponseList() {
   const [searchTerm, setSearchTerm] = useState('');
   const [dates, setDates] = useState([]);
   const [notificationCount, setNotificationCount] = useState(0);
+  const [showModal, setShowModal] = useState(false); // Modal visibility
+  const [selectedId, setSelectedId] = useState(null); // To track which item is selected for confirmation
+
+  // Error handling function
+  const handleError = (error) => {
+    if (error.response) {
+      console.error("Server Error:", error.response.data);
+      setError("Server Error: " + error.response.data.message);
+    } else if (error.request) {
+      console.error("Network Error: No response received from the server.");
+      setError("Network Error: No response from server.");
+    } else {
+      console.error("Error setting up request:", error.message);
+      setError("Request Error: " + error.message);
+    }
+  };
+
+  // Confirmation request function
+  async function conformationReq(id, pharmacistName) {
+    try {
+      const response = await axios.post(
+        `http://localhost:4000/api/pharmacist/confirmReceipt/${id}`,
+        { confirmingPharmacistName: pharmacistName },
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
+     
+      console.log(response.data);
+    } catch (error) {
+      handleError(error);
+    }
+  }
+
+  // Open modal and set the ID for the confirmation action
+  const openConfirmationModal = (id) => {
+    setSelectedId(id);
+    setShowModal(true);
+  };
 
   // Fetch responses
   useEffect(() => {
@@ -24,67 +65,49 @@ function RequestResponseList() {
       console.error('Token is not available');
       return;
     }
-  
+
     async function getResponses() {
       try {
-        const response = await axios({
-          method: 'get',
-          url: 'http://localhost:4000/api/pharmacist/responses',
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
+        const response = await axios.get('http://localhost:4000/api/pharmacist/responses', {
+          headers: { Authorization: `Bearer ${token}` },
         });
-  
-        // Set both full and filtered responses initially
         setResponses(response.data);
         setFilteredResponses(response.data);
         setNotificationCount(response.data.length);
       } catch (error) {
-        if (error.response) {
-          console.error('Error response data:', error.response.data);
-        } else if (error.request) {
-          console.error('Error request:', error.request);
-        } else {
-          console.error('Error message:', error.message);
-        }
+        handleError(error);
       }
     }
-  
+
     getResponses();
-  
-    // Real-time response listening via WebSocket
-    const socket = io('http://localhost:4000', {
-      transports: ['websocket'],
-    });
-  
+
+    const socket = io('http://localhost:4000', { transports: ['websocket'] });
     socket.on('new-response', (newRequest) => {
-      setResponses((prevResponses) => [newRequest, ...prevResponses]); // Add new request at the top
-      setFilteredResponses((prevResponses) => [newRequest, ...prevResponses]); // Ensure it's visible before any filtering
+      setResponses((prev) => [newRequest, ...prev]);
+      setFilteredResponses((prev) => [newRequest, ...prev]);
     });
-  
-    // Cleanup WebSocket on component unmount
+
     return () => {
       socket.off('new-response');
       socket.disconnect();
     };
   }, [token]);
-  
 
-  // Filter function
+  // Filter function for responses
   useEffect(() => {
     const filteredData = responses.filter((item) => {
       const matchesName = item.storageResponse?.storageManagerName
         ?.toLowerCase()
         .includes(searchTerm.toLowerCase());
 
-      const matchesDate = dates.length === 2 ? (
-        moment(item.storageResponse?.responseDate).isBetween(
-          moment(dates[0], 'YYYY-MM-DD'),
-          moment(dates[1], 'YYYY-MM-DD'),
-          undefined,
-          '[]'
-        )
-      ) : true;
+      const matchesDate = dates.length === 2
+        ? moment(item.storageResponse?.responseDate).isBetween(
+            moment(dates[0], 'YYYY-MM-DD'),
+            moment(dates[1], 'YYYY-MM-DD'),
+            undefined,
+            '[]'
+          )
+        : true;
 
       return matchesName && matchesDate;
     });
@@ -131,26 +154,45 @@ function RequestResponseList() {
             <td>الكمية المتوفرة</td>
             <td>تاريخ انتهاء الصلاحية</td>
             <td>تاريخ الرد</td>
+            <td>تاكيد الاستلام</td>
           </tr>
         </thead>
         <tbody>
           {filteredResponses.map((item, index) => (
-            item.storageResponse ? ( // Ensure storageResponse is defined
+            item.storageResponse ? (
               <tr key={index}>
                 <td>{item.storageResponse.storageManagerName}</td>
                 <td>{item.storageResponse.storageStatus}</td>
                 <td>{item.storageResponse.availableQuantity}</td>
                 <td>{item.storageResponse.expirationDate}</td>
                 <td>{item.storageResponse.responseDate}</td>
+                <td>
+                  <img
+                    onClick={() => openConfirmationModal(item._id)}
+                    className="mr-10 cursor-pointer"
+                    src={check}
+                    alt="Confirm"
+                  />
+                </td>
               </tr>
             ) : (
               <tr key={index}>
-                <td colSpan="5">No data available</td> {/* Optional: display a message when no data */}
+                <td colSpan="5">No data available</td>
               </tr>
             )
           ))}
         </tbody>
       </table>
+
+      {/* Confirmation input modal */}
+      <InputModal
+        show={showModal}
+        onClose={() => setShowModal(false)}
+        onConfirm={(inputValue) => {
+          conformationReq(selectedId, inputValue); // Pass pharmacist name to confirmation request
+          setShowModal(false);
+        }}
+      />
     </div>
   );
 }

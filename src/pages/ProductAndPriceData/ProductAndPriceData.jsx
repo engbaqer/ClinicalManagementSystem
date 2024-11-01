@@ -35,6 +35,23 @@ function ProductAndPriceData(params) {
         getProduct();
     }, [productId]);
 
+
+
+    // Format purchase date
+  function formatPurchaseDate(purchaseDate) {
+    const date = new Date(purchaseDate);
+
+    const formattedDate = date.toLocaleDateString('en-CA', {
+      year: 'numeric',
+      month: '2-digit',
+      day: '2-digit',
+    });
+
+    return formattedDate;
+  }
+
+
+
     return (
         <div className='store' >
             <div className='header'>
@@ -61,7 +78,7 @@ function ProductAndPriceData(params) {
                         <tr>
                         <td>{product.productName}</td>
                             <td> {product.productNumber}</td>
-                            <td>{product.purchaseDate}</td>
+                            <td>{formatPurchaseDate(product.purchaseDate)}</td>
                             <td>{product.category}</td>
                             <td>{product.quantity}</td>
                            

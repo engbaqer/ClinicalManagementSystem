@@ -20,6 +20,7 @@ function RP_AddPatient(){
         address: '',
         disease: '',
         notes: '',
+        motherName:''
       });
     console.log(formData)
       function handleChange (type,value){
@@ -95,6 +96,15 @@ function RP_AddPatient(){
             value={formData.patientName}
             onChange={(e)=>{handleChange('patientName',e.target.value)}}
             required
+            />
+           <label style={{ marginTop: '0.5rem' }}>إسم الأم</label>
+          <input 
+            type="text"
+            name="fullName"
+            value={formData.motherName}
+            onChange={(e)=>{handleChange('motherName',e.target.value)}}
+            required
+            style={{ width: '50%' }}
           />
         </div>
         <div className="form-group small-input">

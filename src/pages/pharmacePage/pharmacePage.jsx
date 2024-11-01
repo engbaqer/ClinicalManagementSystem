@@ -6,7 +6,8 @@ import RequestMedication from "./RequestMedication/RequestMedication";
 import Listofmedication from "./ListofMedications/listofmedication";
 import MedicationDispensingList from "./MedicationDispensingList/MedicationDispensingList";
 import RequestResponseList from "./RequestResponseList/RequestResponseList";
-
+import RequestList from '../DrugStore/RequestPage/RequestsPage';
+import { Link, useNavigate } from 'react-router-dom';
 function PharmacePage(params) {
   const [activeSection, setActiveSection] = useState("DispensingMedication");
   const [forlist, setforList] = useState("");
@@ -103,6 +104,9 @@ function PharmacePage(params) {
             >
               قائمة استجابة الطلبات
             </button>
+            <Link to="/drugStore/requests"> <button>
+              قائمة  الطلبات
+            </button>  </Link>
           </div>
         </div>
       </div>

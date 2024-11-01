@@ -1,97 +1,105 @@
-import React, { useState, useContext, useEffect } from 'react'
-import add from '../../../images/image 15.png'
-import './Dispensingmedication.css'
-import Save from '../../../images/save-instagram 1.png'
-import Print from '../../../images/printer (1) 1.png'
-import arrow from './../../../images/arrow_down.png'
-import axios from 'axios'
+import React, { useState, useContext, useEffect } from 'react';
+import add from '../../../images/image 15.png';
+import './Dispensingmedication.css';
+import Save from '../../../images/save-instagram 1.png';
+import Print from '../../../images/printer (1) 1.png';
+import arrow from './../../../images/arrow_down.png';
+import axios from 'axios';
 import { ClinicalContext } from './../../../pages/auth/contextFile';
-// import { set } from 'react-datepicker/dist/date_utils'
 
 function DispensingMedication() {
-  const [hidelist, setHideList] = useState('hide')
+  // State to toggle visibility of the patient list
+  const [hidelist, setHideList] = useState('hide');
+
+  // State to manage table rows containing medication details
   const [rows, setRows] = useState([
     { instructions: '', duration: '', frequency: '', dosage: '', drugName: '', FormOfTheMedication: '' }
   ]);
+
+  // Adds a new row with empty fields for medication details
   const addRow = () => {
     setRows([...rows, { instructions: '', duration: '', frequency: '', dosage: '', patientName: '', FormOfTheMedication: '' }]);
   };
 
+  // Function to handle changes in each row's input fields
   function handleInputChange(e, index, field) {
     const newRows = [...rows];
     newRows[index][field] = e.target.value;
     setRows(newRows);
   }
 
+  // State to hold patient data, loading status, and prescriptions
   const [allPatients, setAllPatients] = useState([]);
   const [loading, setLoading] = useState(true);
-  const { token } = useContext(ClinicalContext)
+  const { token } = useContext(ClinicalContext); // Retrieves token from context
   const [prescriptions, setPrescriptions] = useState([]);
-  const [medication, setMedication] = useState({_id: '', patientName: '', prescriptions: [],prescriptionNumber:0 });
+  const [medication, setMedication] = useState({_id: '', patientName: '', prescriptions: [], prescriptionNumber: 0 });
+  const [patient ,setPatient]=useState(null)
+  const [showAllPrescriptions, setShowAllPrescriptions] = useState(false);
 
+  // Toggles visibility of all prescriptions
+  const handleButtonClick = () => {
+    setShowAllPrescriptions(true);
+  };
 
   ////////////////////////////////////set dispensing medication function //////////////////////////////////////
 
-  // Update dispensing medication and then trigger the `send` function
-async function set_dispensing_medication() {
-  const formattedPrescriptions = rows.map(row => ({
-    drugName: row.drugName, // Assuming `drugName` corresponds to the name of the drug
-    quantity: row.dosage,   // Adjust the quantity based on dosage
-  }));
+  // Sets up the dispensing medication structure and triggers sending data
+  async function set_dispensing_medication() {
+    const formattedPrescriptions = rows.map(row => ({
+      drugName: row.drugName, // Setting the drug name
+      quantity: row.dosage,   // Setting the quantity based on dosage
+    }));
 
-  // Update the medication state and trigger the send function
-  setMedication(prevMed => {
-    const updatedMedication = {
-      ...prevMed,
-      prescriptions: formattedPrescriptions,
-    };
-
-    return updatedMedication; // Return the new updated medication state
-  });
-}
-
-// Use an effect to detect changes in the `medication` state and call `send`
-useEffect(() => {
-  if (medication.prescriptions.length > 0) { // Ensure prescriptions are set
-    send(medication);  // Call send with the updated medication
+    // Update the medication state and trigger the send function
+    setMedication(prevMed => {
+      const updatedMedication = {
+        ...prevMed,
+        prescriptions: formattedPrescriptions,
+      };
+      return updatedMedication; // Return the new updated medication state
+    });
   }
-}, [medication]); // Trigger `send` whenever `medication` updates
 
-async function send(currentMedication) {
-  try {
-    console.log("Sending finalInfo:", currentMedication);
-    const response = await axios.post(
-      'http://localhost:4000/api/pharmacist/despensingMedic',
-      currentMedication,
-      {
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`
+  // useEffect hook that triggers sending data whenever `medication` updates
+  useEffect(() => {
+    if (medication.prescriptions.length > 0) { // Check if prescriptions exist
+      send(medication);  // Call send with the updated medication
+    }
+  }, [medication]); // Trigger whenever `medication` updates
+
+  // Sends the formatted medication data to the server
+  async function send(currentMedication) {
+    try {
+      console.log("Sending finalInfo:", currentMedication);
+      const response = await axios.post(
+        'http://localhost:4000/api/pharmacist/despensingMedic',
+        currentMedication,
+        {
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`
+          }
         }
+      );
+      console.log('Data sent successfully:', response.data);
+      alert("تم صرف الدواء بنجاح");
+      window.location.reload(); // Reload the page on success
+    } catch (error) {
+      if (error.response) {
+        alert(error.response.data.message);
+        console.error('Server Error:', error.response.data);
+      } else if (error.request) {
+        console.error('Network Error: No response received from the server.');
+      } else {
+        console.error('Error setting up request:', error.message);
       }
-    );
-    console.log('Data sent successfully:', response.data);
-    alert("تم صرف الدواء بنجاح");
-   window.location.reload(); // Reload the page after success
-  } catch (error) {
-    if (error.response) {
-      alert(error.response.data.message);
-      console.error('Server Error:', error.response.data);
-    } else if (error.request) {
-      console.error('Network Error: No response received from the server.');
-    } else {
-      console.error('Error setting up request:', error.message);
     }
   }
-}
-
-// You can call `set_dispensing_medication()` when needed (e.g., on form submit or button click)
-
-  ////////////////////////////////////set dispensing medication //////////////////////////////////////
-
 
   ///////////////////////////all patient //////////////////////
 
+  // Fetches all patient data from the server
   async function getAllpatient() {
     if (!token) {
       console.error("No token found, redirecting to login.");
@@ -106,43 +114,34 @@ async function send(currentMedication) {
           "Content-Type": "multipart/form-data",
           Authorization: `Bearer ${token}`,
         },
-
-
       });
-      setAllPatients(r.data)
-      
-      console.log(allPatients)
+      setAllPatients(r.data);
+      console.log(allPatients);
     }
     catch (error) {
       if (error.response) {
         console.error("Error response data:", error.response.data);
-        console.error("Error response status:", error.response.status);
-        console.error("Error response headers:", error.response.headers);
       } else if (error.request) {
         console.error("Error request:", error.request);
       } else {
         console.error("Error message:", error.message);
       }
-
     }
     finally {
-      setLoading(false);
-      if (!allPatients) {
-
-      }  // Stop loading after the request
+      setLoading(false); // Stop loading after the request
     }
   }
+
+  // useEffect hook to call `getAllpatient` on component mount or token change
   useEffect(() => {
     getAllpatient();
   }, [token]);
-  ////////////////////////////all patient //////////////////////
 
-  ///////////////patien by name ///////////////////////////////////////////
+  ///////////////patient by name ///////////////////////////////////////////
 
+  // Fetches specific patient information by name
   async function getpatientInfoByName(name) {
-
     const encodedName = encodeURIComponent(name);
-
     const url = `http://localhost:4000/api/pharmacist/filterByName?name=${encodedName}`;
 
     if (!token) {
@@ -160,14 +159,11 @@ async function send(currentMedication) {
           Authorization: `Bearer ${token}`,
         },
       });
-
       setPrescriptions(r.data);  // Update prescriptions state
-      console.log("prescriptions:", r.data); // Log the result
+      console.log("prescriptions:", r.data); // Log result
     } catch (error) {
       if (error.response) {
         console.error("Error response data:", error.response.data);
-        console.error("Error response status:", error.response.status);
-        console.error("Error response headers:", error.response.headers);
       } else if (error.request) {
         console.error("Error request:", error.request);
       } else {
@@ -178,10 +174,9 @@ async function send(currentMedication) {
     }
   }
 
+  ///////////////////////fetch Prescription by index //////////////////////
 
-  ///////////////patien by name ///////////////////////////////////////////
-  ///////////////////////fuch Prescription by index //////////////////////
-
+  // Sets selected prescription details into rows
   function setInfoPrescriptions(index) {
     const selectedPrescriptions = prescriptions[index].prescriptions;
     const formattedRows = selectedPrescriptions.map(prescription => ({
@@ -191,76 +186,67 @@ async function send(currentMedication) {
       dosage: prescription.dose,
       drugName: prescription.medicineName,
       FormOfTheMedication: prescription.form,
-    
     }));
-
     setRows(formattedRows);
   }
-
-
-  ///////////////////////fuch Prescription by index //////////////////////
-
 
   if (loading) {
     return <div style={{ height: '300px', display: 'flex', justifyContent: 'center', alignItems: 'center', fontSize: '30px' }}><h1>Loading...</h1></div>;
   }
+
   return (
     <div className="DispensingMedication">
-
-
+      {/* Patient Information Section */}
       <div className="info">
-        <h1 className='pationtInfoHead'>
-          معلومات المريض
-        </h1>
+        <h1 className='pationtInfoHead'>معلومات المريض</h1>
         <form className='form' action="">
           <div className='patientInfo'>
-            <input type="text" id='input'  placeholder='اختر اسم المريض' readOnly />
+            <input type="text" id='input' value={patient}  placeholder='اختر اسم المريض' readOnly />
             <label htmlFor="input">الأسم</label>
             <img src={arrow} alt=""  onClick={() => setHideList(hidelist === 'show' ? 'hide' : 'show')} />
             <div className={`listOfpationt  ${hidelist}`}>
               <ul className={hidelist}>
                 {allPatients.map((patient, index) => (
-                  <li key={index} onClick={() => { getpatientInfoByName(patient.patientName) }}>{patient.patientName}</li>
+                  <li key={index} onClick={() => { getpatientInfoByName(patient.patientName) ; setPatient(patient.patientName)}}>{patient.patientName}</li>
                 ))}
               </ul>
             </div>
           </div>
         </form>
-        <div className="dataOfpationt">
-          {/* <h3> العمر<samp>:</samp></h3><p>{prescriptions[0].patientAge}</p> */}
-          {/* <h3>الجنس<samp>:</samp></h3><p>{prescriptions[0].patientGender}</p>
-      <h3>رقم الهاتف<samp>:</samp></h3><p>{prescriptions[0].phonenumber}</p> */}
-        </div>
       </div>
+
+      {/* Prescriptions Section */}
       <div className="head">
         <div></div>
         <h1>الوصفات الطبية</h1>
         <div></div>
       </div>
-
-
-      {/* <input type="text" />
-<label htmlFor="">الوصفة</label> */}
+      <button
+        className='colorForButton underline mr-2'
+        onClick={handleButtonClick}
+      >
+        عرض كل الوصفات
+      </button>
 
       <table className='Prescriptions'>
-
         {prescriptions && prescriptions.length > 0 ? (
-          prescriptions.map((item, index) => (
-            <tr onClick={() => { setInfoPrescriptions(index);
-              setMedication(prevMed => ({
-                ...prevMed,
-                _id: item._id,
-                patientName: item.patientName,
-                prescriptionNumber:item.prescriptionNumber
-              }));
-              
-             }} key={index}>
+          (showAllPrescriptions ? prescriptions : [prescriptions[0]]).map((item, index) => (
+            <tr
+              onClick={() => {
+                setInfoPrescriptions(index);
+                setMedication(prevMed => ({
+                  ...prevMed,
+                  _id: item._id,
+                  patientName: item.patientName,
+                  prescriptionNumber: item.prescriptionNumber
+                }));
+              }}
+              key={index}
+            >
               <td>{new Date(item.createdAt).toLocaleDateString()}</td>
               <td>{item.diagnosis}</td>
               <td>{item.doctorName}</td>
-              <td>
-                {item.patientAge}
-              </td>
+              <td>{item.patientAge}</td>
             </tr>
           ))
         ) : (
@@ -269,26 +255,22 @@ async function send(currentMedication) {
           </tr>
         )}
       </table>
+
+      {/* Medication Input Section */}
       <div className='head'>
         <img src={add} alt="" onClick={addRow} />
-        <h1>
-          الوصفة الطبية
-        </h1>
-        <div>
-          {/* this impty div to center the text   */}
-        </div>
+        <h1>الوصفة الطبية</h1>
       </div>
 
-      <div className='table   '>
-        <table className=''>
+      <div className='table'>
+        <table>
           <tr >
-            <th >التعليمات</th>
-            <th >مدة العلاج</th>
+            <th>التعليمات</th>
+            <th>مدة العلاج</th>
             <th>التكرار</th>
             <th>شكل الدواء</th>
             <th>الجرعة</th>
             <th>اسم الدواء</th>
-
           </tr>
           {rows.map((row, index) => (
             <tr key={index}>
@@ -297,24 +279,23 @@ async function send(currentMedication) {
               <td><input type="text" value={row.frequency} onChange={(e) => handleInputChange(e, index, 'frequency')} /></td>
               <td><input type="text" value={row.FormOfTheMedication} onChange={(e) => handleInputChange(e, index, 'FormOfTheMedication')} /></td>
               <td><input type="text" value={row.dosage} onChange={(e) => handleInputChange(e, index, 'dosage')} /></td>
-              <td><input type="text" value={row.drugName} onChange={(e) => handleInputChange(e, index, 'name')} /></td>
-
+              <td><input type="text" value={row.drugName} onChange={(e) => handleInputChange(e, index, 'drugName')} /></td>
             </tr>
           ))}
         </table>
       </div>
-      <div className='AdditionalNotes'>
-        <h1>
-          ملاحظات اضافية
-        </h1>
 
+      {/* Additional Notes Section */}
+      <div className='AdditionalNotes'>
+        <h1>ملاحظات اضافية</h1>
         <div className='Inputnotes'>
           <input className='note' type="text" placeholder='...ادخل اي ملاحظات اضافية هنا' />
         </div>
       </div>
+
+      {/* Action Buttons */}
       <div className='bus'>
-        <button onClick={()=>{set_dispensing_medication(rows)}}>
-          {/* <img src={Save} alt="" /> */}
+        <button onClick={() => { set_dispensing_medication(rows) }}>
           <p>صرف الدواء</p>
         </button>
         <button onClick={() => window.print()}>
@@ -323,8 +304,7 @@ async function send(currentMedication) {
         </button>
       </div>
     </div>
-
-  )
+  );
 }
 
-export default DispensingMedication
+export default DispensingMedication;

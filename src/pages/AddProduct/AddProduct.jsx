@@ -142,7 +142,7 @@ async function saveData(event) {
                             <div className='DivForInputs quantityProudNum'>
                                 <label htmlFor=""> الكمية</label>
                                 <input type="number"  onChange={(e)=>{setValue("quantity",parseInt(e.target.value))}}  />
-                                <label htmlFor=""> رقم المنتج</label>
+                                <label htmlFor=""> الكود </label>
                                 <input type="text"  onChange={(e)=>{setValue("productNumber",e.target.value)}}  />
                             </div>
                             {/* Dropdown input for product type */}

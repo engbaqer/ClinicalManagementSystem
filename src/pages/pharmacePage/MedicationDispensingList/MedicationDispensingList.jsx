@@ -84,7 +84,7 @@ function MedicationDispensingList() {
           }}
         />
         {/* Name filter input */}
-        <div className="listOfpatient">
+        <div className="">
           <input
             type="text"
             id="input"

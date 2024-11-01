@@ -27,6 +27,7 @@ function ListOfMedication() {
         },
       });
       setAllmedication(response.data);
+      console.log(allmedication)
     } catch (error) {
       if (error.response) {
         console.error("Error response data:", error.response.data);
@@ -76,7 +77,7 @@ function ListOfMedication() {
                 <p>{item.quantity}</p>
               </div>
               <p className='description'>{item.expirationDate}</p>
-              
+
             </div>
             <div className='R-section'>
             <p className='dosage'>{item.drugForm}</p>

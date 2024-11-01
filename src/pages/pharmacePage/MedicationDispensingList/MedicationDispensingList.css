@@ -18,9 +18,14 @@
     z-index: 6;
 }
 .MedicationDispensingList .listOfpatient input ,.MedicationDispensingList  .date{
+   
+   
+    
+    text-align: end;
     border: #14B6DA 1.5px solid;
     height: 32px;
     border-radius: 2px;
+    padding-right: 10px;
 }
 .MedicationDispensingList .listOfpatient img{
     position: absolute;
