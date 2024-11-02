@@ -66,14 +66,17 @@ function Invoice() {
   // Handle errors
   const handleError = (error) => {
     if (error.response) {
+      alert(`${error.response.data.message}`)
       console.error("Server Error:", error.response.data);
-      setError("Server Error: " + error.response.data.message);
+      // setError("Server Error: " + error.response.data.message);
     } else if (error.request) {
+   
       console.error("Network Error: No response received from the server.");
-      setError("Network Error: No response from server.");
+      // setError("Network Error: No response from server.");
     } else {
+     
       console.error("Error setting up request:", error.message);
-      setError("Request Error: " + error.message);
+      // setError("Request Error: " + error.message);
     }
   };
   
@@ -129,8 +132,10 @@ function Invoice() {
       console.log("Data saved successfully:", response.data);
       alert("تم اضافة الفاتورة بنجاح");
      // Optional: Consider handling state without reloading
-     Window.location.reload(); 
+  // eslint-disable-next-line no-restricted-globals
+  location.reload(); 
     } catch (error) {
+      // alert(`${error.response.data.message}`)
       handleError(error);
     }
   }
@@ -165,6 +170,7 @@ function Invoice() {
                 {allPatients.map((patient) => (
                   <React.Fragment key={patient._id}>
                     <li onClick={() => { 
+                      setShowStates(showStates === 'hide' ? 'show' : 'hide');
                       setPatients(patient.patientName);  
                       setSelected(prev => ({ ...prev, patientId: patient._id }));
                     }}>
@@ -207,6 +213,7 @@ function Invoice() {
                     Alldoctors.map((doctor) => (
                       <React.Fragment key={doctor._id}>
                         <li onClick={() => { 
+                          setShowDoctors(showDoctors === 'hide' ? 'show' : 'hide');
                           setdoctor(doctor.username); 
                           setSelected(prev => ({ ...prev, doctorId: doctor._id })); 
                         }}>

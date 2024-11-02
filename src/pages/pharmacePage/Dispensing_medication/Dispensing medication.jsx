@@ -13,7 +13,7 @@ function DispensingMedication() {
 
   // State to manage table rows containing medication details
   const [rows, setRows] = useState([
-    { instructions: '', duration: '', frequency: '', dosage: '', drugName: '', FormOfTheMedication: '' }
+    { instructions: '', duration: '', frequency: '', dosage: '', drugName: '', FormOfTheMedication: '' ,quantity:null}
   ]);
 
   // Adds a new row with empty fields for medication details
@@ -48,7 +48,7 @@ function DispensingMedication() {
   async function set_dispensing_medication() {
     const formattedPrescriptions = rows.map(row => ({
       drugName: row.drugName, // Setting the drug name
-      quantity: row.dosage,   // Setting the quantity based on dosage
+      
     }));
 
     // Update the medication state and trigger the send function
@@ -186,6 +186,7 @@ function DispensingMedication() {
       dosage: prescription.dose,
       drugName: prescription.medicineName,
       FormOfTheMedication: prescription.form,
+      quantity:prescription.quantity
     }));
     setRows(formattedRows);
   }
@@ -193,6 +194,7 @@ function DispensingMedication() {
   if (loading) {
     return <div style={{ height: '300px', display: 'flex', justifyContent: 'center', alignItems: 'center', fontSize: '30px' }}><h1>Loading...</h1></div>;
   }
+  
 
   return (
     <div className="DispensingMedication">
@@ -270,7 +272,9 @@ function DispensingMedication() {
             <th>التكرار</th>
             <th>شكل الدواء</th>
             <th>الجرعة</th>
+            <th>الكميية</th>
             <th>اسم الدواء</th>
+          
           </tr>
           {rows.map((row, index) => (
             <tr key={index}>
@@ -279,7 +283,9 @@ function DispensingMedication() {
               <td><input type="text" value={row.frequency} onChange={(e) => handleInputChange(e, index, 'frequency')} /></td>
               <td><input type="text" value={row.FormOfTheMedication} onChange={(e) => handleInputChange(e, index, 'FormOfTheMedication')} /></td>
               <td><input type="text" value={row.dosage} onChange={(e) => handleInputChange(e, index, 'dosage')} /></td>
+              <td><input type="number" value={row.quantity} onChange={(e) => handleInputChange(e, index, 'quantity')} /></td>
               <td><input type="text" value={row.drugName} onChange={(e) => handleInputChange(e, index, 'drugName')} /></td>
+
             </tr>
           ))}
         </table>

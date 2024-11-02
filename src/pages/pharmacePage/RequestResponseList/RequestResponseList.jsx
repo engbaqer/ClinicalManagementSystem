@@ -96,24 +96,28 @@ function RequestResponseList() {
   // Filter function for responses
   useEffect(() => {
     const filteredData = responses.filter((item) => {
-      const matchesName = item.storageResponse?.storageManagerName
-        ?.toLowerCase()
-        .includes(searchTerm.toLowerCase());
+      // const matchesName = item.storageResponse?.storageManagerName
+      //   ?.toLowerCase()
+      //   .includes(searchTerm.toLowerCase());
+  
+  //     const matchesDate = dates.length === 2
+  // ? moment(item.responseDate).isBetween(moment(dates[0]), moment(dates[1]), 'day', '[]')
+  // : dates.length === 1
+  // ? moment(item.responseDate).isSameOrAfter(moment(dates[0]), 'day')
+  // : true;
 
-      const matchesDate = dates.length === 2
-        ? moment(item.storageResponse?.responseDate).isBetween(
-            moment(dates[0], 'YYYY-MM-DD'),
-            moment(dates[1], 'YYYY-MM-DD'),
-            undefined,
-            '[]'
-          )
-        : true;
-
-      return matchesName && matchesDate;
+      // console.log("Checking item:", item);
+      // console.log("Item responseDate:", item.responseDate);
+      // console.log("Start date:", dates);
+      // console.log("End date:", dates[1]);
+      // console.log("Matches date:", matchesDate);    
+      // return  matchesDate;
     });
+  
+    console.log('Filtered Data:', filteredData); // Debug output
     setFilteredResponses(filteredData);
   }, [searchTerm, dates, responses]);
-
+  
   return (
     <div className="RequestResponseList">
       <div className="EnterInformation">
@@ -158,14 +162,14 @@ function RequestResponseList() {
           </tr>
         </thead>
         <tbody>
-          {filteredResponses.map((item, index) => (
-            item.storageResponse ? (
+          {responses.map((item, index) => (
+            item? (
               <tr key={index}>
-                <td>{item.storageResponse.storageManagerName}</td>
-                <td>{item.storageResponse.storageStatus}</td>
-                <td>{item.storageResponse.availableQuantity}</td>
-                <td>{item.storageResponse.expirationDate}</td>
-                <td>{item.storageResponse.responseDate}</td>
+                <td>{item.storageManagerName}</td>
+                <td>{item.storageStatus}</td>
+                <td>{item.drugs[0].availableQuantity}</td>
+                <td>{item.drugs[0].expirationDate}</td>
+                <td>{item.responseDate}</td>
                 <td>
                   <img
                     onClick={() => openConfirmationModal(item._id)}

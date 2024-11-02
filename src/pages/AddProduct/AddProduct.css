@@ -45,11 +45,15 @@ align-items: center;
 gap: 15px;
 
 }
+
 .NewDivForInputs div{
     display: flex;
     flex-direction: column;
     direction: rtl;
     width: 200px;
+}
+.active{
+    border: black 2.5px solid !important;
 }
 .NewDivForInputs button{
     margin-top: 30px;
@@ -65,4 +69,17 @@ gap: 15px;
 .NewDivForInputs button img {
     width: 25px;
     height: 25px;
+}
+.NewDivForInputs .typeOfDiscount {
+    all: unset ; 
+    display: flex;
+    flex-direction: row;
+   gap: 1rem;
+   align-items: center;
+}
+.NewDivForInputs .typeOfDiscount button{
+    width: 60px;
+    height: 30px;
+    font-size: 1rem;
+
 }

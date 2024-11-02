@@ -24,7 +24,9 @@ function AddProduct(params) {
         "minimumSellingPrice": 0,
         "discount": 0,
         "discountType": "percentage",
-        "finalPrice": 0
+        "finalPrice": 0,
+        "BatchNumber":'',
+        "expiredDate":''
       })
 
     // Function to update input values dynamically
@@ -121,12 +123,12 @@ async function saveData(event) {
                             {/* Input for purchase date */}
                             <div className='DivForInputs'>
                                <label htmlFor="">تاريخ انتهاء صلاحية المنتج</label>
-                               <input type="date" placeholder='تاريخ النفاذ'  />
+                               <input  onChange={(e)=>{setValue("expiredDate", e.target.value)}} type="date" placeholder='تاريخ النفاذ'  />
                             </div>
                             {/* Input for product name */}
                             <div className='DivForInputs'>
-                               <label htmlFor=""> رقم الوجبة</label>
-                               <input type="number" />
+                               <label htmlFor="" > رقم الوجبة</label>
+                               <input onChange={(e)=>{setValue("BatchNumber", e.target.value)}} type="number" />
                             </div>
                         </div>
                              
@@ -158,7 +160,7 @@ async function saveData(event) {
                                     <input value={inputValues.category} className='selectInput' type="text" readOnly />
                                     <ul className={`${toggle.toggle2 === 'toggle' ? 'display' : ''}`}>
                                         <li onClick={() => { setValue('category', 'دواء') }}>دواء</li>
-                                        <li onClick={() => { setValue('category', 'مستلم') }}>مستلم</li>
+                                        <li onClick={() => { setValue('category', 'مستلزم') }}>مستلم</li>
                                         <li onClick={() => { setValue('category', 'ادوات طبية') }}>ادوات طبية</li>
                                     </ul>
                                 </div>
@@ -200,10 +202,29 @@ async function saveData(event) {
                         {/* Input for discount type and discount */}
                         <div className="lineOfinput setNewMargin">
                             <div className='NewDivForInputs'>
-                                <div>
-                                    <label htmlFor=""> نوع الخصم</label>
-                                    <input type="text" placeholder='%'  onChange={(e)=>{setValue("discountType",e.target.value)}} />
-                                </div>
+                                <div className='typeOfDiscount'>
+                                <button 
+    className={`${inputValues.discountType === "percentage" ? "active" : ""}`} 
+    type="button" 
+    onClick={(event) => {
+        setValue("discountType", "percentage");
+        event.preventDefault();
+    }}
+>
+    %
+</button>
+
+<button 
+    className={`${inputValues.discountType === "fixed" ? "active" : ""}`} 
+    type="button" 
+    onClick={(event) => {
+        setValue("discountType", "fixed");
+        event.preventDefault();
+    }}
+>
+    عدد
+</button>
+</div>
                                 <div>
                                     <label htmlFor="">  الخصم</label>
                                     <input type="number"  onChange={(e)=>{setValue("discount",parseInt(e.target.value))}} />
