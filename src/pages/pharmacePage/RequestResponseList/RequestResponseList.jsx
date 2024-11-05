@@ -36,6 +36,7 @@ function RequestResponseList() {
         });
   
         // Set both full and filtered responses initially
+        console.log(response.data);
         setResponses(response.data);
         setFilteredResponses(response.data);
         setNotificationCount(response.data.length);

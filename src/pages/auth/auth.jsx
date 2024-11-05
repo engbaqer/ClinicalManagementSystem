@@ -7,7 +7,9 @@ export default function Auth() {
   // const { token, handleLogin } = useContext(ClinicalContext);
   const [user, setUser] = useState(''); // Initialize user from localStorage
   const [loading, setLoading] = useState(true);
-  const token=localStorage.getItem('token')
+  const token = localStorage.getItem('token')
+  const { setId } = useContext(ClinicalContext);
+
   useEffect(() => {
     async function getMe() {
       if (!token) {
@@ -25,8 +27,10 @@ export default function Auth() {
           },
         });
         const fetchedUsername = response.data.name;
+        const userId = response.data.id;
 
         setUser(fetchedUsername); // Set the user in state
+        setId(userId);
         // handleLogin(token); // Ensure token is set in context
         console.log('Fetched User Data:', response.data);
       } catch (error) {

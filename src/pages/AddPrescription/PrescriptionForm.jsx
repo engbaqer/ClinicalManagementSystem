@@ -8,7 +8,7 @@ const PrescriptionForm = ({ patientData }) => {
   const [formData, setFormData] = useState({
     patientName: patientData.patientName,
     patientAge: patientData.age,
-    patientGender: patientData.gender === "Male" ? 'ذكر' : 'انثى',
+    patientGender: (patientData.gender === "Male" || patientData.gender === 'ذكر') ? 'ذكر' : 'انثى',
     medicalProcedure: '',
     reviewDate: '',
     diagnosis: '',
@@ -34,7 +34,7 @@ const PrescriptionForm = ({ patientData }) => {
         ...formData,
         patientName: patientData.patientName || '',
         patientAge: patientData.age || '',
-        patientGender: patientData.gender === "Male" ? 'ذكر' : 'أنثى',
+        patientGender: (patientData.gender === "Male" || patientData.gender === 'ذكر') ? 'ذكر' : 'أنثى',
       });
     }
   }, [patientData]);

@@ -33,9 +33,9 @@ function App() {
       <Router>
         <Routes>
 
-          <Route path='show-pres' element={<ShowPrescription />} />
           <Route path="/Login" element={<Login />} />
           <Route element={<Auth />} >
+            <Route path='/show-prescription/:prescriptionId' element={<ShowPrescription />} />
             <Route path="/Addprescription" element={<Addprescription />} />
             <Route path="/AddProduct" element={<AddProduct />} />
             <Route path="/theInvoice/:ivoiceId" element={<TheInvoice />} />
@@ -62,8 +62,7 @@ function App() {
             <Route path="/userList" element={<UserList />} />
             <Route path='drugstore' element={<div><Outlet /></div>}>
               <Route path='requests' element={<RequestPage />} />
-              <Route path='request-response/:requestId' element={<ResponsePage />} />
-              {/* <Route path=':requestId' element={<h1>why this ?</h1>} /> */}
+              <Route path='request-response' element={<ResponsePage />} />
             </Route>
           </Route>
         </Routes>
