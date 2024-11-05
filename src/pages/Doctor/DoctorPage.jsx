@@ -8,15 +8,13 @@ import axios from 'axios';
 import { io } from 'socket.io-client';
 
 const DoctorPage = () => {
-  const { token } = useContext(ClinicalContext);
+  const { token, username, id: doctorId } = useContext(ClinicalContext);
   const [activeSection, setActiveSection] = useState('waiting section');
   const [enteredPatients, setEnteredPatients] = useState([]);
   const [waitingPatientList, setWaitingPatientList] = useState([]);
 
   // fetching entered/previous patients
   useEffect(() => {
-    // TODO:change the doctor ID
-    const doctorId = '670ab3ce59d75de768df5c39'
     const getEnteredPatients = async () => {
       try {
         const response = await axios.get(`http://localhost:4000/api/doctor/getEnteredPatients/${doctorId}`, {
@@ -45,9 +43,6 @@ const DoctorPage = () => {
 
   // fetch waiting patients
 
-  // TODO:change the doctor ID
-  const doctorId = '670ab3ce59d75de768df5c39'
-
   useEffect(() => {
     if (!token) {
       console.error('Token is not available');
@@ -72,7 +67,6 @@ const DoctorPage = () => {
       console.error('Connection error:', error);
     });
 
-    // Fetch initial pharmacy requests from the server using Axios
     const fetchPatients = async () => {
       try {
         const response = await axios.get(`http://localhost:4000/api/doctor/getWaitingPatients/${doctorId}`, {
@@ -110,13 +104,13 @@ const DoctorPage = () => {
 
   return (
     <div className="bg-primary h-screen w-[100vw] overflow-y-scroll pb-5">
-      <DoctorHeader />
+      <DoctorHeader doctorName={username} />
       {/* choose a section */}
       <div className='w-[75%] mx-auto  py-4 flex flex-row-reverse gap-4'>
         <SwitchSectionBtn switchSection={() => handleShowSection('waiting section')} isChossen={activeSection === 'waiting section'} >قائمة الانتظار</SwitchSectionBtn>
         <SwitchSectionBtn switchSection={() => handleShowSection('entered section')} isChossen={activeSection === 'entered section'} >المرضى السابقون</SwitchSectionBtn>
       </div>
-      {activeSection === 'waiting section' && <PatientList waitingPatientList={waitingPatientList}/>}
+      {activeSection === 'waiting section' && <PatientList waitingPatientList={waitingPatientList} />}
       {activeSection === 'entered section' && <EnteredPatients enteredPatients={enteredPatients} />}
 
       {/* <Footer /> */}

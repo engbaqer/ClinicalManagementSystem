@@ -38,14 +38,14 @@ const PatientBar = ({ patient, isOpen, toggleAccordion }) => {
   const handleNavigate = () => {
     navigate(`/patient-profile/${patient._id}`);
   }
-  
+
 
   return (
     <div>
-      <div className="bg-white grid grid-cols-4 place-items-center p-4 shadow-md lg:text-xl 2xl:text-3xl text-right rounded-t-md mt-2">
+      <div className="bg-white grid grid-cols-4 place-items-center p-4 shadow-md lg:text-xl 2xl:text-3xl text-right rounded-t-md mt-2 relative">
         <CaretBtn isOpen={isOpen} toggleAccordion={toggleAccordion} />
-        <button onClick={handleNavigate}>
-          <span>🔍</span>
+        <button onClick={handleNavigate} className="text-gray-500">
+          <span>🔍 معاينة بروفايل المريض</span>
         </button>
         <DisorderInfo disorder={patient.disease || 'Unknown'} />
         <UserInfo name={patient.patientName || patient.name} />
