@@ -3,7 +3,8 @@ import { DatePicker } from 'antd';
 import './MedicationDispensingList.css';
 import axios from 'axios';
 import { ClinicalContext } from './../../../pages/auth/contextFile';
-import moment from 'moment';
+
+import { format, parse, isWithinInterval } from 'date-fns';
 
 const { RangePicker } = DatePicker;
 
@@ -52,17 +53,18 @@ function MedicationDispensingList() {
 
   // Filter prescriptions by date and name
   const filteredPrescriptions = prescriptions.filter((prescription) => {
-    const prescriptionDate = moment(prescription.updatedAt);
+    // Parse the prescription date with date-fns
+    const prescriptionDate = parse(formatPurchaseDate(prescription.updatedAt), 'yyyy-MM-dd', new Date());
     const nameMatches = prescription.patientName
       .toLowerCase()
       .includes(searchQuery.toLowerCase());
 
     // If dates are selected, filter by range
     if (dates.length === 2) {
-      const [start, end] = dates.map((date) => moment(date, 'YYYY-DD-MM'));
-      return (
-        prescriptionDate.isBetween(start, end, undefined, '[]') && nameMatches
-      );
+      // Parse start and end dates from the selected range
+      const [start, end] = dates.map((date) => parse(date, 'yyyy-MM-dd', new Date()));
+
+      return isWithinInterval(prescriptionDate, { start, end }) && nameMatches;
     }
 
     // Return all prescriptions if no dates are selected, but still filter by name
@@ -77,12 +79,14 @@ function MedicationDispensingList() {
           className="date"
           onChange={(values) => {
             if (values) {
-              setDates(values.map((item) => moment(item).format('YYYY-DD-MM')));
+              // Convert moment to native Date and format using date-fns
+              setDates(values.map((item) => format(item.toDate(), 'yyyy-MM-dd')));
             } else {
-              setDates([]); // Reset dates if no range is selected
+              setDates([]);
             }
           }}
         />
+
         {/* Name filter input */}
         <div className="">
           <input

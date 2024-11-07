@@ -44,7 +44,7 @@ function InvoicePage() {
           },
         });
         setInvoices(response.data);
-        console.log('Fetched Invoices:', response.data.patientName);
+        // console.log(response.data);
       } catch (error) {
         if (error.response) {
           console.error("Error response data:", error.response.data);

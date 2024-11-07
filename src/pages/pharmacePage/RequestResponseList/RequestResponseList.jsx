@@ -3,7 +3,7 @@ import { DatePicker } from 'antd';
 import arrow from './../../../images/arrow_down.png';
 import './RequestResponseList.css';
 import axios from 'axios';
-import moment from 'moment';
+import { format, parse, isWithinInterval } from 'date-fns';
 import { ClinicalContext } from './../../../pages/auth/contextFile';
 import notification from './../../../images/Notification.png';
 import io from 'socket.io-client';
@@ -93,31 +93,30 @@ function RequestResponseList() {
     };
   }, [token]);
 
-  // Filter function for responses
-  useEffect(() => {
-    const filteredData = responses.filter((item) => {
-      // const matchesName = item.storageResponse?.storageManagerName
-      //   ?.toLowerCase()
-      //   .includes(searchTerm.toLowerCase());
-  
-  //     const matchesDate = dates.length === 2
-  // ? moment(item.responseDate).isBetween(moment(dates[0]), moment(dates[1]), 'day', '[]')
-  // : dates.length === 1
-  // ? moment(item.responseDate).isSameOrAfter(moment(dates[0]), 'day')
-  // : true;
 
-      // console.log("Checking item:", item);
-      // console.log("Item responseDate:", item.responseDate);
-      // console.log("Start date:", dates);
-      // console.log("End date:", dates[1]);
-      // console.log("Matches date:", matchesDate);    
-      // return  matchesDate;
-    });
-  
-    console.log('Filtered Data:', filteredData); // Debug output
-    setFilteredResponses(filteredData);
-  }, [searchTerm, dates, responses]);
-  
+
+console.log(responses)
+ // Filter responses by date
+const filteredresponses = responses.filter((response) => {
+  // Ensure response.responseDate is valid and parse it correctly
+  const ResponseDate = response.responseDate ? parse(response.responseDate, 'yyyy-MM-dd', new Date()) : null;
+
+  if (!ResponseDate) {
+    return false; // Skip this response if the date is invalid or missing
+  }
+
+  // If dates are selected, filter by the date range
+  if (dates.length === 2) {
+    const [start, end] = dates.map((date) => parse(date, 'yyyy-MM-dd', new Date()));
+
+    return isWithinInterval(ResponseDate, { start, end });
+  }
+
+  // If no date range is selected, include all responses
+  return true;
+});
+
+
   return (
     <div className="RequestResponseList">
       <div className="EnterInformation">
@@ -126,7 +125,8 @@ function RequestResponseList() {
             className="date"
             onChange={(values) => {
               if (values) {
-                setDates(values.map((item) => moment(item).format('YYYY-MM-DD')));
+           
+                setDates(values.map((item) => format(item, 'yyyy-MM-dd')));
               } else {
                 setDates([]);
               }
@@ -162,7 +162,7 @@ function RequestResponseList() {
           </tr>
         </thead>
         <tbody>
-          {responses.map((item, index) => (
+          {filteredresponses.map((item, index) => (
             item? (
               <tr key={index}>
                 <td>{item.storageManagerName}</td>

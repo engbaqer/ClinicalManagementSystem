@@ -84,6 +84,8 @@ border: #14B6DA solid 0.4px ;
     border: #000 solid 1px;
     border-top: none;
     /* border-bottom: none; */
+    height: 300px;
+    overflow: auto;
 }
 .rightSection form .nameDiv ul li{
     padding: 0 10px;
