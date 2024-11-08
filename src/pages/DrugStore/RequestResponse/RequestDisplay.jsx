@@ -1,6 +1,4 @@
-
-
-
+import { useEffect, useState } from "react";
 
 const RequestDisplay = ({ request }) => {
   return (
@@ -21,19 +19,39 @@ const DisplayHeader = ({ headerTitle }) => {
 }
 
 const DisplayInfo = ({ info }) => {
-  return (
-    <div className="">
-      {/* top information */}
-      <div className="grid grid-cols-5">
-        <RequestDetail detailHeader={'الكمية'} detailData={info.quantity} />
-        <RequestDetail detailHeader={'شكل الدواء '} detailData={info.drugForm} />
-        <RequestDetail detailHeader={'اسم الدواء '} detailData={info.drugName} />
-        <RequestDetail detailHeader={'تاريخ الطلب '} detailData={new Date(info.requestDate).toLocaleDateString('en-CA')} />
-        <RequestDetail detailHeader={'اسم الصيدلاني '} detailData={info.pharmacistName} />
+  if (!info || !info.medicines)
+    return (
+      <div style={{ height: '300px', display: 'flex', justifyContent: 'center', alignItems: 'center', fontSize: '30px' }}>
+        <h1>Loading...</h1>
       </div>
-      {/* note */}
+    );
+
+
+  return (
+    <div>
+      {/* Top information */}
+      <div className="grid grid-cols-3" style={{ direction: 'rtl' }}>
+        <RequestDetail detailHeader={'اسم الصيدلاني '} detailData={info.pharmacistName} />
+        <RequestDetail detailHeader={'تاريخ الطلب '} detailData={new Date(info.requestDate).toLocaleDateString('en-CA')} />
+        <RequestDetail detailHeader={'رقم الطلب'} detailData={info.serialNumber} />
+      </div>
+
+      {/* Medicines Information */}
+      <div className="mt-4">
+        <h3 className="text-gray-400 text-2xl text-right font-extrabold mb-2">🔽 {'الأدوية المطلوبة'}</h3>
+        <div className="grid grid-cols-1 gap-4" style={{ direction: 'rtl' }}>
+          {info.medicines.map((medicine) => (
+            <div key={medicine._id} className="grid grid-cols-3">
+              <RequestDetail detailHeader={'اسم الدواء'} detailData={medicine.drugName} />
+              <RequestDetail detailHeader={'شكل الدواء'} detailData={medicine.drugForm} />
+              <RequestDetail detailHeader={'الكمية'} detailData={medicine.quantity} />
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Note */}
       <div className="text-right mt-4">
-        {/* <RequestDetail detailHeader={'الملاحظات'} detailData={info.notes} /> */}
         <h3 className="text-gray-400 text-2xl font-bold">{'الملاحظات'}</h3>
         <p className="text-xl mt-2 font-bold">{info.additionalNote}</p>
       </div>

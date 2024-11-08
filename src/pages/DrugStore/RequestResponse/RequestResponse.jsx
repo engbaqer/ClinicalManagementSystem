@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import RequestDisplay from "./RequestDisplay";
 import ResponseForm from "./ResponseForm";
 import axios from "axios";
@@ -6,10 +6,27 @@ import { useContext, useEffect, useState } from "react";
 import { ClinicalContext } from "../../auth/contextFile";
 
 const RequestResponse = () => {
-  const { requestId } = useParams();
-  const [displayRequest, setDisplayRequest] = useState({})
+  const location = useLocation();
+  const searchParams = new URLSearchParams(location.search);
+  const requestId = searchParams.get('requestId')
+  const medicineId = searchParams.get('medicineId')
   const [request, setRequest] = useState({});
+  const [medicineRequestId, setMedicineRequestId] = useState('');
+  const [medicineInfo, setMedicineInfo] = useState({});
   const { token } = useContext(ClinicalContext);
+
+  useEffect(() => {
+    const getResponse = async () => {
+      const response = await axios.get('http://localhost:4000/api/pharmacist/responses', {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      })
+      console.log(response.data);
+    }
+
+    getResponse();
+  }, [])
 
   useEffect(() => {
     const getRequestDetails = async () => {
@@ -22,11 +39,11 @@ const RequestResponse = () => {
 
         const data = response.data;
         if (data) {
-          console.log(data);
           setRequest(data);
-          const { pharmacistName, additionalNote, requestDate } = data;
-          const { drugName, quantity, drugForm } = data.medicines[0];
-          setDisplayRequest({ pharmacistName, additionalNote, requestDate, drugName, quantity, drugForm })
+          // const { pharmacistName, additionalNote, requestDate, serialNumber } = data;
+          // const { drugName, quantity, drugForm, _id } = (data.medicines.filter(item => item._id === medicineId))[0];
+          // setMedicineRequestId(_id);
+          // setMedicineInfo({ drugName, quantity, drugForm })
         }
 
       } catch (error) {
@@ -36,10 +53,12 @@ const RequestResponse = () => {
     getRequestDetails();
   }, [])
 
+
+
   return (
     <main className="bg-white border-[2px] border-[#14B6DA] h-fit rounded-xl mt-4 mb-8">
-      <RequestDisplay request={displayRequest} />
-      <ResponseForm request={request} />
+      <RequestDisplay request={request} />
+      <ResponseForm request={request} requestId={medicineRequestId} medicineInfo={medicineInfo} />
     </main>
   );
 }

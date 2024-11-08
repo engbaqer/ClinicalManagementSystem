@@ -4,7 +4,6 @@ import { Link, useNavigate } from 'react-router-dom';
 const Bills = ({ invoices }) => {
   // counter to display the number of invoices
   let counter = 0;
-  console.log(invoices);
 
   return (
     <div className="mt-4">

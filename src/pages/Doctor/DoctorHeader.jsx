@@ -9,7 +9,7 @@ const DoctorHeader = ({ doctorName, proffession }) => {
         </button>
       </div>
       <div className='text-right'>
-        <h1 className='text-5xl mb-3'>د. أحمد محمد مصطفى</h1>
+        <h1 className='text-5xl mb-5'>{doctorName}</h1>
         <h2 className='text-xl'>اختصاص أمراض القلب و الشرايين</h2>
       </div>
     </section>

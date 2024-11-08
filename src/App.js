@@ -26,6 +26,7 @@ import Addprescription from './pages/AddPrescription/AddPrescription'
 import ProductAndPriceData from './pages/ProductAndPriceData/ProductAndPriceData'
 import TheInvoice from './pages/theInvoice/theInvoice';
 import ResponsePage from './pages/DrugStore/RequestResponse/ResponsePage';
+import ShowPrescription from './pages/show prescription/ShowPrescription';
 function App() {
   return (
     <div className="App mx-auto font-amiri">
@@ -34,6 +35,7 @@ function App() {
 
           <Route path="/Login" element={<Login />} />
           <Route element={<Auth />} >
+            <Route path='/show-prescription/:prescriptionId' element={<ShowPrescription />} />
             <Route path="/Addprescription" element={<Addprescription />} />
             <Route path="/AddProduct" element={<AddProduct />} />
             <Route path="/theInvoice/:ivoiceId" element={<TheInvoice />} />
@@ -48,7 +50,8 @@ function App() {
             <Route path="/InvoicePage" element={<InvoicePage />} />
             <Route path="/doctor" element={<DoctorPage />} >
             </Route>
-            <Route path="/patient-profile/:patientId" element={<PatientProfile />} />
+            <Route path="/patient-profile/:patientId" element={<PatientProfile />} >
+            </Route>
             <Route path="/cardpage" element={<Cardpage />} />
             <Route path="/logs" element={<Logs />} />
             <Route path="/dashboard" element={<Dashboard />} />
@@ -59,8 +62,7 @@ function App() {
             <Route path="/userList" element={<UserList />} />
             <Route path='drugstore' element={<div><Outlet /></div>}>
               <Route path='requests' element={<RequestPage />} />
-              <Route path='request-response/:requestId' element={<ResponsePage />} />
-              {/* <Route path=':requestId' element={<h1>why this ?</h1>} /> */}
+              <Route path='request-response' element={<ResponsePage />} />
             </Route>
           </Route>
         </Routes>

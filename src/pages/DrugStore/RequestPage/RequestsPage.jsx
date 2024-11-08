@@ -25,6 +25,7 @@ const RequestPage = () => {
     socket.emit('authenticate', { token: `Bearer ${token}` });
 
     // Check if the socket is connected
+    // TODO:delte this in production
     socket.on('connect', () => {
       console.log('Socket connected:', socket.id);
     });
@@ -45,8 +46,6 @@ const RequestPage = () => {
 
         const data = response.data;
         setPharmacyRequests(data);  // Set initial data
-        // TODO:delete the console log
-        console.log('Initial requests:', data);  // Log for debugging
       } catch (error) {
         console.error('Error fetching requests:', error);
       }
@@ -56,8 +55,6 @@ const RequestPage = () => {
 
     // Listen for real-time updates for new requests
     socket.on('new-drugRequest', (newRequest) => {
-      // TODO:delete the console log
-      console.log('New request received:', newRequest);  // Log for debugging
       setPharmacyRequests((prevRequests) => [...prevRequests, newRequest]);
     });
 
@@ -73,9 +70,7 @@ const RequestPage = () => {
       <RequestHeader />
       <FilterRequests />
       {pharmacyRequests.map((request, index) => (
-        request.medicines.map((medicine) => {
-          return <Request key={medicine._id} requestDetails={request} medicine={medicine} />
-        })
+        <Request key={request._id} requestDetails={request} medicines={request.medicines} />
       ))}
     </div>
   );

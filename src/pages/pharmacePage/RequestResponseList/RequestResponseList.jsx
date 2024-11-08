@@ -71,6 +71,8 @@ function RequestResponseList() {
         const response = await axios.get('http://localhost:4000/api/pharmacist/responses', {
           headers: { Authorization: `Bearer ${token}` },
         });
+  
+        // Set both full and filtered responses initially
         setResponses(response.data);
         setFilteredResponses(response.data);
         setNotificationCount(response.data.length);

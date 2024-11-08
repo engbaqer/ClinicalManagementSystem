@@ -30,12 +30,13 @@ const Status = ({ subscriptionStatus, patientId }) => {
 
   return (
     <div className="flex items-center space-x-4 gap-4 justify-self-end">
-      <img src={wait_icon} alt="Wait" className="h-10 cursor-pointer" />
+      {/* <img src={wait_icon} alt="Wait" className="h-10 cursor-pointer" /> */}
       <button onClick={goToPatientProfile}>
-        <img src={check_icon} alt="Check" className="min-h-10 min-w-10 cursor-pointer w-full" />
+        {/* <p className='text-gray-500 mb-1'>أدخال المريض</p> */}
+        <img src={check_icon} alt="Check" className="h-10 cursor-pointer w-full"/>
       </button>
       <div>
-        <p className="w-[200px] text-center">{subscriptionStatus}</p>
+        {/* <p className="w-[200px] text-center">{subscriptionStatus}</p> */}
       </div>
     </div>
   );
