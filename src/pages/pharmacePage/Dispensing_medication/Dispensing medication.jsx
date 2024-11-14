@@ -47,19 +47,17 @@ function DispensingMedication() {
   // Sets up the dispensing medication structure and triggers sending data
   async function set_dispensing_medication() {
     const formattedPrescriptions = rows.map(row => ({
-      drugName: row.drugName, // Setting the drug name
-      
+      drugName: row.drugName, // Set the drug name
+      ...row // Spread all other properties from each row into the object
     }));
-
+  
     // Update the medication state and trigger the send function
-    setMedication(prevMed => {
-      const updatedMedication = {
-        ...prevMed,
-        prescriptions: formattedPrescriptions,
-      };
-      return updatedMedication; // Return the new updated medication state
-    });
+    setMedication(prevMed => ({
+      ...prevMed,
+      prescriptions: formattedPrescriptions // Set prescriptions with formattedPrescriptions
+    }));
   }
+  
 
   // useEffect hook that triggers sending data whenever `medication` updates
   useEffect(() => {
@@ -209,7 +207,7 @@ function DispensingMedication() {
             <div className={`listOfpationt  ${hidelist}`}>
               <ul className={hidelist}>
                 {allPatients.map((patient, index) => (
-                  <li key={index} onClick={() => { getpatientInfoByName(patient.patientName) ; setPatient(patient.patientName)}}>{patient.patientName}</li>
+                  <li key={index} onClick={() => { setHideList(hidelist === 'show' ? 'hide' : 'show'); getpatientInfoByName(patient.patientName) ; setPatient(patient.patientName)}}>{patient.patientName}</li>
                 ))}
               </ul>
             </div>
@@ -262,6 +260,7 @@ function DispensingMedication() {
       <div className='head'>
         <img src={add} alt="" onClick={addRow} />
         <h1>الوصفة الطبية</h1>
+        <div></div>
       </div>
 
       <div className='table'>

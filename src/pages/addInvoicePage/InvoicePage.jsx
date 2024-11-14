@@ -21,7 +21,7 @@ function Invoice() {
   const [allPatients, setAllPatients] = useState([]);
   const [Alldoctors, setAlldoctors] = useState([]);
   const [selected, setSelected] = useState({ patientId: '', doctorId: '' });
-  const [values, setValues] = useState({ patientName:toString(patient), invoiceDate: "", issueDate: "", notes: "" });
+  const [values, setValues] = useState({ patientName:'', invoiceDate: "", issueDate: "", notes: "" });
   const handleValueChange = (field, newValue) => {
     setValues(prevValues => ({ ...prevValues, [field]: newValue }));
   };
@@ -45,6 +45,14 @@ function Invoice() {
     }
   }, [token]);
 
+  useEffect(() => {
+    setValues(prevValues => ({
+      ...prevValues,
+      patientName: patient
+    }));
+  }, [patient]);
+  
+  console.log(values.patientName)
   // Fetch all doctors
   useEffect(() => {
     const getAlldoctors = async () => {

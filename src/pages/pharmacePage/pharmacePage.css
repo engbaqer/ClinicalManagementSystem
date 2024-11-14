@@ -30,14 +30,16 @@ body {
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    margin: 0 40px 20px ;
+    margin: 0 20px 40px   ;
 }
 .header h1 {
-    font-size: 40px;
-    font-weight: 900;
+    font-size: 30px;
+    font-weight: bold;
 }
-.header img{
+.pharmacepage .header img{
     cursor: pointer;
+    height: 50px;
+    width: 50px;
 }
 .upDiv{
     /* margin-top: 50px; */
@@ -59,10 +61,10 @@ body {
 display: flex;
 flex-direction: column;
 align-items: center;
-gap: 4rem;
+gap: 3rem;
 margin-right:40px ;
 border-left: black 2px solid ;
-padding: 120px 20px ;
+padding: 15px ;
 }
 .pharmacepage .rightsection button{
     width: 200px;

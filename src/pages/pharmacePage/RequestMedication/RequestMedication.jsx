@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react';
 import add from '../../../images/image 15.png';
-import send_icon from '../../../images/printer (1) 1.png';
+import send_icon from '../../../images/send_request.svg';
 import axios from 'axios';
 import { ClinicalContext } from './../../../pages/auth/contextFile';
 

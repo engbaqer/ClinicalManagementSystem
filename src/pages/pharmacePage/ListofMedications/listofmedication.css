@@ -6,7 +6,7 @@
     height: 600px;
     margin-top: 20px;
     overflow-y:auto;
- 
+    scrollbar-color:#14B6DA #d1f2f9;
 }
 
 .head { 

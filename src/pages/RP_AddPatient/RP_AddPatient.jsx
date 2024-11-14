@@ -10,7 +10,7 @@ function RP_AddPatient(){
   const {token} =useContext(ClinicalContext)
     const [formData, setFormData] = useState({
       patientName: '',
-        gender: 'male',
+        gender: '',
         age:'',
         phone: '',
         registrationDate: '',
@@ -171,7 +171,7 @@ function RP_AddPatient(){
             name="email"
             value={formData.email}
             onChange={(e)=>{handleChange('email',e.target.value)}}
-            required
+          
           />
         </div>
         <div className="checkbox-group">

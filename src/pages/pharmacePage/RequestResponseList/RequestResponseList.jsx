@@ -47,7 +47,8 @@ function RequestResponseList() {
         { headers: { Authorization: `Bearer ${token}` } }
       );
      
-      console.log(response.data);
+      alert(response.data.message)
+      window.location.reload()
     } catch (error) {
       handleError(error);
     }
@@ -97,27 +98,27 @@ function RequestResponseList() {
 
 
 
-console.log(responses)
  // Filter responses by date
 const filteredresponses = responses.filter((response) => {
-  // Ensure response.responseDate is valid and parse it correctly
-  const ResponseDate = response.responseDate ? parse(response.responseDate, 'yyyy-MM-dd', new Date()) : null;
 
-  if (!ResponseDate) {
-    return false; // Skip this response if the date is invalid or missing
-  }
+  const ResponseDate =  parse(response.responseDate, 'yyyy-MM-dd', new Date());
+  const nameMatches = response.storageManagerName
+  .toLowerCase()
+  .includes(searchTerm.toLowerCase());
+ 
 
-  // If dates are selected, filter by the date range
   if (dates.length === 2) {
     const [start, end] = dates.map((date) => parse(date, 'yyyy-MM-dd', new Date()));
 
-    return isWithinInterval(ResponseDate, { start, end });
+    return isWithinInterval(ResponseDate, { start, end }) && nameMatches;
   }
 
-  // If no date range is selected, include all responses
-  return true;
+ 
+
+  return nameMatches && (response.confirmationStatus===false) ;
 });
 
+console.log(filteredResponses)
 
   return (
     <div className="RequestResponseList">
@@ -128,7 +129,7 @@ const filteredresponses = responses.filter((response) => {
             onChange={(values) => {
               if (values) {
            
-                setDates(values.map((item) => format(item, 'yyyy-MM-dd')));
+                setDates(values.map((item) => format(item.toDate(), 'yyyy-MM-dd')));
               } else {
                 setDates([]);
               }
@@ -141,15 +142,15 @@ const filteredresponses = responses.filter((response) => {
           <input
             type="text"
             id="input"
-            placeholder="اختر اسم امين المخزن"
+            placeholder=" اسم امين المخزن"
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
           />
-          <img
+          {/* <img
             src={arrow}
             alt=""
             onClick={() => setHideList(hidelist === 'show' ? 'hide' : 'show')}
-          />
+          /> */}
         </div>
       </div>
       <table>
