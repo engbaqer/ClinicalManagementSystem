@@ -92,7 +92,7 @@ function MedicationDispensingList() {
           <input
             type="text"
             id="input"
-            placeholder="اختر اسم المريض"
+            placeholder=" اسم المريض"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)} // Update searchQuery on input change
           />

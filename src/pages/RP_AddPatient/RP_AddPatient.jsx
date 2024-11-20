@@ -171,7 +171,7 @@ function RP_AddPatient(){
             name="email"
             value={formData.email}
             onChange={(e)=>{handleChange('email',e.target.value)}}
-          
+      
           />
         </div>
         <div className="checkbox-group">
@@ -204,7 +204,7 @@ function RP_AddPatient(){
             name="address"
             value={formData.address}
             onChange={(e)=>{handleChange('address',e.target.value)}}
-            required
+          
           />
         </div>
         <div className="form-group large-input">
@@ -214,7 +214,7 @@ function RP_AddPatient(){
             name="ills"
             value={formData.disease}
             onChange={(e)=>{handleChange('disease',e.target.value)}}
-            required
+            
           />
         </div>
       </div>

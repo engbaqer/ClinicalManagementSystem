@@ -76,7 +76,7 @@ function DispensingMedication() {
         }
       );
       console.log('Data sent successfully:', response.data);
-     alert(`${response.data.request.serialNumber}  رقم الطلب  تم ارسال الطلب بنجاح`)
+     alert(`(${response.data.request.serialNumber}  رقم الطلب)  تم ارسال الطلب بنجاح`)
      window.location.reload();
     } catch (error) {
       if (error.response) {
